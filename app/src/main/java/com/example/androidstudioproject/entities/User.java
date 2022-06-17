@@ -1,12 +1,17 @@
-package com.example.androidstudioproject.entities;
-
+package com.example.gymstegramproject;
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
+//import androidx.room.PrimaryKey;
+
+
+//@Entity
 public class User {
+    //    @PrimaryKey
+    @NonNull
     //login info
-    private String userName;
-    private String firstName;
-    private String lastName;
+//    private String userName;
+    private String fullName;
     private String email;
     private String phoneNumber;
     private String password;
@@ -15,44 +20,34 @@ public class User {
     private String bio;
     private int age;
     private int gender; // 0 - male, 1 - female
-    private int sexualPreferences; // 0 - male, 1 - female, 2 - both
+    private String sexualPreferences; // 0 - male, 1 - female, 2 - both
     //private List<String> moreInfo;
 
     //helpful
+//    private List<String> connections; // will contain usernames, it's mutual
     private Boolean isDeleted; // default: false
     private Bitmap profilePicture; // binary photo
     // anything else?
 
-    public User(){
-        this.isDeleted = false;
-    }
 
-    public User(String userName, String firstName, String lastName, String email, String phoneNumber, String password, String bio, int age, int gender, int sexualPreferences, Bitmap profilePicture) {
-        this.userName = userName;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(@NonNull String email, String fullName, String phoneNumber, String password, String bio, int age, int gender, String sexualPreferences, String profilePicture) {
+        this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.password = password;
+//        this.password = password;
         this.bio = bio;
         this.age = age;
         this.gender = gender;
         this.sexualPreferences = sexualPreferences;
+//        this.moreInfo = moreInfo;
+//        this.connections = connections;
         this.isDeleted = false;
-        this.profilePicture = profilePicture;
+//        this.profilePicture = profilePicture;
     }
 
     //getters
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public String getFullName() {
+        return fullName;
     }
 
     public String getEmail() {
@@ -79,9 +74,17 @@ public class User {
         return gender;
     }
 
-    public int getSexualPreferences() {
+    public String getSexualPreferences() {
         return sexualPreferences;
     }
+
+//    public List<String> getMoreInfo() {
+//        return moreInfo;
+//    }
+
+//    public List<String> getConnections() {
+//        return connections;
+//    }
 
     public Boolean getDeleted() {
         return isDeleted;
@@ -91,17 +94,8 @@ public class User {
         return profilePicture;
     }
 
-    //setters
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullname) {
+        this.fullName = fullname;
     }
 
     public void setEmail(String email) {
@@ -128,15 +122,21 @@ public class User {
         this.gender = gender;
     }
 
-    public void setSexualPreferences(int sexualPreferences) {
+    public void setSexualPreferences(String sexualPreferences) {
         this.sexualPreferences = sexualPreferences;
     }
+
+//    public void setMoreInfo(List<String> moreInfo) {
+//        this.moreInfo = moreInfo;
+//    }
+
+//    public void setConnections(List<String> connections) {
+//        this.connections = connections;
+//    }
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
 
-    public void setProfilePicture(Bitmap profilePicture) {
-        this.profilePicture = profilePicture;
-    }
+    public void setProfilePicture(Bitmap profilePicture) { this.profilePicture = profilePicture; }
 }
