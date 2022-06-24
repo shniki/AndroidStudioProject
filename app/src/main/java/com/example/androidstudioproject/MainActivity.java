@@ -8,8 +8,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,22 +16,28 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-    
+    //private FirebaseAuth AuthUI;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
         //initialize
-        mAuth = FirebaseAuth.getInstance();
+        //AuthUI = FirebaseAuth.getInstance();
 
         // Write a message to the database
         //choose dataset
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://androidstudioproject-b82dc-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference myRef = database.getReference("message");//myRef = key
 
+        //database.ge
+
         myRef.setValue("Hello, World!"); //value
+
+        //if(FirebaseAuth.getInstance().getCurrentUser()==null){
+            //...
+        //}
 
         // Read from the database
         //addListenerForSingleValueEvent = only for one value
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
     }
 }

@@ -4,12 +4,12 @@ import android.graphics.Bitmap;
 
 public class User {
     //login info
-    private String userName;
+    private String email;
+    //private String userName;
     private String firstName;
     private String lastName;
-    private String email;
     private String phoneNumber;
-    private String password;
+    //private String password;
 
     //personal info
     private String bio;
@@ -27,13 +27,13 @@ public class User {
         this.isDeleted = false;
     }
 
-    public User(String userName, String firstName, String lastName, String email, String phoneNumber, String password, String bio, int age, int gender, int sexualPreferences, Bitmap profilePicture) {
-        this.userName = userName;
+    public User(String email, String firstName, String lastName, String phoneNumber, String password, String bio, int age, int gender, int sexualPreferences, Bitmap profilePicture) {
+        //this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.password = password;
+        //this.password = password;
         this.bio = bio;
         this.age = age;
         this.gender = gender;
@@ -43,10 +43,6 @@ public class User {
     }
 
     //getters
-    public String getUserName() {
-        return userName;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -61,10 +57,6 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getBio() {
@@ -92,10 +84,6 @@ public class User {
     }
 
     //setters
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -110,10 +98,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setBio(String bio) {
