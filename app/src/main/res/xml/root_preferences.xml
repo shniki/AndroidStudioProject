@@ -1,7 +1,5 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/settings"
-    android:layout_width="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory app:title="@string/theme_header">
         <SwitchPreferenceCompat
             app:dependency="Theme"
@@ -29,6 +27,16 @@
             app:key="Password"
             app:title="@string/password_change_title"
             android:icon="@drawable/lock_img_foreground"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/language_header">
+
+        <SwitchPreferenceCompat
+            app:key="Language"
+            app:title="@string/language_change_title"
+            android:icon="@drawable/language_img_foreground"
             />
 
     </PreferenceCategory>

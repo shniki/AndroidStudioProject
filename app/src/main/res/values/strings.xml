@@ -6,9 +6,11 @@
     <!-- Preference Titles -->
     <string name="privacy_header">Privacy</string>
     <string name="theme_header">Theme</string>
+    <string name="language_header">Language</string>
 
     <!-- Messages Preferences -->
     <string name="password_change_title">Change your password</string>
+    <string name="language_change_title">Change language to spanish</string>
     <string name="theme_color_title">Custom theme color</string>
 
     <!-- Sync Preferences -->
