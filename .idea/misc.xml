@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="app/src/main/res/font/aldrich.xml" value="0.13796296296296295" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/settings_activity.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.18378906249999996" />
       </map>
     </option>
   </component>

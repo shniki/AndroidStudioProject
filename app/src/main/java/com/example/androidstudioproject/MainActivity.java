@@ -2,17 +2,12 @@ package com.example.androidstudioproject;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,18 +17,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+        Log.d(TAG, "main\n");
+
+        TextView tv = findViewById(R.id.helloworld);
+        tv.setOnClickListener(view-> {
+                    Intent switchActivityIntent = new Intent(this, SettingsActivity.class);
+                    startActivity(switchActivityIntent);
+                });
+
         //initialize
         //AuthUI = FirebaseAuth.getInstance();
 
         // Write a message to the database
         //choose dataset
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://androidstudioproject-b82dc-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef = database.getReference("message");//myRef = key
+        //FirebaseDatabase database = FirebaseDatabase.getInstance("https://androidstudioproject-b82dc-default-rtdb.europe-west1.firebasedatabase.app/");
+//        DatabaseReference myRef = database.getReference("message");//myRef = key
 
         //database.ge
 
-        myRef.setValue("Hello, World!"); //value
+//        myRef.setValue("Hello, World!"); //value
 
         //if(FirebaseAuth.getInstance().getCurrentUser()==null){
             //...
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Read from the database
         //addListenerForSingleValueEvent = only for one value
-        myRef.addValueEventListener(new ValueEventListener() {
+ /*       myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -55,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
-        });
+        });*/
     }
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
+        //FirebaseUser currentUser = AuthUI.getCurrentUser();
         //updateUI(currentUser);
     }
 }

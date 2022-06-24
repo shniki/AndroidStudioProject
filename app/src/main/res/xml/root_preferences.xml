@@ -3,10 +3,10 @@
     <PreferenceCategory app:title="@string/theme_header">
         <SwitchPreferenceCompat
             app:dependency="Theme"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title"
+            app:key="Theme"
+            app:summaryOff="@string/change_theme_off"
+            app:summaryOn="@string/change_theme_on"
+            app:title="@string/change_theme_title"
             android:icon="@drawable/swap_img_foreground"
             />
 
@@ -43,4 +43,5 @@
 </PreferenceScreen>
 
 
-<!-- TODO: PUT BACKGROUND IMAGE LIPcEy.png for this setting page -->
+    <!-- TODO: PUT BACKGROUND IMAGE LIPcEy.png for this setting page -->
+

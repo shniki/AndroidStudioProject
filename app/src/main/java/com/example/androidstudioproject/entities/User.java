@@ -1,12 +1,12 @@
+package com.example.androidstudioproject.entities;
 import android.graphics.Bitmap;
 //import androidx.room.PrimaryKey;
-package com.example.androidstudioproject.entities;
 
 
 //@Entity
 public class User {
     //    @PrimaryKey
-    @NonNull
+//    @NonNull
     //login info
     private String email;
     //private String userName;
@@ -102,10 +102,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setBio(String bio) {
