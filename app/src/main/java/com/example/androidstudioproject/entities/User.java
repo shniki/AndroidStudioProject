@@ -1,37 +1,40 @@
-package com.example.gymstegramproject;
+package com.example.androidstudioproject.entities;
 import android.graphics.Bitmap;
-
-import androidx.annotation.NonNull;
 //import androidx.room.PrimaryKey;
 
 
 //@Entity
 public class User {
     //    @PrimaryKey
-    @NonNull
+//    @NonNull
     //login info
-//    private String userName;
-    private String fullName;
     private String email;
+    //private String userName;
+    private String firstName;
+    private String lastName;
     private String phoneNumber;
-    private String password;
+    //private String password;
 
     //personal info
     private String bio;
     private int age;
     private int gender; // 0 - male, 1 - female
-    private String sexualPreferences; // 0 - male, 1 - female, 2 - both
+    private int sexualPreferences; // 0 - male, 1 - female, 2 - both
     //private List<String> moreInfo;
 
     //helpful
-//    private List<String> connections; // will contain usernames, it's mutual
     private Boolean isDeleted; // default: false
     private Bitmap profilePicture; // binary photo
     // anything else?
 
+    public User(){
+        this.isDeleted = false;
+    }
 
-    public User(@NonNull String email, String fullName, String phoneNumber, String password, String bio, int age, int gender, String sexualPreferences, String profilePicture) {
-        this.fullName = fullName;
+    public User(String email, String firstName, String lastName, String phoneNumber, String password, String bio, int age, int gender, int sexualPreferences, Bitmap profilePicture) {
+        //this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
 //        this.password = password;
@@ -39,15 +42,17 @@ public class User {
         this.age = age;
         this.gender = gender;
         this.sexualPreferences = sexualPreferences;
-//        this.moreInfo = moreInfo;
-//        this.connections = connections;
         this.isDeleted = false;
-//        this.profilePicture = profilePicture;
+        this.profilePicture = profilePicture;
     }
 
     //getters
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
@@ -56,10 +61,6 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getBio() {
@@ -74,17 +75,9 @@ public class User {
         return gender;
     }
 
-    public String getSexualPreferences() {
+    public int getSexualPreferences() {
         return sexualPreferences;
     }
-
-//    public List<String> getMoreInfo() {
-//        return moreInfo;
-//    }
-
-//    public List<String> getConnections() {
-//        return connections;
-//    }
 
     public Boolean getDeleted() {
         return isDeleted;
@@ -94,8 +87,13 @@ public class User {
         return profilePicture;
     }
 
-    public void setFullName(String fullname) {
-        this.fullName = fullname;
+    //setters
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setEmail(String email) {
@@ -104,10 +102,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setBio(String bio) {
@@ -122,17 +116,9 @@ public class User {
         this.gender = gender;
     }
 
-    public void setSexualPreferences(String sexualPreferences) {
+    public void setSexualPreferences(int sexualPreferences) {
         this.sexualPreferences = sexualPreferences;
     }
-
-//    public void setMoreInfo(List<String> moreInfo) {
-//        this.moreInfo = moreInfo;
-//    }
-
-//    public void setConnections(List<String> connections) {
-//        this.connections = connections;
-//    }
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;

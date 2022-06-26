@@ -13,10 +13,9 @@
     <string name="language_change_title">Change language to spanish</string>
     <string name="theme_color_title">Custom theme color</string>
 
+    <string name="change_theme_title">Change theme</string>
+    <string name="change_theme_off">To dark mode</string>
+    <string name="change_theme_on">To light mode</string>
+
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Pick a theme color</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Change to night theme</string>
 </resources>
