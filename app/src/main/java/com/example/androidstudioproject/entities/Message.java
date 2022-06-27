@@ -1,12 +1,15 @@
 package com.example.androidstudioproject.entities;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Entity
 public class Message {
     private static final AtomicInteger intIdHelper = new AtomicInteger(0);
-
+    @PrimaryKey(autoGenerate = true)
     private final long messageId;
     private long senderId;
     private long receiverId;

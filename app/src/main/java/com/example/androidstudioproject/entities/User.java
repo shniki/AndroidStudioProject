@@ -1,12 +1,16 @@
 package com.example.androidstudioproject.entities;
 import android.graphics.Bitmap;
-//import androidx.room.PrimaryKey;
+
+import androidx.annotation.NonNull;
+import androidx.room.PrimaryKey;
+import androidx.room.Entity;
 
 
-//@Entity
+
+@Entity
 public class User {
-    //    @PrimaryKey
-//    @NonNull
+    @PrimaryKey
+    @NonNull
     //login info
     private String email;
     //private String userName;
@@ -27,11 +31,7 @@ public class User {
     private Bitmap profilePicture; // binary photo
     // anything else?
 
-    public User(){
-        this.isDeleted = false;
-    }
-
-    public User(String email, String firstName, String lastName, String phoneNumber, String password, String bio, int age, int gender, int sexualPreferences, Bitmap profilePicture) {
+    public User(@NonNull String email, String firstName, String lastName, String phoneNumber, String password, String bio, int age, int gender, int sexualPreferences, Bitmap profilePicture) {
         //this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -55,6 +55,7 @@ public class User {
         return lastName;
     }
 
+    @NonNull
     public String getEmail() {
         return email;
     }
@@ -96,7 +97,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@NonNull String email) {
         this.email = email;
     }
 

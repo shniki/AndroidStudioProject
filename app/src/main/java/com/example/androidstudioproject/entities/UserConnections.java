@@ -1,6 +1,8 @@
 package com.example.androidstudioproject.entities;
 
-//@Entity(primaryKeys = {"userId", "secondUserId"})
+import androidx.room.Entity;
+
+@Entity(primaryKeys = {"userId", "secondUserId"})
 public class UserConnections {
     private long userId;
     private long secondUserId;

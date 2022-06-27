@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
 public class SettingsActivity extends AppCompatActivity {
+    private AppDB roomDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
