@@ -5,14 +5,23 @@ import android.graphics.Bitmap;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Post {
     private static final AtomicInteger intIdHelper = new AtomicInteger(0);
-
+//todo: intidhelper or use auto generate?
+    @PrimaryKey(autoGenerate = true)
     private final long postID; //make this incremental
-    private String userName; //(user) one to many (post)
+    //foreign key
+    @NonNull
+    private String userEmail; //(user) one to many (post)
     private String content;
 
     //post date
+    @NonNull
     private final String postDate;
 
     private Bitmap picture;//photo will be binary, then convert with function that I guess exist
@@ -27,11 +36,12 @@ public class Post {
         this.postID = intIdHelper.incrementAndGet();
         this.isDeleted = false;
         this.postDate = dateParse();
+        userEmail = null;
     }
 
-    public Post(String userName, String content, Bitmap picture) {
+    public Post(@NonNull String userEmail, String content, Bitmap picture) {
         this.postID = intIdHelper.incrementAndGet();
-        this.userName = userName;
+        this.userEmail = userEmail;
         this.content = content;
         this.picture = picture;
         this.isDeleted = false;
@@ -48,8 +58,9 @@ public class Post {
         return postID;
     }
 
-    public String getUserName() {
-        return userName;
+    @NonNull
+    public String getUserEmail() {
+        return userEmail;
     }
 
     public String getContent() {
@@ -70,8 +81,8 @@ public class Post {
 
 
     //setters
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserEmail(@NonNull String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public void setContent(String content) {

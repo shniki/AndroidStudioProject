@@ -1,21 +1,25 @@
 package com.example.androidstudioproject.entities;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Entity
 public class Comment {
     private static final AtomicInteger intIdHelper = new AtomicInteger(0);
-
+    @PrimaryKey(autoGenerate = true)
     private final long commentID;
+    @NonNull
     private String commenterUserName; //(user) one to many (comment)
-    private String postID; //(post) one to many (comment)
+//    @ForeignKey(Post)
+    @NonNull
+    private final String postID; //(post) one to many (comment)
     private String content;
     private Boolean isDeleted;
 
-    public Comment(){
-        this.commentID = intIdHelper.incrementAndGet();
-    }
-
-    public Comment(String commenterUserName, String postID, String content)
+    public Comment(@NonNull String commenterUserName, @NonNull String postID, String content)
     {
         this.commentID = intIdHelper.incrementAndGet();
         this.commenterUserName = commenterUserName;
@@ -29,10 +33,12 @@ public class Comment {
         return commentID;
     }
 
+    @NonNull
     public String getCommenterUserName() {
         return commenterUserName;
     }
 
+    @NonNull
     public String getPostID() {
         return postID;
     }
@@ -46,12 +52,8 @@ public class Comment {
     }
 
     //setters
-    public void setCommenterUserName(String commenterUserName) {
+    public void setCommenterUserName(@NonNull String commenterUserName) {
         this.commenterUserName = commenterUserName;
-    }
-
-    public void setPostID(String postID) {
-        this.postID = postID;
     }
 
     public void setContent(String content) {

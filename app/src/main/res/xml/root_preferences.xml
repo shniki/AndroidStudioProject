@@ -1,0 +1,47 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory app:title="@string/theme_header">
+        <SwitchPreferenceCompat
+            app:dependency="Theme"
+            app:key="Theme"
+            app:summaryOff="@string/change_theme_off"
+            app:summaryOn="@string/change_theme_on"
+            app:title="@string/change_theme_title"
+            android:icon="@drawable/swap_img_foreground"
+            />
+
+
+        <ListPreference
+            app:entries="@array/color_entries"
+            app:entryValues="@array/color_values"
+            app:key="Pick custom theme color"
+            app:title="@string/theme_color_title"
+            app:useSimpleSummaryProvider="true"
+            android:icon="@drawable/color_img_foreground"
+            />
+
+    </PreferenceCategory>
+    <PreferenceCategory app:title="@string/privacy_header">
+
+        <EditTextPreference
+            app:key="Password"
+            app:title="@string/password_change_title"
+            android:icon="@drawable/lock_img_foreground"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/language_header">
+
+        <SwitchPreferenceCompat
+            app:key="Language"
+            app:title="@string/language_change_title"
+            android:icon="@drawable/language_img_foreground"
+            />
+
+    </PreferenceCategory>
+</PreferenceScreen>
+
+
+    <!-- TODO: PUT BACKGROUND IMAGE LIPcEy.png for this setting page -->
+
