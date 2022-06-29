@@ -15,13 +15,12 @@ public class Post {
     //post date
     private final String postDate;
 
-    private Bitmap picture; //photo will be binary, then convert with function that I guess exists
+    private Bitmap picture;//photo will be binary, then convert with function that I guess exist
     //TODO add video
     private Boolean isDeleted;
 
     //TODO add location
-    // enter location? then with google maps
-    // amount of likes, comments...?
+    // enter location? then with google map
     // add videos
 
     public Post(){
