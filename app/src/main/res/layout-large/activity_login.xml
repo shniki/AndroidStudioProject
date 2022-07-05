@@ -9,7 +9,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_background"/>
+        android:background="@drawable/love2"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="124dp"
                 android:fontFamily="@font/aldrich"
-                android:text="Sign Up"
+                android:text="Login"
                 android:textColor="@color/white"
                 android:textSize="44sp"
                 android:textStyle="bold"
@@ -81,92 +81,43 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragLogin_userName_et" />
 
-            <Spinner
-                android:id="@+id/fragLogin_gender"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/fragLogin_forgotPassword_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/input_bg"
-                android:drawableStart="@drawable/ic_baseline_account_box_24"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:hint="@string/gender"
-                android:minHeight="48dp"
-                android:inputType="textPersonName"
-                android:paddingLeft="20dp"
-                android:paddingTop="13dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="13dp"
-                android:spinnerMode="dropdown"
+                android:text="Forgot password?"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragLogin_phoneNumber" />
-
-            <EditText
-                android:id="@+id/fragLogin_phoneNumber"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/input_bg"
-                android:ems="10"
-                android:hint="Phone Number"
-                android:drawableLeft="@drawable/ic_phone"
-                android:drawablePadding="10dp"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="13dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="13dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragLogin_fullName" />
-
-            <EditText
-                android:id="@+id/fragLogin_fullName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/input_bg"
-                android:ems="10"
-                android:hint="Full Name"
-                android:drawableLeft="@drawable/ic_person"
-                android:drawablePadding="10dp"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="13dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="13dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="20sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/fragLogin_password_et"
                 app:layout_constraintTop_toBottomOf="@+id/fragLogin_password_et" />
 
             <Button
                 android:id="@+id/fragLogin_login_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_bg"
+                android:text="Login"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/fragLogin_forgotPassword_tv"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/fragLogin_password_et"
+                app:layout_constraintTop_toBottomOf="@+id/fragLogin_forgotPassword_tv" />
+
+            <TextView
+                android:id="@+id/fragLogin_newAccount_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
-                android:background="@drawable/input_bg"
-                android:text="Create Account"
+                android:layout_marginTop="20dp"
+                android:text="Create new Account"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragLogin_gender" />
-
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/fragLogin_login_btn"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="@+id/fragLogin_login_btn"
+                app:layout_constraintTop_toBottomOf="@+id/fragLogin_login_btn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

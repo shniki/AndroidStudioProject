@@ -9,7 +9,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_background"/>
+        android:background="@drawable/love2"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/fragLogin_userName_et"
+                android:id="@+id/fragSignup_userName_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -58,7 +58,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/loginText_tv" />
 
             <EditText
-                android:id="@+id/fragLogin_password_et"
+                android:id="@+id/fragSignup_password_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -79,10 +79,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragLogin_userName_et" />
+                app:layout_constraintTop_toBottomOf="@+id/fragSignup_userName_et" />
 
             <Spinner
-                android:id="@+id/fragLogin_gender"
+                android:id="@+id/fragSignup_gender"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -93,8 +93,8 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/gender"
-                android:minHeight="48dp"
                 android:inputType="textPersonName"
+                android:minHeight="48dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="13dp"
                 android:paddingRight="20dp"
@@ -105,10 +105,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragLogin_phoneNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/fragSignup_phoneNumber" />
 
             <EditText
-                android:id="@+id/fragLogin_phoneNumber"
+                android:id="@+id/fragSignup_phoneNumber"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -129,10 +129,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragLogin_fullName" />
+                app:layout_constraintTop_toBottomOf="@+id/fragSignup_fullName" />
 
             <EditText
-                android:id="@+id/fragLogin_fullName"
+                android:id="@+id/fragSignup_fullName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -153,10 +153,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragLogin_password_et" />
+                app:layout_constraintTop_toBottomOf="@+id/fragSignup_password_et" />
 
             <Button
-                android:id="@+id/fragLogin_login_btn"
+                android:id="@+id/fragSignup_login_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="52dp"
@@ -165,7 +165,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragLogin_gender" />
+                app:layout_constraintTop_toBottomOf="@+id/fragSignup_gender" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
