@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/drawable-anydpi/ic_sendMessage.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-xhdpi/input_edit_account_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/color_img_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_send_message_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/input_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/language_img_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/font/aldrich.xml" value="0.13796296296296295" />
@@ -34,7 +35,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/layout/post_item.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_send_message.xml" value="0.1" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.18378906249999996" />
       </map>
     </option>
