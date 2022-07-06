@@ -19,11 +19,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "main\n");
 
-        TextView tv = findViewById(R.id.helloworld);
-        tv.setOnClickListener(view-> {
+       // TextView tv = findViewById(R.id.helloworld);
+       /* tv.setOnClickListener(view-> {
                     Intent switchActivityIntent = new Intent(this, SettingsActivity.class);
                     startActivity(switchActivityIntent);
-                });
+                }); */
 
         //initialize
         //AuthUI = FirebaseAuth.getInstance();

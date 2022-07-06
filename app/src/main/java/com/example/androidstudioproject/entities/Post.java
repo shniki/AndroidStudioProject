@@ -24,8 +24,9 @@ public class Post {
     @NonNull
     private final String postDate;
 
-    private Bitmap picture;//photo will be binary, then convert with function that I guess exist
-    //TODO add video
+    private int dataType; //0-text only, 1-video, 2-video
+    private String dataURL;//photo will be binary, then convert with function that I guess exist
+
     private Boolean isDeleted;
 
     //TODO add location
@@ -37,13 +38,16 @@ public class Post {
         this.isDeleted = false;
         this.postDate = dateParse();
         userEmail = null;
+        dataURL = null;
+        dataType = 0;
     }
 
-    public Post(@NonNull String userEmail, String content, Bitmap picture) {
+    public Post(@NonNull String userEmail, String content, int dataType, String dataURL) {
         this.postID = intIdHelper.incrementAndGet();
         this.userEmail = userEmail;
         this.content = content;
-        this.picture = picture;
+        this.dataType = dataType;
+        this.dataURL = dataURL;
         this.isDeleted = false;
         this.postDate = dateParse();
     }
@@ -71,8 +75,12 @@ public class Post {
         return postDate;
     }
 
-    public Bitmap getPicture() {
-        return picture;
+    public int getDataType() {
+        return dataType;
+    }
+
+    public String getDataURL() {
+        return dataURL;
     }
 
     public Boolean getDeleted() {
@@ -89,8 +97,12 @@ public class Post {
         this.content = content;
     }
 
-    public void setPicture(Bitmap picture) {
-        this.picture = picture;
+    public void setDataType(int dataType) {
+        this.dataType = dataType;
+    }
+
+    public void setDataURL(String dataURL) {
+        this.dataURL = dataURL;
     }
 
     public void setDeleted(Boolean deleted) {

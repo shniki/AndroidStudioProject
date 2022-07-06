@@ -10,7 +10,7 @@
         android:title=""></item>
     <item
         android:id="@+id/nav_createP"
-        android:icon="@drawable/ic_createPost"
+        android:icon="@drawable/ic_add_post"
         android:title=""></item>
     <item
     android:id="@+id/nav_setting"

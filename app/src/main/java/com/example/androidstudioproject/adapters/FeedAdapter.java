@@ -1,4 +1,4 @@
-package adapters;
+package com.example.androidstudioproject.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,11 +35,11 @@ List<Post> postsList;
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post=postsList.get(position);
 
-        holder.userName.setText(post.getUserName());
+        holder.userName.setText(post.getUserEmail());
         holder.date.setText(post.getPostDate());
         holder.description.setText(post.getContent());
         //holder.location.setText(post.getLocation());
-        holder.image.setImageBitmap(post.getPicture());
+        //holder.image.setImageBitmap(post.getPicture());
       //  holder.userProfile.setImageBitmap(post.getUserName());
 
     }

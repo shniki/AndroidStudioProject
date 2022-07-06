@@ -28,10 +28,10 @@ public class User {
 
     //helpful
     private Boolean isDeleted; // default: false
-    private Bitmap profilePicture; // binary photo
+    private String profilePicture; // binary photo
     // anything else?
 
-    public User(@NonNull String email, String firstName, String lastName, String phoneNumber, String password, String bio, int age, int gender, int sexualPreferences, Bitmap profilePicture) {
+    public User(@NonNull String email, String firstName, String lastName, String phoneNumber, String password, String bio, int age, int gender, int sexualPreferences, String profilePicture) {
         //this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -84,7 +84,7 @@ public class User {
         return isDeleted;
     }
 
-    public Bitmap getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
@@ -125,5 +125,5 @@ public class User {
         isDeleted = deleted;
     }
 
-    public void setProfilePicture(Bitmap profilePicture) { this.profilePicture = profilePicture; }
+    public void setProfilePicture(String profilePicture) { this.profilePicture = profilePicture; }
 }
