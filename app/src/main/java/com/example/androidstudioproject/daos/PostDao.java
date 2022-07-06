@@ -18,6 +18,9 @@ public interface PostDao {
     @Query("select * from Post where postID= :postID") //get a specific post
     Post get(String postID);
 
+    @Query("select * from Post where userEmail= :userEmail") //get a specific post
+    List<Post> getByUser(String userEmail);
+
     //@Insert(onConflict = OnConflictStrategy.REPLACE) void insertAll(post... posts); //add post
     @Insert
     void insert(Post... post); //add post
