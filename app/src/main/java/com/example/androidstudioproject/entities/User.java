@@ -1,5 +1,4 @@
 package com.example.androidstudioproject.entities;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.room.PrimaryKey;
@@ -31,7 +30,7 @@ public class User {
     private String profilePicture; // binary photo
     // anything else?
 
-    public User(@NonNull String email, String firstName, String lastName, String phoneNumber, String password, String bio, int age, int gender, int sexualPreferences, String profilePicture) {
+    public User(@NonNull String email, String firstName, String lastName, String phoneNumber, String bio, int age, int gender, int sexualPreferences, String profilePicture) {
         //this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;

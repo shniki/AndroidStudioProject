@@ -14,7 +14,7 @@ public class Post {
     private static final AtomicInteger intIdHelper = new AtomicInteger(0);
 //todo: intidhelper or use auto generate?
     @PrimaryKey(autoGenerate = true)
-    private final long postID; //make this incremental
+    private long postID; //make this incremental + FINAL
     //foreign key
     @NonNull
     private String userEmail; //(user) one to many (post)
@@ -22,7 +22,7 @@ public class Post {
 
     //post date
     @NonNull
-    private final String postDate;
+    private String postDate; //FINAL
 
     private int dataType; //0-text only, 1-video, 2-video
     private String dataURL;//photo will be binary, then convert with function that I guess exist
@@ -32,15 +32,15 @@ public class Post {
     //TODO add location
     // enter location? then with google map
     // add videos
-
-    public Post(){
-        this.postID = intIdHelper.incrementAndGet();
-        this.isDeleted = false;
-        this.postDate = dateParse();
-        userEmail = null;
-        dataURL = null;
-        dataType = 0;
-    }
+//
+//    public Post(){
+//        this.postID = intIdHelper.incrementAndGet();
+//        this.isDeleted = false;
+//        this.postDate = dateParse();
+//        userEmail = null;
+//        dataURL = null;
+//        dataType = 0;
+//    }
 
     public Post(@NonNull String userEmail, String content, int dataType, String dataURL) {
         this.postID = intIdHelper.incrementAndGet();
@@ -107,6 +107,14 @@ public class Post {
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public void setPostID(long postID) {
+        //this.postID = postID;
+    }
+
+    public void setPostDate(@NonNull String postDate) {
+        //this.postDate = postDate;
     }
 }
 

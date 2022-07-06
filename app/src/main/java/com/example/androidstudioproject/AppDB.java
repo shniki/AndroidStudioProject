@@ -12,15 +12,13 @@ import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.entities.UserConnections;
 
-@Database(entities = {User.class, Post.class, Message.class, Comment.class, UserConnections.class}, version = 1)
+@Database(entities = {User.class, Post.class, UserConnections.class}, version = 1)
 public abstract class AppDB extends RoomDatabase{
 
     private static AppDB instance;
 
     public abstract UserDao userDao();
     public abstract PostDao postDao();
-    public abstract MessageDao messageDao();
-    public abstract CommentDao commentDao();
     public abstract ConnectionDao connectionDao();
 
     public static AppDB getInstance(Context context) {
