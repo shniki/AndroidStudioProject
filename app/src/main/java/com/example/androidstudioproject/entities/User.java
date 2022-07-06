@@ -27,7 +27,7 @@ public class User {
 
     //helpful
     private Boolean isDeleted; // default: false
-    private String profilePicture; // binary photo
+    private String profilePicture; // binary photo - convert to Uri
     // anything else?
 
     public User(@NonNull String email, String firstName, String lastName, String phoneNumber, String bio, int age, int gender, int sexualPreferences, String profilePicture) {

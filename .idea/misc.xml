@@ -18,7 +18,6 @@
         <entry key="..\:/Users/noyha/StudioProjects/AndroidStudioProject/app/src/main/res/menu/bottom_nav.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/noyha/StudioProjects/AndroidStudioProject/app/src/main/res/menu/bottom_navigation_bar.xml" value="0.1796875" />
         <entry key="..\:/Users/noyha/StudioProjects/AndroidStudioProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable-anydpi/ic_sendMessage.xml" value="0.1515" />
         <entry key="app/src/main/res/drawable-anydpi/ic_sendMessage.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-xhdpi/input_edit_account_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/color_img_background.xml" value="0.1" />
@@ -26,25 +25,26 @@
         <entry key="app/src/main/res/drawable/input_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/language_img_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/font/aldrich.xml" value="0.13796296296296295" />
-        <entry key="app/src/main/res/layout/activity_add_post.xml" value="0.27844340006510415" />
         <entry key="app/src/main/res/layout-large/activity_login.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/layout-large/activity_post_location.xml" value="0.167578125" />
         <entry key="app/src/main/res/layout-large/activity_signup.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-large/fragment_login.xml" value="0.1351806640625" />
+        <entry key="app/src/main/res/layout-large/fragment_signup.xml" value="0.1" />
         <entry key="app/src/main/res/layout-large/post_item.xml" value="0.246875" />
         <entry key="app/src/main/res/layout-sw600dp/activity_signup.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/layout/activity_add_post.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19025115966796877" />
-        <entry key="app/src/main/res/layout/activity_post.xml" value="0.15520833333333334" />
-        <entry key="app/src/main/res/layout/activity_post_location.xml" value="0.15520833333333334" />
-        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.15520833333333334" />
-        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.15520833333333334" />
-        <entry key="app/src/main/res/layout/post_item.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_post.xml" value="0.4324071248372396" />
+        <entry key="app/src/main/res/layout/activity_post_location.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.32916666666666666" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/gender_spinner_item.xml" value="0.11759033203125001" />
         <entry key="app/src/main/res/layout/post_item.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/color_img_round.xml" value="0.1515" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_send_message.xml" value="0.1" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.18378906249999996" />

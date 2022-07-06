@@ -1,13 +1,14 @@
-package com.example.androidstudioproject;
+package com.example.androidstudioproject.activities.main;
 
 import static android.content.ContentValues.TAG;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.androidstudioproject.AppDB;
+import com.example.androidstudioproject.R;
 
 public class MainActivity extends AppCompatActivity {
     private AppDB roomDB;

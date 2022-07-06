@@ -24,4 +24,17 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="gender_array">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="following_options">
+        <item>Follow</item>
+        <item>Follow Back</item>
+        <item>Following</item>
+        <item>You found a Match</item>
+    </string-array>
 </resources>
