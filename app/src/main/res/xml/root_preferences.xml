@@ -39,20 +39,11 @@
 
     <PreferenceCategory app:title="@string/signOut">
 
-        <Button
-            android:id="@+id/fragSettings_signOut"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/input_bg"
-            android:hint="Sign Out"
-            android:text="@string/signOut"
-            android:textColor="@color/black" />
-
+        <Preference
+            android:title="@string/signOut"
+            android:key="@string/signOut"
+            android:summary="@string/signOut"
+            />
     </PreferenceCategory>
 
 </PreferenceScreen>
-
-
-    <!-- TODO: PUT BACKGROUND IMAGE LIPcEy.png for this setting page -->
-

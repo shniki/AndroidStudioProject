@@ -36,6 +36,7 @@
     <string name="wrong_mobile">Please enter a valid phone number</string>
     <string name="non_valid_input">Please enter a valid inputs</string>
     <string name="short_password">Your password must be at least 8 characters long</string>
+    <string name="signOut">Sign Out</string>
 
 
 </resources>
