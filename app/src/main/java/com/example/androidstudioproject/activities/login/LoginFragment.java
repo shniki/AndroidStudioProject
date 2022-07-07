@@ -1,6 +1,5 @@
 package com.example.androidstudioproject.activities.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,13 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.androidstudioproject.R;
-import com.example.androidstudioproject.SettingsActivity;
 import com.google.android.material.snackbar.Snackbar;
-
-import org.w3c.dom.Text;
 
 public class LoginFragment extends Fragment {
 
@@ -61,7 +56,7 @@ public class LoginFragment extends Fragment {
         edtPasswd = view.findViewById(R.id.fragLogin_password_et); //get input line (edit text) by id
 
         //fragLogin_google_btn
-        Button googleLoginBtn = view.findViewById(R.id.fragLogin_google_btn);
+        View googleLoginBtn = view.findViewById(R.id.fragLogin_google_btn);
         googleLoginBtn.setOnClickListener(v->{
             ((LoginActivity) getActivity()).authenticateGoogle();
         });

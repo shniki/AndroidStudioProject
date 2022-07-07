@@ -7,8 +7,6 @@ public class UserConnections {
     private long userId;
     private long secondUserId;
 
-    public UserConnections(){}
-
     public UserConnections(long userId, long secondUserId) {
         this.userId = userId;
         this.secondUserId = secondUserId;
