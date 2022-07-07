@@ -2,6 +2,8 @@ package com.example.androidstudioproject.activities.main;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -9,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidstudioproject.AppDB;
 import com.example.androidstudioproject.R;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private AppDB roomDB;
@@ -67,5 +71,15 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         //FirebaseUser currentUser = AuthUI.getCurrentUser();
         //updateUI(currentUser);
+    }
+
+    public void setLanguage(String language)
+    {
+        Locale locale = new Locale(language);
+        locale.setDefault(locale);
+        Resources resources = this.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 }
