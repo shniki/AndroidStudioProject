@@ -1,6 +1,5 @@
 package com.example.androidstudioproject.activities.login;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -8,34 +7,24 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.main.MainActivity;
 import com.example.androidstudioproject.entities.User;
-import com.example.androidstudioproject.repositories.authentication.AutheticationModelFirebase;
-import com.example.androidstudioproject.repositories.authentication.AutheticationViewModel;
+import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     UsersViewModel viewModel;
 
-    AutheticationViewModel autheticationViewModel;
+    AuthenticationViewModel authenticationViewModel;
 
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
@@ -48,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         viewModel = new UsersViewModel(this.getApplication());
         //getActivity()
 
-        autheticationViewModel = new AutheticationViewModel(this.getApplication());
+        authenticationViewModel = new AuthenticationViewModel(this.getApplication());
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -75,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public Boolean authenticate(String email, String password){
         //send to firebase auth email password
-       return autheticationViewModel.authenticate(email, password);
+       return authenticationViewModel.authenticate(email, password);
     }
 
     public void gotoMainActivity(){
@@ -104,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         viewModel.add(u);
 
         //todo authenticate using firebase (+create new user)
-        autheticationViewModel.add(email,password);
+        authenticationViewModel.add(email,password);
     }
 
     public void authenticateGoogle(){

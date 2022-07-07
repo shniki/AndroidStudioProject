@@ -1,11 +1,11 @@
 package com.example.androidstudioproject.activities.main;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
@@ -13,12 +13,16 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.example.androidstudioproject.R;
+import com.example.androidstudioproject.activities.login.LoginActivity;
+import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSelectedListener*/{
-
+    AuthenticationViewModel mAuth = new AuthenticationViewModel(this.getActivity().getApplication());
     Switch edtDarkMode;
     EditText edtChangePassword;
     Switch edtChangeLanguage;
+    Button btnSignOut;
 
     public static SettingsFragment newInstance(/*Data data, int position*/) {
         SettingsFragment frag = new SettingsFragment();
@@ -42,15 +46,9 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
         super.onViewCreated(view, savedInstanceState);
 
         edtDarkMode = (Switch) view.findViewById(R.id.fragSettings_DarkModeSwitch); //get input line (edit text) by id
-        Spinner colorPicker = (Spinner) view.findViewById(R.id.fragSettings_ColorPicker);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.color_entries, R.layout.gender_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        colorPicker.setAdapter(adapter);
         edtChangePassword = view.findViewById(R.id.fragSettings_ChangePassword); //get input line (edit text) by id
         edtChangeLanguage = (Switch) view.findViewById(R.id.fragSettings_ChangeLanguage); //get input line (edit text) by id
+        btnSignOut = (Button) view.findViewById(R.id.fragSettings_signOut);
 
         edtDarkMode.setOnCheckedChangeListener( (buttonView, isChecked) -> {
             if (isChecked)
@@ -67,10 +65,23 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
         });
 
         edtChangePassword.setOnClickListener(v -> {
-            // todo: update password in firebase auth
+            if(edtChangePassword == null)
+            {
+                Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
+                return;
+            }
+            String text = edtChangePassword.getText().toString();
+            if(text.length() == 0)
+            {
+                Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
+                return;
+            }
+            mAuth.changePassword(text);
         });
 
-        //todo: implement color picker
-
+        btnSignOut.setOnClickListener(v -> {
+            mAuth.signOut();
+            ((MainActivity)this.getActivity()).gotoLoginActivity();
+        });
     }
 }

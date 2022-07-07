@@ -3,23 +3,18 @@ package com.example.androidstudioproject.repositories.authentication;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 
-import com.example.androidstudioproject.entities.User;
-import com.example.androidstudioproject.repositories.user.UsersRepository;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.List;
-
-public class AutheticationViewModel extends AndroidViewModel {
+public class AuthenticationViewModel extends AndroidViewModel {
     
-    private AutheticationModelFirebase mRepository;
+    private AuthenticationModelFirebase mRepository;
     
     private FirebaseUser currUser;
 
-    public AutheticationViewModel(Application application) {
+    public AuthenticationViewModel(Application application) {
         super(application);
-        mRepository = new AutheticationModelFirebase();
+        mRepository = new AuthenticationModelFirebase();
         currUser = mRepository.getCurrentUser();
     }
 

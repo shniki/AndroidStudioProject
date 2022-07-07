@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory app:title="@string/theme_header">
         <SwitchPreferenceCompat
+            android:id="@+id/fragSettings_DarkModeSwitch"
             android:icon="@drawable/swap_img_foreground"
             app:dependency="Theme"
             app:key="Theme"
@@ -9,19 +10,11 @@
             app:summaryOn="@string/change_theme_on"
             app:title="@string/change_theme_title" />
 
-
-        <ListPreference
-            android:icon="@drawable/color_img_foreground"
-            app:entries="@array/color_entries"
-            app:entryValues="@array/color_values"
-            app:key="Pick custom theme color"
-            app:title="@string/theme_color_title"
-            app:useSimpleSummaryProvider="true" />
-
     </PreferenceCategory>
     <PreferenceCategory app:title="@string/privacy_header">
 
         <EditTextPreference
+            android:id="@+id/fragSettings_ChangePassword"
             android:icon="@drawable/lock_img_foreground"
             app:key="Password"
             app:title="@string/password_change_title" />
@@ -31,19 +24,24 @@
     <PreferenceCategory app:title="@string/language_header">
 
         <SwitchPreferenceCompat
+            android:id="@+id/fragSettings_ChangeLanguage"
             android:icon="@drawable/language_img_foreground"
             app:key="Language"
             app:title="@string/language_change_title" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/signOut">
+    <PreferenceCategory
+        app:title="@string/signOut">
 
         <Preference
-            android:title="@string/signOut"
+            android:id="@+id/fragSettings_signOut"
+            android:background="#686868"
+            android:backgroundTint="#686868"
+            android:icon="@drawable/ic_sign_out"
             android:key="@string/signOut"
             android:summary="@string/signOut"
-            />
+            android:title="@string/signOut" />
     </PreferenceCategory>
 
 </PreferenceScreen>

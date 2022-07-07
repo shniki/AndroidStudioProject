@@ -15,13 +15,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.concurrent.Executor;
 
-public class AutheticationModelFirebase {
+public class AuthenticationModelFirebase {
 
     private FirebaseAuth mAuth;
 
     private FirebaseUser currUser;
 
-    public AutheticationModelFirebase() {
+    public AuthenticationModelFirebase() {
         mAuth = FirebaseAuth.getInstance();
         currUser = null;
     }

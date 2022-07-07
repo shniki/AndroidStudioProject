@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.androidstudioproject.AppDB;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
-import com.example.androidstudioproject.repositories.authentication.AutheticationViewModel;
+import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     UsersViewModel usersViewModel;
     PostsViewModel postViewModel;
     ConnectionsViewModel connectionsViewModel;
-    AutheticationViewModel autheticationViewModel;
+    AuthenticationViewModel authenticationViewModel;
 
     String currEmail;
 
@@ -38,24 +38,29 @@ public class MainActivity extends AppCompatActivity {
         postViewModel = new PostsViewModel(this.getApplication());
         usersViewModel = new UsersViewModel(this.getApplication());
         connectionsViewModel = new ConnectionsViewModel(this.getApplication());
-        autheticationViewModel = new AutheticationViewModel(this.getApplication());
+        authenticationViewModel = new AuthenticationViewModel(this.getApplication());
     }
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        if(!autheticationViewModel.isLoggedIn()){ //not logged in
+        if(!authenticationViewModel.isLoggedIn()){ //not logged in
             gotoLoginActivity();
         }
 
-        currEmail = autheticationViewModel.getCurrentEmail();
+        currEmail = authenticationViewModel.getCurrentEmail();
     }
 
     public void gotoLoginActivity(){
-        Intent switchActivityIntent = new Intent(this, LoginActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(switchActivityIntent);
+        try {
+            Intent switchActivityIntent = new Intent(this, LoginActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(switchActivityIntent);
+        }
+        catch(Exception e) {
+            Log.d("ERROR", "Error going to login activity with message" + e.getMessage());
+        }
     }
 
     public void replaceFragments(Class fragmentClass) {
@@ -95,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
         return connectionsViewModel;
     }
 
-    public AutheticationViewModel getAutheticationViewModel() {
-        return autheticationViewModel;
+    public AuthenticationViewModel getAuthenticationViewModel() {
+        return authenticationViewModel;
     }
 
     public String getCurrEmail() {
