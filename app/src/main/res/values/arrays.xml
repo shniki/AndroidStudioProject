@@ -36,5 +36,6 @@
         <item>Follow Back</item>
         <item>Following</item>
         <item>You found a Match</item>
+        <item>Edit</item>
     </string-array>
 </resources>

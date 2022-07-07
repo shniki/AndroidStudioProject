@@ -39,6 +39,23 @@ public class MainActivity extends AppCompatActivity {
         usersViewModel = new UsersViewModel(this.getApplication());
         connectionsViewModel = new ConnectionsViewModel(this.getApplication());
         autheticationViewModel = new AutheticationViewModel(this.getApplication());
+
+
+ //TODO use navigation to get to :
+        //user
+        //feed -
+                //single post
+                    //edit
+                    //delete
+                    //send message
+                //glide video + photo
+        //create
+                //goto pictures
+                //goto camera
+                //goto location
+                //intent back
+        //search - NOY
+        //settings DONE
     }
 
     @Override

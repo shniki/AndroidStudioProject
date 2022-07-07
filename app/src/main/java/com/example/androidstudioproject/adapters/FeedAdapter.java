@@ -17,6 +17,7 @@ import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 
+import java.util.Collections;
 import java.util.List;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
@@ -27,10 +28,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     //@NonNull
     //?
-    public FeedAdapter(FeedFragment fragment)
+    public FeedAdapter(MainActivity context)
     {
-        usersViewModel=fragment.getUsersViewModel();
-        context=(MainActivity) fragment.getActivity();
+        usersViewModel=context.getUsersViewModel();
+        context=context;
     }
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -98,6 +99,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     public void setPostsList(List<Post> postsList) {
         this.postsList = postsList;
+        Collections.reverse(this.postsList);
         notifyDataSetChanged();
     }
 

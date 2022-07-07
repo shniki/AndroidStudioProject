@@ -37,6 +37,7 @@
     <string name="non_valid_input">Please enter a valid inputs</string>
     <string name="short_password">Your password must be at least 8 characters long</string>
     <string name="signOut">Sign Out</string>
+    <string name="error_no_data">Please input some data</string>
 
 
 </resources>

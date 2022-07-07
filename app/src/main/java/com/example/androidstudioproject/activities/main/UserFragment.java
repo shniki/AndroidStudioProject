@@ -46,5 +46,10 @@ public class UserFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {}
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        User user = usersViewModel.get(userEmail);
+
+        //TODO recycle view
+    }
 }
