@@ -14,9 +14,14 @@ import android.widget.Toast;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.main.MainActivity;
 import com.example.androidstudioproject.entities.User;
+import com.example.androidstudioproject.repositories.authentication.AutheticationModelFirebase;
+import com.example.androidstudioproject.repositories.authentication.AutheticationViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -30,10 +35,9 @@ public class LoginActivity extends AppCompatActivity {
 
     UsersViewModel viewModel;
 
-    private FirebaseAuth mAuth;
+    AutheticationViewModel autheticationViewModel;
 
-    GoogleApiClient googleApiClient;
-
+    private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
 
     @Override
@@ -44,16 +48,15 @@ public class LoginActivity extends AppCompatActivity {
         viewModel = new UsersViewModel(this.getApplication());
         //getActivity()
 
-        mAuth = FirebaseAuth.getInstance();
+        autheticationViewModel = new AutheticationViewModel(this.getApplication());
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail().requestProfile()
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .requestProfile()
                 .build();
 
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, (GoogleApiClient.OnConnectionFailedListener) this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
 
@@ -71,22 +74,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public Boolean authenticate(String email, String password){
-        //todo send to firebase auth email password
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails
-                            updateUI(null);
-                        }
-                    }
-                });
-        return (mAuth.getCurrentUser()!=null);
+        //send to firebase auth email password
+       return autheticationViewModel.authenticate(email, password);
     }
 
     public void gotoMainActivity(){
@@ -115,24 +104,11 @@ public class LoginActivity extends AppCompatActivity {
         viewModel.add(u);
 
         //todo authenticate using firebase (+create new user)
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails
-                            updateUI(null);
-                        }
-                    }
-                });
+        autheticationViewModel.add(email,password);
     }
 
     public void authenticateGoogle(){
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent,RC_SIGN_IN);
     }
 
