@@ -23,8 +23,17 @@ public class AutheticationViewModel extends AndroidViewModel {
         currUser = mRepository.getCurrentUser();
     }
 
-    public FirebaseUser getCurrentUser() { return currUser; }
-    public String getCurrentEmail() { return currUser.getEmail(); }
+    public FirebaseUser getCurrentUser() {
+        currUser = mRepository.getCurrentUser();
+        return currUser;
+    }
+
+    public boolean isLoggedIn() {return mRepository.isLoggedIn();}
+
+    public String getCurrentEmail() {
+        getCurrentUser();
+        return currUser.getEmail();
+    }
 
     public boolean authenticate(String email, String password){
         Boolean res = mRepository.authenticate(email,password);
@@ -34,5 +43,11 @@ public class AutheticationViewModel extends AndroidViewModel {
 
     public void add(String email, String password) { mRepository.add(email,password); }
     
-    
+    public void signOut(){
+        mRepository.signOut();
+    }
+
+    public void changePassword(String password){
+        mRepository.changePassword(password);
+    }
 }

@@ -36,14 +36,6 @@
             android:value="${MAPS_API_KEY}" />
         -->
         <activity
-            android:name=".PostLocationActivity"
-            android:exported="false"
-            android:label="@string/title_activity_post_location" />
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_settings" />
-        <activity
             android:name=".activities.main.MainActivity"
             android:exported="false" />
     </application>

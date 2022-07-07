@@ -1,6 +1,7 @@
 package com.example.androidstudioproject.repositories.authentication;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -17,7 +18,7 @@ import java.util.concurrent.Executor;
 public class AutheticationModelFirebase {
 
     private FirebaseAuth mAuth;
-    
+
     private FirebaseUser currUser;
 
     public AutheticationModelFirebase() {
@@ -25,13 +26,20 @@ public class AutheticationModelFirebase {
         currUser = null;
     }
 
-    public FirebaseUser getCurrentUser() { return currUser; }
+    public FirebaseUser getCurrentUser() {
+        updateUI(mAuth.getCurrentUser());
+        return currUser;
+    }
 
-    public void updateUI(FirebaseUser user){
+    public boolean isLoggedIn() {
+        return (mAuth.getCurrentUser() != null);
+    }
+
+    public void updateUI(FirebaseUser user) {
         currUser = user;
     }
 
-    public Boolean authenticate(String email, String password){
+    public Boolean authenticate(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -46,7 +54,7 @@ public class AutheticationModelFirebase {
                         }
                     }
                 });
-        return (mAuth.getCurrentUser()!=null);
+        return (mAuth.getCurrentUser() != null);
     }
 
     public void add(String email, String password) {
@@ -66,4 +74,19 @@ public class AutheticationModelFirebase {
                 });
     }
 
+    public void signOut() {
+        mAuth.signOut();
+    }
+
+    public void changePassword(String password) {
+        getCurrentUser().updatePassword(password)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            //successfully
+                        }
+                    }
+                });
+    }
 }
