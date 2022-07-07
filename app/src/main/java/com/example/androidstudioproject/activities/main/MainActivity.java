@@ -70,9 +70,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gotoLoginActivity(){
-        Intent switchActivityIntent = new Intent(this, LoginActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(switchActivityIntent);
+        try {
+            Intent switchActivityIntent = new Intent(this, LoginActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(switchActivityIntent);
+        }
+        catch(Exception e) {
+            Log.d("ERROR", "Error going to login activity with message" + e.getMessage());
+        }
     }
 
     public void replaceFragments(Class fragmentClass) {
