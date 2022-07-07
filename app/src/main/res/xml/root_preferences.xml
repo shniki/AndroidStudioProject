@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory app:title="@string/theme_header">
         <SwitchPreferenceCompat
+            app:id="@+id/fragSettings_DarkModeSwitch"
             app:dependency="Theme"
             app:key="Theme"
             app:summaryOff="@string/change_theme_off"
@@ -11,7 +12,8 @@
             />
 
 
-        <ListPreference
+        <Spinner
+            app:id="@+id/fragSettings_ColorPicker"
             app:entries="@array/color_entries"
             app:entryValues="@array/color_values"
             app:key="Pick custom theme color"
@@ -24,6 +26,7 @@
     <PreferenceCategory app:title="@string/privacy_header">
 
         <EditTextPreference
+            app:id="@+id/fragSettings_ChangePassword"
             app:key="Password"
             app:title="@string/password_change_title"
             android:icon="@drawable/lock_img_foreground"
@@ -34,6 +37,7 @@
     <PreferenceCategory app:title="@string/language_header">
 
         <SwitchPreferenceCompat
+            app:id="@+id/fragSettings_ChangeLanguage"
             app:key="Language"
             app:title="@string/language_change_title"
             android:icon="@drawable/language_img_foreground"
