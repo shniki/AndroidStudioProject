@@ -4,7 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
-        <entry key="../Library/Android/sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.12916666666666668" />
         <entry key="..\:/Users/noyha/StudioProjects/AndroidStudioProject/app/src/main/res/drawable-anydpi/ic_sendMessage.xml" value="0.1" />
         <entry key="..\:/Users/noyha/StudioProjects/AndroidStudioProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/noyha/StudioProjects/AndroidStudioProject/app/src/main/res/drawable/ic_baseline_chat_24.xml" value="0.1" />
@@ -29,20 +28,27 @@
         <entry key="app/src/main/res/layout-large/activity_login.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/layout-large/activity_post_location.xml" value="0.167578125" />
         <entry key="app/src/main/res/layout-large/activity_signup.xml" value="0.1" />
-        <entry key="app/src/main/res/layout-large/fragment_login.xml" value="0.12916666666666668" />
-        <entry key="app/src/main/res/layout-large/fragment_signup.xml" value="0.12916666666666668" />
+        <entry key="app/src/main/res/layout-large/activity_user_info.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-large/fragment_login.xml" value="0.1351806640625" />
+        <entry key="app/src/main/res/layout-large/fragment_signup.xml" value="0.1" />
         <entry key="app/src/main/res/layout-large/post_item.xml" value="0.246875" />
         <entry key="app/src/main/res/layout-sw600dp/activity_signup.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/layout/activity_add_post.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_post.xml" value="0.4324071248372396" />
+        <entry key="app/src/main/res/layout/activity_post_location.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.32916666666666666" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.15677083333333333" />
-        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.25833333333333336" />
-        <entry key="app/src/main/res/layout/gender_spinner_item.xml" value="0.12916666666666668" />
+        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/gender_spinner_item.xml" value="0.11759033203125001" />
         <entry key="app/src/main/res/layout/post_item.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/color_img_round.xml" value="0.1515" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_send_message.xml" value="0.1" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.18378906249999996" />
       </map>

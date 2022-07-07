@@ -11,19 +11,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidstudioproject.R;
+import com.example.androidstudioproject.activities.main.FeedFragment;
+import com.example.androidstudioproject.activities.main.MainActivity;
 import com.example.androidstudioproject.entities.Post;
+import com.example.androidstudioproject.entities.User;
+import com.example.androidstudioproject.repositories.user.UsersViewModel;
 
 import java.util.List;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
-List<Post> postsList;
+    UsersViewModel usersViewModel;
+    private List<Post> postsList;
+    MainActivity context;
 
     //@NonNull
     //?
-    public FeedAdapter(List<Post> posts)
+    public FeedAdapter(FeedFragment fragment)
     {
-        postsList=posts;
+        usersViewModel=fragment.getUsersViewModel();
+        context=(MainActivity) fragment.getActivity();
     }
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,20 +40,65 @@ List<Post> postsList;
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Post post=postsList.get(position);
+        if (postsList != null) {
 
-        holder.userName.setText(post.getUserEmail());
-        holder.date.setText(post.getPostDate());
-        holder.description.setText(post.getContent());
-        //holder.location.setText(post.getLocation());
-        //holder.image.setImageBitmap(post.getPicture());
-      //  holder.userProfile.setImageBitmap(post.getUserName());
+            Post post = postsList.get(position);
 
+            //todo search for user
+            User user = null;// = usersViewModel.get(post.getUserEmail());
+            holder.userName.setText(user.getFirstName() + " " + user.getLastName());
+            holder.date.setText(post.getPostDate());
+            holder.description.setText(post.getContent());
+
+            //holder.location.setText(post.getLocation());
+
+            //holder.image.setImageBitmap(post.getPicture());
+            //holder.video.setImageBitmap(post.getPicture());
+
+            //holder.userProfile.setImageBitmap(user.getProfilePicture());
+
+
+            //click to fragment
+            holder.image.setOnClickListener(v->{
+                gotoPostFragment(post.getPostID());
+            });
+
+//            holder.video.setOnClickListener(v->{
+//                gotoPostFragment(post.getPostID());
+//            });
+
+            holder.description.setOnClickListener(v->{
+                gotoUserFragment(post.getUserEmail());
+            });
+
+            holder.userProfile.setOnClickListener(v->{
+                gotoUserFragment(post.getUserEmail());
+            });
+
+            holder.userName.setOnClickListener(v->{
+                gotoUserFragment(post.getUserEmail());
+            });
+        }
+    }
+
+    private void gotoPostFragment(long postid){
+        context.gotoPostFragment(postid);
+    }
+
+    private void gotoUserFragment(String useremail){
+        context.gotoUserFragment(useremail);
     }
 
     @Override
     public int getItemCount() {
-        return postsList.size();
+        if(postsList!=null)
+            return postsList.size();
+        return 0;
+    }
+
+    public void setPostsList(List<Post> postsList) {
+        this.postsList = postsList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -56,7 +108,6 @@ List<Post> postsList;
         TextView date;
         ImageView userProfile;
         ImageView image;
-        ImageButton sendMessage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,11 +116,9 @@ List<Post> postsList;
             date=itemView.findViewById((R.id.date));
             description=itemView.findViewById((R.id.description));
             userProfile=itemView.findViewById((R.id.userProfilePost));
-            sendMessage=itemView.findViewById((R.id.sendMessage));
             image=itemView.findViewById((R.id.postImage));
 
-
-
+            //video=itemView.findViewById((R.id.^^^));
 
         }
     }

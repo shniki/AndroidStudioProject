@@ -67,6 +67,7 @@ public class LoginFragment extends Fragment {
             ((LoginActivity) getActivity()).replaceFragments(SignUpFragment.class);
         });
 
+
         //fragLogin_login_btn
         Button loginBtn = view.findViewById(R.id.fragLogin_login_btn);
         loginBtn.setOnClickListener(v -> {

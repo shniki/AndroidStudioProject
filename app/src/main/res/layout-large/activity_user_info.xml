@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/fui_heading_padding_bottom"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImg_info"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:src="@tools:sample/avatars">
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+
+        <TextView
+            android:id="@+id/userName_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ted Mosbey"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/followBtn_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/follow_txt"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/moreInfo_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="14sp"
+            android:text="31  |  male  |  likes women"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/bio_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfw"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingTop="@dimen/fui_heading_padding_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
