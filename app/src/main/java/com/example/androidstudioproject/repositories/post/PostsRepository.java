@@ -25,6 +25,14 @@ public class PostsRepository {
         postListData = new PostListData();
     }
 
+    public Post getPostById(long postID){
+        return dao.get(postID);
+    }
+
+    public List<Post> getUserPosts(String userEmail){
+        return dao.getByUser(userEmail);
+    }
+
     public void cancellGetAllPosts() {
         PostModelFirebase.instance.cancellGetAllPosts();
     }

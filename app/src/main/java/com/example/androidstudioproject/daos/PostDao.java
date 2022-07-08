@@ -16,7 +16,7 @@ public interface PostDao {
     List<Post> index();
 
     @Query("select * from Post where postID= :postID") //get a specific post
-    Post get(String postID);
+    Post get(long postID);
 
     @Query("select * from Post where userEmail= :userEmail") //get a specific post
     List<Post> getByUser(String userEmail);

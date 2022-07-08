@@ -25,6 +25,10 @@ public class UsersRepository {
         userListData = new UserListData();
     }
 
+    public User getUserByEmail(String email){
+        return dao.get(email);
+    }
+
     public void cancellGetAllUsers() {
         UserModelFirebase.instance.cancellGetAllUsers();
     }
