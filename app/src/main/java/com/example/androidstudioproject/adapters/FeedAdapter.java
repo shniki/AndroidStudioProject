@@ -26,6 +26,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     private List<Post> postsList;
     MainActivity context;
 
+private ItemClickListener listener;
+public interface ItemClickListener{
+    void onClick(int i);//create function in the feed activity
+}
     //@NonNull
     //?
     public FeedAdapter(MainActivity context)
@@ -38,15 +42,26 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item,parent,false);
         return new ViewHolder(view);
     }
+    private User findUser(String userEmail)
+    {
+        for(int i=0;i<usersViewModel.getAllUsers().getValue().size();i++)
+            if(usersViewModel.getAllUsers().getValue().get(i).getEmail().equals(userEmail))
+                return usersViewModel.getAllUsers().getValue().get(i);
+       return null;
+    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (postsList != null) {
-
             Post post = postsList.get(position);
+            User user=findUser(post.getUserEmail());
+        holder.userName.setText(user.getFirstName() + " " + user.getLastName());
+        holder.date.setText(post.getPostDate());
+        holder.description.setText(post.getContent());
+        //holder.location.setText(post.getLocation());
+        //holder.image.setImageBitmap(post.getPicture());
+      //  holder.userProfile.setImageBitmap(post.getUserName());
 
-            //todo search for user
-            User user = null;// = usersViewModel.get(post.getUserEmail());
             holder.userName.setText(user.getFirstName() + " " + user.getLastName());
             holder.date.setText(post.getPostDate());
             holder.description.setText(post.getContent());
