@@ -1,5 +1,6 @@
 package com.example.androidstudioproject.activities.main;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -82,6 +83,7 @@ public class CreatePostFragment extends Fragment {
         });
         btnCamera =view.findViewById(R.id.frag_addP_cam_btn);
         btnCamera.setOnClickListener(v->{
+            ((MainActivity)this.getActivity()).openCamera();
             //TODO sent to take a new pic/vid intent
             //then input to bitmap
             //change datatype to 1 or 2
@@ -90,6 +92,7 @@ public class CreatePostFragment extends Fragment {
         });
         btnGallery =view.findViewById(R.id.frag_addP_gallery_btn);
         btnGallery.setOnClickListener(v->{
+            ((MainActivity)this.getActivity()).pickImageFromGallery();
             //TODO sent to get pic/vid from gallery intent
             //then input to bitmap
         });

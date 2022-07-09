@@ -2,11 +2,15 @@ package com.example.androidstudioproject.activities.main;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -15,18 +19,23 @@ import androidx.fragment.app.FragmentManager;
 import com.example.androidstudioproject.AppDB;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
-import com.example.androidstudioproject.repositories.authentication.AutheticationViewModel;
+import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     UsersViewModel usersViewModel;
     PostsViewModel postViewModel;
     ConnectionsViewModel connectionsViewModel;
-    AutheticationViewModel autheticationViewModel;
+    AuthenticationViewModel authenticationViewModel;
+
+    public static final int CAMERA_PIC_REQUEST = 1337;
+    public static final int PICK_PHOTO = 1338;
 
     String currEmail;
 
@@ -38,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         postViewModel = new PostsViewModel(this.getApplication());
         usersViewModel = new UsersViewModel(this.getApplication());
         connectionsViewModel = new ConnectionsViewModel(this.getApplication());
-        autheticationViewModel = new AutheticationViewModel(this.getApplication());
+        authenticationViewModel = new AuthenticationViewModel(this.getApplication());
 
 
  //TODO use navigation to get to :
@@ -62,11 +71,11 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        if(!autheticationViewModel.isLoggedIn()){ //not logged in
+        if(!authenticationViewModel.isLoggedIn()){ //not logged in
             gotoLoginActivity();
         }
 
-        currEmail = autheticationViewModel.getCurrentEmail();
+        currEmail = authenticationViewModel.getCurrentEmail();
     }
 
     public void gotoLoginActivity(){
@@ -78,6 +87,37 @@ public class MainActivity extends AppCompatActivity {
         catch(Exception e) {
             Log.d("ERROR", "Error going to login activity with message" + e.getMessage());
         }
+    }
+
+    public void openCamera(){
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+    }
+
+    public void pickImageFromGallery(){
+        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getIntent.setType("image/*");
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+
+        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+
+        startActivityForResult(chooserIntent, PICK_PHOTO);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA_PIC_REQUEST || requestCode == PICK_PHOTO) {
+                Bitmap image = data.getExtras().getParcelable("data");
+                ImageView imageview = (ImageView) findViewById(R.id.frag_addP_iv_p); //sets imageview as the bitmap
+                imageview.setImageBitmap(image);
+            }
+        }
+        //todo: convert to URL and save in fireabse
     }
 
     public void replaceFragments(Class fragmentClass) {
@@ -117,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
         return connectionsViewModel;
     }
 
-    public AutheticationViewModel getAutheticationViewModel() {
-        return autheticationViewModel;
+    public AuthenticationViewModel getAuthenticationViewModel() {
+        return authenticationViewModel;
     }
 
     public String getCurrEmail() {

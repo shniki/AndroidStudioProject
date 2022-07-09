@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidstudioproject">
+    <uses-permission android:name="android.permission.CAMERA"> </uses-permission>
 
     <application
         android:allowBackup="true"
@@ -37,7 +38,8 @@
         -->
         <activity
             android:name=".activities.main.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
     </application>
 
 </manifest>
