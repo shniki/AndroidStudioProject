@@ -29,6 +29,8 @@ public class ConnectionsRepository {
         ConnectionModelFirebase.instance.cancellGetAllConnections();
     }
 
+    public UserConnections getConnectionIfExists(String firstEmail, String secondEmail) { return dao.getConnectionIfExists(firstEmail, secondEmail);}
+
     class ConnectionListData extends MutableLiveData<List<UserConnections>> {
 
         @Override

@@ -23,6 +23,8 @@ public class ConnectionsViewModel extends AndroidViewModel {
         connections = mRepository.getAllConnections();
     }
 
+    public UserConnections getConnectionIfExists(String firstEmail, String secondEmail) { return mRepository.getConnectionIfExists(firstEmail, secondEmail);}
+
     public LiveData<List<UserConnections>> getAllUsers() { return connections; }
 
     public void add(UserConnections connection) { mRepository.add(connection); }
