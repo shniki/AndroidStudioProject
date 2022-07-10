@@ -10,8 +10,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -23,6 +25,7 @@ import com.example.androidstudioproject.repositories.authentication.Authenticati
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     PostsViewModel postViewModel;
     ConnectionsViewModel connectionsViewModel;
     AuthenticationViewModel authenticationViewModel;
-
+    BottomNavigationView bottomNavigationView;
     public static final int CAMERA_PIC_REQUEST = 1337;
     public static final int PICK_PHOTO = 1338;
 
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        bottomNavigationView=findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
         postViewModel = new PostsViewModel(this.getApplication());
         usersViewModel = new UsersViewModel(this.getApplication());
@@ -89,6 +95,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener=
+            new BottomNavigationView.OnNavigationItemSelectedListener(){
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.nav_search:
+                            replaceFragments(SearchFragment.class);
+                            break;
+                        case R.id.nav_createP:
+                            replaceFragments(CreatePostFragment.class);
+                            break;
+                        case R.id.nav_home:
+                            replaceFragments(FeedFragment.class);
+                            break;
+                        case R.id.nav_profile:
+                            replaceFragments(UserFragment.class);
+                            break;
+                    }
+                    return true;
+                }
+            };
+
     public void openCamera(){
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
@@ -119,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //todo: convert to URL and save in fireabse
     }
+
 
     public void replaceFragments(Class fragmentClass) {
         Fragment fragment = null;
