@@ -38,6 +38,7 @@
     <string name="short_password">Your password must be at least 8 characters long</string>
     <string name="signOut">Sign Out</string>
     <string name="error_no_data">Please input some data</string>
+    <string name="follow_txt">Follow</string>
 
 
 </resources>

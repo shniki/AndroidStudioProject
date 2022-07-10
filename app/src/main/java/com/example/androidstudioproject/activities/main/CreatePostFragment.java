@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -65,6 +66,12 @@ public class CreatePostFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -104,7 +111,9 @@ public class CreatePostFragment extends Fragment {
         });
         btnCancel =view.findViewById(R.id.fragEditAccount_cancel_btn);
         btnCancel.setOnClickListener(v->{
-            //TODO intent back
+            ((MainActivity)this.getActivity()).replaceFragments(FeedFragment.class);
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         });
         btnUpload =view.findViewById(R.id.fragEditAccount_save_btn);
         btnUpload.setOnClickListener(v->{

@@ -48,6 +48,12 @@ public class FeedFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_feed, container, false);

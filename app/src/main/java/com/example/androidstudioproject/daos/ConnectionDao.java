@@ -17,10 +17,13 @@ public interface ConnectionDao {
     @Query("select * from UserConnections") //get all posts
     List<UserConnections> index();
 
-    @Query("select * from UserConnections where userId = :email or secondUserId = :email") //get a specific user's connections
-    UserConnections get(String email);
+    @Query("select * from UserConnections where userId = :email") //get a specific user's connections
+    UserConnections getFollowing(String email);
 
-    @Query("select * from UserConnections where (userId = :firstEmail and secondUserId = :secondEmail) or (userId = :secondEmail and secondUserId = :firstEmail)") //get a specific user's connections
+    @Query("select * from UserConnections where secondUserId = :email") //get a specific user's connections
+    UserConnections getFollowers(String email);
+
+    @Query("select * from UserConnections where userId = :firstEmail and secondUserId = :secondEmail") //get a specific user's connections
     UserConnections getConnectionIfExists(String firstEmail, String secondEmail);
 
     //@Insert(onConflict = OnConflictStrategy.REPLACE) void insertAll(user... users); //add user

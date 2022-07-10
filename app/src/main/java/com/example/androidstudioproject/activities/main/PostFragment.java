@@ -63,6 +63,12 @@ public class PostFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -75,7 +81,7 @@ public class PostFragment extends Fragment {
 
         //TODO DELETE & EDIT glide in edit.
 
-        Post post = postsViewModel.get(postID);
+        Post post = postsViewModel.getPostById(postID);
         String curremail = ((MainActivity)getActivity()).getCurrEmail();
 
         View layout = view.findViewById(R.id.linearLayout2);
@@ -87,7 +93,7 @@ public class PostFragment extends Fragment {
             //layout gone
         }
 
-        if(connectionsViewModel.contains(post.getUserEmail(),curremail)){
+        if(connectionsViewModel.getConnectionIfExists(post.getUserEmail(), curremail) != null){
             //TODO make send message visible
         }
 

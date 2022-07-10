@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.androidstudioproject.R;
+import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 
@@ -30,6 +31,12 @@ public class UserFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -42,13 +49,13 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_add_post, container, false);
+        return inflater.inflate(R.layout.fragment_user, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        User user = usersViewModel.get(userEmail);
+        User user = usersViewModel.getUserByEmail(userEmail);
 
         //TODO recycle view
     }

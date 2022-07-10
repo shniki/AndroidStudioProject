@@ -47,6 +47,12 @@ public class SearchFragment extends Fragment implements SelectListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment

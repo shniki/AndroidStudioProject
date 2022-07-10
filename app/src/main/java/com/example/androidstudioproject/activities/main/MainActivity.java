@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     public static final int CAMERA_PIC_REQUEST = 1337;
     public static final int PICK_PHOTO = 1338;
+    public String currentFragmentName;
 
     String currEmail;
 
@@ -101,16 +102,20 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.nav_search:
-                            replaceFragments(SearchFragment.class);
+                            if(!SearchFragment.class.getName().equals(currentFragmentName))
+                                replaceFragments(SearchFragment.class);
                             break;
                         case R.id.nav_createP:
-                            replaceFragments(CreatePostFragment.class);
+                            if(!CreatePostFragment.class.getName().equals(currentFragmentName))
+                                replaceFragments(CreatePostFragment.class);
                             break;
                         case R.id.nav_home:
-                            replaceFragments(FeedFragment.class);
+                            if(!FeedFragment.class.getName().equals(currentFragmentName))
+                                replaceFragments(FeedFragment.class);
                             break;
                         case R.id.nav_profile:
-                            replaceFragments(UserFragment.class);
+                            if(!UserFragment.class.getName().equals(currentFragmentName))
+                                replaceFragments(UserFragment.class);
                             break;
                     }
                     return true;
