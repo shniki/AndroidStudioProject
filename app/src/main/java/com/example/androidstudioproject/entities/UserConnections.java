@@ -2,31 +2,31 @@ package com.example.androidstudioproject.entities;
 
 import androidx.room.Entity;
 
-@Entity(primaryKeys = {"userId", "secondUserId"})
+@Entity(primaryKeys = {"userEmail", "secondUserEmail"})
 public class UserConnections {
-    private long userId;
-    private long secondUserId;
+    private String userEmail;
+    private String secondUserEmail;
 
-    public UserConnections(long userId, long secondUserId) {
-        this.userId = userId;
-        this.secondUserId = secondUserId;
+    public UserConnections(String userEmail, String secondUserEmail) {
+        this.userEmail = userEmail;
+        this.secondUserEmail = secondUserEmail;
     }
 
     //getters
-    public long getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public long getSecondUserId() {
-        return secondUserId;
+    public String getSecondUserEmail() {
+        return secondUserEmail;
     }
 
     //setters
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public void setSecondUserId(long secondUserId) {
-        this.secondUserId = secondUserId;
+    public void setSecondUserEmail(String secondUserEmail) {
+        this.secondUserEmail = secondUserEmail;
     }
 }

@@ -39,6 +39,10 @@
     <string name="signOut">Sign Out</string>
     <string name="error_no_data">Please input some data</string>
     <string name="follow_txt">Follow</string>
+    <string name="settings">User Settings</string>
+    <string name="match">Its a Match!</string>
+    <string name="following">Following</string>
+    <string name="follow_back">Follow Back</string>
 
 
 </resources>

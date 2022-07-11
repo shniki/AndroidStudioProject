@@ -163,29 +163,15 @@
                 android:id="@+id/fragEditAccount_save_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="32dp"
                 android:backgroundTint="@color/purple_200"
                 android:drawablePadding="5dp"
                 android:text="save"
                 android:textColor="@color/black"
                 app:cornerRadius="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frag_addP_iv_p"
-                />
-
-            <Button
-                android:id="@+id/fragEditAccount_cancel_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/purple_200"
-                android:drawablePadding="5dp"
-                android:text="cancel"
-                android:textColor="@color/black"
-                app:cornerRadius="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/frag_addP_iv_p"
                 app:layout_constraintEnd_toEndOf="parent"
-
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frag_addP_iv_p" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

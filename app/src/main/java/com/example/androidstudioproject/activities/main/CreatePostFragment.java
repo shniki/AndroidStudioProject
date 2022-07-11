@@ -109,12 +109,6 @@ public class CreatePostFragment extends Fragment {
             image=null;
             url=null;
         });
-        btnCancel =view.findViewById(R.id.fragEditAccount_cancel_btn);
-        btnCancel.setOnClickListener(v->{
-            ((MainActivity)this.getActivity()).replaceFragments(FeedFragment.class);
-            FragmentManager fm = getActivity().getSupportFragmentManager();
-            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        });
         btnUpload =view.findViewById(R.id.fragEditAccount_save_btn);
         btnUpload.setOnClickListener(v->{
             if(edtContent== null) //validate input

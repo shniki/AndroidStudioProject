@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int PICK_PHOTO = 1338;
     public String currentFragmentName;
 
-    String currEmail;
+    public String currEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
