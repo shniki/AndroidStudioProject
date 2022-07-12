@@ -25,6 +25,8 @@ public class ConnectionsViewModel extends AndroidViewModel {
 
     public UserConnections getConnectionIfExists(String firstEmail, String secondEmail) { return mRepository.getConnectionIfExists(firstEmail, secondEmail);}
 
+    public void delete(UserConnections connection) { mRepository.delete(connection); }
+
     public LiveData<List<UserConnections>> getAllConnections() { return connections; }
 
     public void add(UserConnections connection) { mRepository.add(connection); }
