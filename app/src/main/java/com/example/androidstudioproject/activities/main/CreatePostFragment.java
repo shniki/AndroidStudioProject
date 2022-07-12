@@ -124,6 +124,11 @@ public class CreatePostFragment extends Fragment {
                 return;
             }
 
+            if(content.length() > 140){
+                Snackbar.make(view, R.string.content_too_long, Snackbar.LENGTH_LONG).show();
+                return;
+            }
+
             Post p = new Post(email,content,type,url);
             postsViewModel.add(p);
 
