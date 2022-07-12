@@ -59,8 +59,9 @@
             android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:paddingTop="@dimen/fui_heading_padding_bottom"
+            android:id="@+id/rvUserFeed"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/fui_heading_padding_bottom" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

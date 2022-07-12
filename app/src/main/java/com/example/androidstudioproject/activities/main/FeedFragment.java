@@ -68,12 +68,15 @@ public class FeedFragment extends Fragment {
         //choose type of layout: linear, horological or staggered
         rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        postsViewModel.getAllPosts().observe(this.getActivity(), new Observer<List<Post>>() {
-            @Override
-            public void onChanged(@Nullable final List<Post> posts) {
-                // Update the cached copy of the words in the adapter.
-                adapter.setPostsList(posts);
-            }
-        });
+        //TODO ON REFRESH
+//        postsViewModel.getAllPosts().observe(this.getActivity(), new Observer<List<Post>>() {
+//            @Override
+//            public void onChanged(@Nullable final List<Post> posts) {
+//                // Update the cached copy of the words in the adapter.
+//                adapter.setPostsList(posts);
+//            }
+//        });
     }
+
+
 }

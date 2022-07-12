@@ -43,6 +43,8 @@
     <string name="match">Its a Match!</string>
     <string name="following">Following</string>
     <string name="follow_back">Follow Back</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="deleted_post">Sorry, this post has been deleted</string>
 
 
 </resources>

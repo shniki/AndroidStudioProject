@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
 import com.example.androidstudioproject.activities.login.SignUpFragment;
+import com.example.androidstudioproject.adapters.FeedAdapter;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.entities.UserConnections;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
@@ -28,6 +31,7 @@ public class UserFragment extends Fragment {
     UsersViewModel usersViewModel;
     ConnectionsViewModel connectionsViewModel;
     String userEmail;
+    FeedAdapter adapter;
 
 
     public UserFragment() {
@@ -44,6 +48,7 @@ public class UserFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        adapter.setPostsList(postsViewModel.getPostsByUser(userEmail));
     }
 
     @Override
@@ -53,6 +58,8 @@ public class UserFragment extends Fragment {
         postsViewModel = ((MainActivity)getActivity()).getPostViewModel();
         usersViewModel = ((MainActivity)getActivity()).getUsersViewModel();
         connectionsViewModel = ((MainActivity)getActivity()).getConnectionsViewModel();
+
+        adapter = new FeedAdapter((MainActivity) this.getActivity()); //create adapter
     }
 
     @Override
@@ -76,7 +83,7 @@ public class UserFragment extends Fragment {
         Button followBtn = (Button) view.findViewById(R.id.followBtn_info);
         String loggedInUser = ((MainActivity)this.getActivity()).currEmail;
         if(userEmail.equals(loggedInUser)){
-            followBtn.setText(R.string.settings);
+            followBtn.setText(R.string.edit_profile);
             followBtn.setOnClickListener(v -> {
                 ((MainActivity) this.getActivity()).replaceFragments(SettingsFragment.class);
             });
@@ -111,6 +118,7 @@ public class UserFragment extends Fragment {
         }
 
         TextView moreInfo = (TextView) view.findViewById(R.id.moreInfo_info);
+        //TODO non static
         String gender;
         if(user.getGender() == 0) gender = "Male";
         else gender = "Female";
@@ -121,9 +129,15 @@ public class UserFragment extends Fragment {
         String info = user.getAge() + " | " + gender + " | " + preference;
         moreInfo.setText(info);
 
+
         TextView bio = (TextView) view.findViewById(R.id.bio_info);
         bio.setText(user.getBio());
 
-        //TODO recycle view
+        //recycle view
+        RecyclerView rvFeed = view.findViewById(R.id.rvUserFeed); //get recycler-view by id
+        rvFeed.setAdapter(adapter); //set adapter
+        //choose type of layout: linear, horological or staggered
+        rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
+
 }

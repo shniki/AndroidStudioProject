@@ -139,6 +139,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Delete" />
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/buttonDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+
+            android:text="Done" />
     </LinearLayout>
 
     <EditText
@@ -151,6 +169,8 @@
         app:layout_constraintTop_toBottomOf="@+id/postImage_post"
         android:visibility="gone"
         tools:layout_editor_absoluteX="12dp" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

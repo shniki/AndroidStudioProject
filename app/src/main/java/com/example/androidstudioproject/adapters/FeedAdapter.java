@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.example.androidstudioproject.activities.main.MainActivity;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Collections;
 import java.util.List;
@@ -58,20 +60,27 @@ public interface ItemClickListener{
         holder.userName.setText(user.getFirstName() + " " + user.getLastName());
         holder.date.setText(post.getPostDate());
         holder.description.setText(post.getContent());
-        //holder.location.setText(post.getLocation());
-        //holder.image.setImageBitmap(post.getPicture());
-      //  holder.userProfile.setImageBitmap(post.getUserName());
+        if(post.getDataType()==1)
+        {
+            //TODO holder.image.setImageBitmap(post.getPicture());
+            holder.image.setVisibility(View.VISIBLE);
+        }
+        else
+            holder.image.setVisibility(View.GONE);
+        //TODO holder.location.setText(post.getLocation());
+        if(post.getDataType()==2)
+        {
+            //TODO holder.video.setImageBitmap(post.getPicture());
+            holder.video.setVisibility(View.VISIBLE);
+        }
+        else
+            holder.video.setVisibility(View.GONE);
+
+        //TODO holder.userProfile.setImageBitmap(post.getUserName());
 
             holder.userName.setText(user.getFirstName() + " " + user.getLastName());
             holder.date.setText(post.getPostDate());
             holder.description.setText(post.getContent());
-
-            //holder.location.setText(post.getLocation());
-
-            //holder.image.setImageBitmap(post.getPicture());
-            //holder.video.setImageBitmap(post.getPicture());
-
-            //holder.userProfile.setImageBitmap(user.getProfilePicture());
 
 
             //click to fragment
@@ -125,6 +134,7 @@ public interface ItemClickListener{
         TextView date;
         ImageView userProfile;
         ImageView image;
+        VideoView video;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
