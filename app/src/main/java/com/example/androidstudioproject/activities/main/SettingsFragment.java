@@ -23,6 +23,7 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
     EditText edtChangePassword;
     Switch edtChangeLanguage;
     Button btnSignOut;
+    Button btnChangeDetails;
 
     public static SettingsFragment newInstance(/*Data data, int position*/) {
         SettingsFragment frag = new SettingsFragment();
@@ -55,6 +56,7 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
         edtChangePassword = view.findViewById(R.id.fragSettings_ChangePassword); //get input line (edit text) by id
         edtChangeLanguage = (Switch) view.findViewById(R.id.fragSettings_ChangeLanguage); //get input line (edit text) by id
         btnSignOut = (Button) view.findViewById(R.id.fragSettings_signOut);
+        btnChangeDetails = (Button) view.findViewById(R.id.fragSettings_changeDetails);
 
         edtDarkMode.setOnCheckedChangeListener( (buttonView, isChecked) -> {
             if (isChecked)
@@ -88,6 +90,10 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
         btnSignOut.setOnClickListener(v -> {
             mAuth.signOut();
             ((MainActivity)this.getActivity()).gotoLoginActivity();
+        });
+
+        btnChangeDetails.setOnClickListener(v -> {
+            ((MainActivity)getActivity()).replaceFragments(EditDetailsFragment.class);
         });
     }
 }

@@ -19,6 +19,15 @@
             app:key="Password"
             app:title="@string/password_change_title" />
 
+        <Preference
+            android:id="@+id/fragSettings_changeDetails"
+            android:background="#686868"
+            android:backgroundTint="#686868"
+            android:icon="@drawable/ic_change_details"
+            android:key="Change user details"
+            android:summary="Change user details"
+            android:title="Change user details" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/language_header">

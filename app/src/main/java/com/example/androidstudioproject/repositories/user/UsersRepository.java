@@ -33,6 +33,10 @@ public class UsersRepository {
         UserModelFirebase.instance.cancellGetAllUsers();
     }
 
+    public void update(User user) {
+        dao.update(user);
+    }
+
     class UserListData extends MutableLiveData<List<User>> {
 
         @Override

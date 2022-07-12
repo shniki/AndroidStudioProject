@@ -45,6 +45,15 @@
     <string name="follow_back">Follow Back</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="deleted_post">Sorry, this post has been deleted</string>
+    <string name="content_too_long">Content too long, please limit yourself to 140 characters</string>
+    <string name="bio_too_long">Bio too long, please limit yourself to 140 characters</string>
+    <string name="sexualPreference">Sexual Preference</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="fullName">Full Name</string>
+    <string name="age">Age</string>
+    <string name="bio">Bio</string>
+    <string name="updateUser">Update User</string>
 
 
 </resources>

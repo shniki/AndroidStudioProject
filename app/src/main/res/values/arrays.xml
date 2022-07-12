@@ -31,6 +31,13 @@
         <item>Female</item>
     </string-array>
 
+    <string-array name="sexual_preference_array">
+        <item>Sexual Preference</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Both</item>
+    </string-array>
+
     <string-array name="following_options">
         <item>Follow</item>
         <item>Follow Back</item>
