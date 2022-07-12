@@ -33,6 +33,11 @@ public class PostsRepository {
         return dao.getByUser(userEmail);
     }
 
+    public void delete(Post post) { dao.delete(post); }
+
+    public void update(Post post) { dao.update(post); }
+
+
     public void cancellGetAllPosts() {
         PostModelFirebase.instance.cancellGetAllPosts();
     }

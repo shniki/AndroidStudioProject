@@ -24,6 +24,10 @@ public class PostsViewModel extends AndroidViewModel {
 
     public LiveData<List<Post>> getAllPosts() { return posts; }
 
+    public void delete(Post post) { mRepository.delete(post); }
+
+    public void update(Post post) { mRepository.update(post); }
+
     public Post getPostById(long postID) { return mRepository.getPostById(postID); }
 
     public List<Post> getPostsByUser(String userEmail) { return mRepository.getUserPosts(userEmail); }

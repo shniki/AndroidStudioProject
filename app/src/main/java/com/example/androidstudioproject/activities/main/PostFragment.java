@@ -186,7 +186,8 @@ public class PostFragment extends Fragment {
             btnDelete.setVisibility(View.VISIBLE);
         });
         btnDelete.setOnClickListener(v->{
-            //TODO yaniv's delete post
+            postsViewModel.delete(post);
+            ((MainActivity)this.getActivity()).onBackPressed();
         });
 
         View layout = view.findViewById(R.id.linearLayout2);
