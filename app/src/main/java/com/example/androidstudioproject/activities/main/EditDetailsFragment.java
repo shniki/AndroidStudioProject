@@ -149,7 +149,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
             loggedInUser.setFirstName(strFullName.split(" ")[1]);
             loggedInUser.setPhoneNumber(strPhoneNumber);
             usersViewModel.update(loggedInUser);
-            ((MainActivity) getActivity()).replaceFragments(SettingsFragment.class);
+            ((MainActivity) getActivity()).onBackPressed();
         });
     }
 }

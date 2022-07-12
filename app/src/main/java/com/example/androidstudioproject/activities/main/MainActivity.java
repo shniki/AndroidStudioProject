@@ -26,6 +26,7 @@ import com.example.androidstudioproject.repositories.connection.ConnectionsViewM
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 //goto location
                 //intent back
         //search - NOY
+                //on change mvvm
         //settings DONE
     }
 
@@ -200,16 +202,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gotoPostFragment(long postID) {
-        PostFragment fragment = null;
-        try {
-            fragment = (PostFragment) PostFragment.newInstance(postID);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(postViewModel.getPostById(postID)==null)
+        {
+            Snackbar.make(getWindow().getDecorView().getRootView(), R.string.deleted_post, Snackbar.LENGTH_LONG).show();
+            //REFRESH
+            return;
         }
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.mainFragment, fragment)
-                .commit();
+        else {
+            PostFragment fragment = null;
+            try {
+                fragment = (PostFragment) PostFragment.newInstance(postID);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.mainFragment, fragment)
+                    .commit();
+        }
     }
 
     public void gotoUserFragment(String useremail) {

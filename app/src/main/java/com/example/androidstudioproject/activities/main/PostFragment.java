@@ -76,6 +76,21 @@ public class PostFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+
+        //update info
+        Post post = postsViewModel.getPostById(postID);
+        if(post.getContent().equals(""))
+            txtDesc.setVisibility(View.GONE);
+        else
+            txtDesc.setVisibility(View.VISIBLE);
+        txtDesc.setText(post.getContent());
+
+        User user = usersViewModel.getUserByEmail(post.getUserEmail());
+
+        //TODO imgProfile.setImageResource(user.getProfilePicture());
+
+        txtUserName.setText(user.getFirstName()+" "+user.getLastName());
+
     }
 
     @Override
