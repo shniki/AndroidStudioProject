@@ -110,6 +110,7 @@
     <string name="textSettings">You can now continue to edit your app settings</string>
     <string name="changeUserDetails">Change user details</string>
     <string name="media_upload_failed">Media upload failed</string>
+    <string name="empty_content">Cannot assign empty content for content-only post</string>
 
 
 </resources>

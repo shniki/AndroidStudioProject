@@ -106,14 +106,14 @@ public class CreatePostFragment extends Fragment {
         btnLocation =  view.findViewById(R.id.addLocation);
 
         btnLocation.setOnClickListener(v->{
-            PlacePicker.IntentBuilder builder=new PlacePicker.IntentBuilder();
-            try {
-                startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
-            } catch (GooglePlayServicesRepairableException e) {
-                e.printStackTrace();
-            } catch (GooglePlayServicesNotAvailableException e) {
-                e.printStackTrace();
-            }
+//            PlacePicker.IntentBuilder builder=new PlacePicker.IntentBuilder();
+//            try {
+//                startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
+//            } catch (GooglePlayServicesRepairableException e) {
+//                e.printStackTrace();
+//            } catch (GooglePlayServicesNotAvailableException e) {
+//                e.printStackTrace();
+//            }
         });
         btnCamera =view.findViewById(R.id.frag_addP_cam_btn);
         btnCamera.setOnClickListener(v->{
@@ -134,7 +134,7 @@ public class CreatePostFragment extends Fragment {
         visableImg.setOnClickListener(v->{
             visableImg.setImageResource(R.drawable.camera);
             image=null;
-            url=null;
+            url="";
         });
         btnUpload =view.findViewById(R.id.fragEditAccount_save_btn);
         btnUpload.setOnClickListener(v->{
@@ -155,10 +155,7 @@ public class CreatePostFragment extends Fragment {
                 Snackbar.make(view, R.string.content_too_long, Snackbar.LENGTH_LONG).show();
                 return;
             }
-            if(content == null)
-                content = "";
-            if(url == null)
-                url = "";
+
             if(location == null)
                 location = "";
 
@@ -168,9 +165,9 @@ public class CreatePostFragment extends Fragment {
             if(type==1)//image
                 url =((MainActivity)getActivity()).getStorageModelFirebase().addImage(image);
             else if(type==2)
-                url = null;//TODO ADD VIDEO
+                url = "";//TODO ADD VIDEO
 
-            if(url==null)//upload failed
+            if(url.equals(""))//upload failed
             {
                 Snackbar.make(view, R.string.media_upload_failed, Snackbar.LENGTH_LONG).show();
                 return;

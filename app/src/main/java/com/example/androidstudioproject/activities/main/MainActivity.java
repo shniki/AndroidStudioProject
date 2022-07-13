@@ -33,8 +33,8 @@ import com.example.androidstudioproject.repositories.connection.ConnectionsViewM
 import com.example.androidstudioproject.repositories.storage.StorageModelFirebase;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
+//import com.google.android.gms.location.places.Place;
+//import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -241,11 +241,11 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(requestCode==PLACE_PICKER_REQUEST)
             {
-                Place place= PlacePicker.getPlace(data,this);
-                if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName()))
-                {
-                    ((CreatePostFragment)currentFragment).setLocation(place.getAddress().toString());
-                }
+//                Place place= PlacePicker.getPlace(data,this);
+//                if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName()))
+//                {
+//                    ((CreatePostFragment)currentFragment).setLocation(place.getAddress().toString());
+//                }
             }
         }
 

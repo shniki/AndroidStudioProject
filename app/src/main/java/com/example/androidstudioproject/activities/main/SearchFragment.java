@@ -66,7 +66,7 @@ public class SearchFragment extends Fragment implements SelectListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        searchView = view.findViewById(R.id.searchView);
+//        searchView = view.findViewById(R.id.searchView);
         listUsers=view.findViewById(R.id.rvSearch);
        usersViewModel.getAllUsers().observe(this.getActivity(), new Observer<List<User>>() {
           @Override

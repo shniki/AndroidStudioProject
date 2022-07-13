@@ -195,8 +195,13 @@ public class PostFragment extends Fragment {
             }
 
             String strNewDesc = edtDesc.getText().toString();
+            if(post.getDataType() == 0 && TextUtils.isEmpty(strNewDesc))
+            {
+                Snackbar.make(view, R.string.empty_content, Snackbar.LENGTH_LONG).show();
+                return;
+            }
             post.setContent(strNewDesc);
-            //postsViewModel.update(post); //TODO yaniv's update+delete in firebase viewmodel
+            postsViewModel.update(post);
 
             edtDesc.setVisibility(View.GONE);
             btnDone.setVisibility(View.GONE);
