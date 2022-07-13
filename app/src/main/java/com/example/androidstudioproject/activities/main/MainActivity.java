@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         storageModelFirebase = new StorageModelFirebase();
 
 
- //TODO use navigation to get to :
+ // use navigation to get to :
         //user
         //feed -
                 //single post

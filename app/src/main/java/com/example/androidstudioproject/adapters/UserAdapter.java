@@ -1,5 +1,6 @@
 package com.example.androidstudioproject.adapters;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final User user=usersList.get(position);
         holder.userName.setText(user.getFirstName()+" "+user.getLastName());
         holder.userProfile.setImageURI(Uri.parse(user.getProfilePicture()));
