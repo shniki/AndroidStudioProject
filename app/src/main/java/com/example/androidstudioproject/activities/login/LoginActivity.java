@@ -19,6 +19,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -81,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void addUser(String email, String password, String name, String number, String gender, String age) {
         //adds to firebase database
+
         String[] splitted = name.split(getString(R.string.spaceChar));
 
         int _age = Integer.parseInt(age);
@@ -89,10 +92,10 @@ public class LoginActivity extends AppCompatActivity {
         if (gender.equals(getString(R.string.male))) _gender = 0;
         else _gender = 1;
 
-        User u = new User(email, splitted[0], splitted[1], number, null, _age, _gender, 2, null);
+        User u = new User(email, splitted[0], splitted[1], number, "", _age, _gender, 2, "");
         viewModel.add(u);
 
-        //todo authenticate using firebase (+create new user)
+        // authenticate using firebase (+create new user)
         authenticationViewModel.add(email,password);
     }
 

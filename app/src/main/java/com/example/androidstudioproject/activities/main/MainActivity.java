@@ -262,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.mainFragment, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -318,6 +319,7 @@ public class MainActivity extends AppCompatActivity {
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFragment, fragment)
+                    .addToBackStack(null)
                     .commit();
         }
     }
@@ -332,6 +334,7 @@ public class MainActivity extends AppCompatActivity {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.mainFragment, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 }

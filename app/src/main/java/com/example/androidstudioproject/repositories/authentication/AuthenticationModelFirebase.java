@@ -1,12 +1,8 @@
 package com.example.androidstudioproject.repositories.authentication;
 
-import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 
-import com.example.androidstudioproject.AppDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -19,11 +15,14 @@ public class AuthenticationModelFirebase {
 
     private FirebaseAuth mAuth;
 
+    Executor executor;
+
     private FirebaseUser currUser;
 
-    public AuthenticationModelFirebase() {
+    public AuthenticationModelFirebase(Executor executor) {
         mAuth = FirebaseAuth.getInstance();
         currUser = null;
+        this.executor=executor;
     }
 
     public FirebaseUser getCurrentUser() {
@@ -41,7 +40,7 @@ public class AuthenticationModelFirebase {
 
     public Boolean authenticate(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(executor, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -59,7 +58,7 @@ public class AuthenticationModelFirebase {
 
     public void add(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(executor, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
