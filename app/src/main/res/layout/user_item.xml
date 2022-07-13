@@ -33,7 +33,7 @@
             android:foregroundGravity="center"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="userName"
+            android:text="@string/username"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
     </LinearLayout>

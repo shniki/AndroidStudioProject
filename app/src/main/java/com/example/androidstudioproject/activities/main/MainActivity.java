@@ -17,11 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LiveData;
 
 import com.example.androidstudioproject.AppDB;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
 import com.example.androidstudioproject.activities.main.intro.IntroFragment;
+import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
@@ -32,6 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(switchActivityIntent);
         }
         catch(Exception e) {
-            Log.d("ERROR", "Error going to login activity with message" + e.getMessage());
+            Log.d(getString(R.string.errorType), getString(R.string.gotoLoginErrorMsg) + e.getMessage());
         }
     }
 
@@ -138,15 +141,28 @@ public class MainActivity extends AppCompatActivity {
 
     public void pickImageFromGallery(){
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        getIntent.setType("image/*");
+        getIntent.setType(getString(R.string.imageType));
 
         Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/*");
+        pickIntent.setType(getString(R.string.imageType));
 
-        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+        Intent chooserIntent = Intent.createChooser(getIntent, getString(R.string.selectImage));
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
 
         startActivityForResult(chooserIntent, PICK_PHOTO);
+    }
+
+    public Boolean isRelevantPost(Post post, int sexualPreference){
+        int gender = usersViewModel.getUserByEmail(post.getUserEmail()).getGender();
+        if((sexualPreference == 1 && gender == 0) || (sexualPreference == 0 && gender == 1))
+            return false;
+        return true;
+    }
+
+    public List<Post> getAllRelevantPosts(int sexualPreference){
+        List<Post> updatedPosts = postViewModel.getAllPosts().getValue();
+        updatedPosts.removeIf(p -> !isRelevantPost(p, sexualPreference));
+        return updatedPosts;
     }
 
     @Override
@@ -154,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_PIC_REQUEST || requestCode == PICK_PHOTO) {
-                Bitmap image = data.getExtras().getParcelable("data");
+                Bitmap image = data.getExtras().getParcelable(getString(R.string.data));
                 ImageView imageview = (ImageView) findViewById(R.id.frag_addP_iv_p); //sets imageview as the bitmap
                 imageview.setImageBitmap(image);
             }

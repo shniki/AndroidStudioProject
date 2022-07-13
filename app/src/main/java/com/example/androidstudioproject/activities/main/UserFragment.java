@@ -62,7 +62,7 @@ public class UserFragment extends Fragment {
 
         profilePic.setImageURI(Uri.parse(user.getProfilePicture()));
 
-        String text = user.getFirstName() + ' ' + user.getLastName();
+        String text = user.getFirstName() + getString(R.string.spaceChar) + user.getLastName();
         username.setText(text);
 
         setFollowBtn();
@@ -136,11 +136,11 @@ public class UserFragment extends Fragment {
             String textAfterClick;
             if(isFollowed != null) {
                 followBtn.setText(R.string.follow_back);
-                textAfterClick = "Its a Match!";
+                textAfterClick = getString(R.string.match);
             }
             else{
                 followBtn.setText(R.string.follow_txt);
-                textAfterClick = "Following";
+                textAfterClick = getString(R.string.following);
             }
 
             followBtn.setOnClickListener(v -> {
@@ -155,13 +155,13 @@ public class UserFragment extends Fragment {
 
         //TODO non static
         String gender;
-        if(user.getGender() == 0) gender = "Male";
-        else gender = "Female";
+        if(user.getGender() == 0) gender = getString(R.string.male);
+        else gender = getString(R.string.female);
         String preference;
-        if(user.getSexualPreferences() == 0) preference = "Likes men";
-        else if(user.getSexualPreferences() == 1) preference = "Likes women";
-        else preference = "Likes both";
-        String info = user.getAge() + " | " + gender + " | " + preference;
+        if(user.getSexualPreferences() == 0) preference = getString(R.string.malePreference);
+        else if(user.getSexualPreferences() == 1) preference = getString(R.string.femalePreference);
+        else preference = getString(R.string.bothPreference);
+        String info = user.getAge() + getString(R.string.separator) + gender + getString(R.string.separator) + preference;
         moreInfo.setText(info);
     }
 }

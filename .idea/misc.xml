@@ -47,6 +47,7 @@
         <entry key="app/src/main/res/layout/fragment_edit_details.xml" value="0.18426678067550234" />
         <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.18426678067550234" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.2573749465583583" />
         <entry key="app/src/main/res/layout/fragment_main_intro.xml" value="0.2573749465583583" />
         <entry key="app/src/main/res/layout/fragment_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.15677083333333333" />
@@ -60,6 +61,7 @@
         <entry key="app/src/main/res/layout/post_item.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.1" />
         <entry key="app/src/main/res/layout/user_item.xml" value="0.18170158187259514" />
+        <entry key="app/src/main/res/menu/bottom_navigation_bar.xml" value="0.2573749465583583" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_send_message.xml" value="0.1" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.18378906249999996" />
       </map>

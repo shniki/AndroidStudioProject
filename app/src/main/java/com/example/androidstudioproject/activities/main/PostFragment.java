@@ -79,7 +79,7 @@ public class PostFragment extends Fragment {
 
         //update info
         Post post = postsViewModel.getPostById(postID);
-        if(post.getContent().equals(""))
+        if(post.getContent().equals(getString(R.string.emptyString)))
             txtDesc.setVisibility(View.GONE);
         else
             txtDesc.setVisibility(View.VISIBLE);
@@ -88,8 +88,8 @@ public class PostFragment extends Fragment {
         User user = usersViewModel.getUserByEmail(post.getUserEmail());
 
         //TODO imgProfile.setImageResource(user.getProfilePicture());
-
-        txtUserName.setText(user.getFirstName()+" "+user.getLastName());
+        String text = user.getFirstName()+getString(R.string.spaceChar)+user.getLastName();
+        txtUserName.setText(text);
 
     }
 
@@ -112,7 +112,8 @@ public class PostFragment extends Fragment {
         //TODO imgProfile.setImageResource(user.getProfilePicture());
 
         txtUserName = view.findViewById(R.id.userName_post);//userName_post
-        txtUserName.setText(user.getFirstName()+" "+user.getLastName());
+        String text = user.getFirstName()+getString(R.string.spaceChar)+user.getLastName();
+        txtUserName.setText(text);
 
         txtLocation = view.findViewById(R.id.location_post);//location_post
         //TODO txtLocation.setText(post.getLocation());
@@ -140,7 +141,7 @@ public class PostFragment extends Fragment {
         }
 
         txtDesc = view.findViewById(R.id.description_post);//description_post
-        if(post.getContent().equals(""))
+        if(post.getContent().equals(getString(R.string.emptyString)))
             txtDesc.setVisibility(View.GONE);
         else
             txtDesc.setVisibility(View.VISIBLE);

@@ -67,8 +67,8 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
         edtChangeLanguage.setOnCheckedChangeListener( (buttonView, isChecked) -> {
             String language;
             if (isChecked)
-                language = "es";
-            else language = "en";
+                language = getString(R.string.spanish);
+            else language = getString(R.string.english);
             ((MainActivity)this.getActivity()).setLanguage(language);
         });
 

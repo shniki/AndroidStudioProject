@@ -10,7 +10,7 @@
 
     <!-- Messages Preferences -->
     <string name="password_change_title">Change your password</string>
-    <string name="language_change_title">Change language to spanish</string>
+    <string name="language_change_title">Change language to romanian</string>
     <string name="theme_color_title">Custom theme color</string>
 
     <string name="change_theme_title">Change theme</string>
@@ -57,6 +57,58 @@
     <string name="appSettings">App Settings</string>
     <string name="gotIt">Got it</string>
     <string name="skip">Skip</string>
+    <string name="male">Male</string>
+    <string name="spaceChar">" "</string>
+    <string name="female">Female</string>
+    <string name="both">Both</string>
+    <string name="gotoLoginErrorMsg">Error going to login activity with message</string>
+    <string name="errorType">ERROR</string>
+    <string name="imageType">image/*</string>
+    <string name="selectImage">Select Image</string>
+    <string name="data">data</string>
+    <string name="emptyString" />
+    <string name="spanish">es</string>
+    <string name="english">en</string>
+    <string name="malePreference">Likes men</string>
+    <string name="femalePreference">Likes women</string>
+    <string name="bothPreference">Likes both</string>
+    <string name="separator">" | "</string>
+    <string name="tindergram">TINDERGRAM</string>
+    <string name="newPost">New Post</string>
+    <string name="addLocation">Add location</string>
+    <string name="content">Content</string>
+    <string name="uploadPhoto">Upload photo</string>
+    <string name="save">save</string>
+    <string name="changeDetails">Change your details</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="createNewAccount">Create new Account</string>
+    <string name="username">user_Name</string>
+    <string name="location">Location</string>
+    <string name="description">Description nxnxnxnnmmmmmmmmmmmmm</string>
+    <string name="now">NOW</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="inputDescription">input description</string>
+    <string name="searchUsers">search users....</string>
+    <string name="signUp">Sign Up</string>
+    <string name="createAccount">Create Account</string>
+    <string name="sampleName">Ted Mosbey</string>
+    <string name="sampleStatus">31  |  male  |  likes women</string>
+    <string name="placeFiller">fggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfw</string>
+    <string name="welcomeText">Welcome to Tindergram!</string>
+    <string name="editSecondary">You can go and edit your details before exploring the app</string>
+    <string name="aboutUs">About us</string>
+    <string name="explanationFirst">You can scroll through your feed to find possible dating matches</string>
+    <string name="explanationSecond">By clicking the post, you can see a post\'s details, whether it\'s yours or not.</string>
+    <string name="explanationThird">By clicking the user, you can see a users details and send him an SMS if he\'s a match for you...</string>
+    <string name="explanationFourth">You can search users and create your own posts at anytime from the bottom bar.</string>
+    <string name="txtAwesome">Awesome!</string>
+    <string name="textSettings">You can now continue to edit your app settings</string>
+    <string name="changeUserDetails">Change user details</string>
 
 
 </resources>

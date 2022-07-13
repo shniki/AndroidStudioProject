@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.SelectListener;
+import com.example.androidstudioproject.activities.main.MainActivity;
 import com.example.androidstudioproject.entities.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -23,9 +25,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private List<User> usersList;
     private SelectListener listener;
-    public UserAdapter(List<User> usersList, SelectListener listener) {
+    MainActivity context;
+
+    public UserAdapter(List<User> usersList, SelectListener listener, MainActivity context) {
         this.usersList = usersList;
         this.listener=listener;
+        this.context = context;
     }
 
     @NonNull
@@ -38,7 +43,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final User user=usersList.get(position);
-        holder.userName.setText(user.getFirstName()+" "+user.getLastName());
+        String text = user.getFirstName()+context.getString(R.string.spaceChar)+user.getLastName();
+        holder.userName.setText(text);
         //holder.userProfile.setImageBitmap(user.getProfilePicture());
        // Glide.with()- image profile
         holder.cardView.setOnClickListener(new View.OnClickListener() {
