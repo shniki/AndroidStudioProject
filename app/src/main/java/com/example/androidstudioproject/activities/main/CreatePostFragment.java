@@ -155,8 +155,8 @@ public class CreatePostFragment extends Fragment {
                 Snackbar.make(view, R.string.media_upload_failed, Snackbar.LENGTH_LONG).show();
                 return;
             }
-            Post p = new Post(email,content,type,url);
-            postsViewModel.add(p);
+           // Post p = new Post(email,content,type,url);
+           // postsViewModel.add(p);
 
             ((MainActivity)getActivity()).replaceFragments(FeedFragment.class);
         });

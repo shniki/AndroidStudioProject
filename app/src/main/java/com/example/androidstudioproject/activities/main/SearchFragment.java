@@ -45,7 +45,7 @@ public class SearchFragment extends Fragment implements SelectListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         adapter = new UserAdapter(usersFilteredList,this);
+         adapter = new UserAdapter(usersFilteredList,this,(MainActivity) getActivity());
         listUsers.setAdapter(adapter);
     }
 
