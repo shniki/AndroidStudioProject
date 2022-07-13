@@ -12,7 +12,7 @@ import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.entities.UserConnections;
 
-@Database(entities = {User.class, Post.class, UserConnections.class}, version = 1)
+@Database(entities = {User.class, Post.class, UserConnections.class}, version = 1, exportSchema = false)
 public abstract class AppDB extends RoomDatabase{
 
     private static AppDB instance;

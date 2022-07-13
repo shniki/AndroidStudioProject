@@ -116,6 +116,10 @@ public class User {
         this.gender = gender;
     }
 
+    public void setHasLoggedIn(Boolean hasLoggedIn) {
+        this.hasLoggedIn = hasLoggedIn;
+    }
+
     public void setSexualPreferences(int sexualPreferences) {
         this.sexualPreferences = sexualPreferences;
     }
