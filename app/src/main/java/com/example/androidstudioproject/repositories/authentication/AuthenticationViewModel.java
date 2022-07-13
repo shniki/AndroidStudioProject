@@ -1,20 +1,24 @@
 package com.example.androidstudioproject.repositories.authentication;
 
 import android.app.Application;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.google.firebase.auth.FirebaseUser;
 
 public class AuthenticationViewModel extends AndroidViewModel {
     
-    private AuthenticationModelFirebase mRepository;
-    
+    private final AuthenticationModelFirebase mRepository;
+
+
     private FirebaseUser currUser;
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public AuthenticationViewModel(Application application) {
         super(application);
-        mRepository = new AuthenticationModelFirebase();
+        mRepository = new AuthenticationModelFirebase(application.getMainExecutor());
         currUser = mRepository.getCurrentUser();
     }
 
