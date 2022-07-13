@@ -26,6 +26,8 @@ public class FeedFragment extends Fragment {
     PostsViewModel postsViewModel;
     UsersViewModel usersViewModel;
 
+    FeedAdapter adapter;
+
     public static FeedFragment newInstance() {
         FeedFragment frag = new FeedFragment();
 
@@ -51,6 +53,9 @@ public class FeedFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+
+        //update info
+        adapter.setPostsList(postsViewModel.getAllPosts().getValue());
     }
 
     @Override
@@ -63,7 +68,7 @@ public class FeedFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         RecyclerView rvFeed = view.findViewById(R.id.rvFeed); //get recycler-view by id
-        final FeedAdapter adapter = new FeedAdapter((MainActivity) this.getActivity()); //create adapter
+        adapter = new FeedAdapter((MainActivity) this.getActivity()); //create adapter
         rvFeed.setAdapter(adapter); //set adapter
         //choose type of layout: linear, horological or staggered
         rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));

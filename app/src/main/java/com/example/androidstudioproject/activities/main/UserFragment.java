@@ -33,6 +33,13 @@ public class UserFragment extends Fragment {
     String userEmail;
     FeedAdapter adapter;
 
+    CircleImageView profilePic;
+    Button followBtn;
+    TextView username;
+    TextView moreInfo;
+    TextView bio;
+
+
 
     public UserFragment() {
         // Required empty public constructor
@@ -48,6 +55,22 @@ public class UserFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+
+
+        //reset info
+        User user = usersViewModel.getUserByEmail(userEmail);
+
+        profilePic.setImageURI(Uri.parse(user.getProfilePicture()));
+
+        String text = user.getFirstName() + ' ' + user.getLastName();
+        username.setText(text);
+
+        setFollowBtn();
+
+        setMoreInfo(user);
+
+        bio.setText(user.getBio());
+
         adapter.setPostsList(postsViewModel.getPostsByUser(userEmail));
     }
 
@@ -72,15 +95,24 @@ public class UserFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        User user = usersViewModel.getUserByEmail(userEmail);
-        CircleImageView profilePic = (CircleImageView) view.findViewById(R.id.profileImg_info);
-        profilePic.setImageURI(Uri.parse(user.getProfilePicture()));
+        profilePic = (CircleImageView) view.findViewById(R.id.profileImg_info);
 
-        TextView username = (TextView) view.findViewById(R.id.userName_info);
-        String text = user.getFirstName() + ' ' + user.getLastName();
-        username.setText(text);
+        username = (TextView) view.findViewById(R.id.userName_info);
 
-        Button followBtn = (Button) view.findViewById(R.id.followBtn_info);
+        followBtn = (Button) view.findViewById(R.id.followBtn_info);
+
+        moreInfo = (TextView) view.findViewById(R.id.moreInfo_info);
+
+        bio = (TextView) view.findViewById(R.id.bio_info);
+
+        //recycle view
+        RecyclerView rvFeed = view.findViewById(R.id.rvUserFeed); //get recycler-view by id
+        rvFeed.setAdapter(adapter); //set adapter
+        //choose type of layout: linear, horological or staggered
+        rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    private void setFollowBtn(){
         String loggedInUser = ((MainActivity)this.getActivity()).currEmail;
         if(userEmail.equals(loggedInUser)){
             followBtn.setText(R.string.edit_profile);
@@ -117,7 +149,10 @@ public class UserFragment extends Fragment {
             followBtn.setText(textAfterClick);
         }
 
-        TextView moreInfo = (TextView) view.findViewById(R.id.moreInfo_info);
+    }
+
+    private void setMoreInfo(User user){
+
         //TODO non static
         String gender;
         if(user.getGender() == 0) gender = "Male";
@@ -128,16 +163,5 @@ public class UserFragment extends Fragment {
         else preference = "Likes both";
         String info = user.getAge() + " | " + gender + " | " + preference;
         moreInfo.setText(info);
-
-
-        TextView bio = (TextView) view.findViewById(R.id.bio_info);
-        bio.setText(user.getBio());
-
-        //recycle view
-        RecyclerView rvFeed = view.findViewById(R.id.rvUserFeed); //get recycler-view by id
-        rvFeed.setAdapter(adapter); //set adapter
-        //choose type of layout: linear, horological or staggered
-        rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
-
 }

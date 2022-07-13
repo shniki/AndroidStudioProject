@@ -150,7 +150,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
             loggedInUser.setPhoneNumber(strPhoneNumber);
             // todo: set profile picture if exists
             usersViewModel.update(loggedInUser);
-            ((MainActivity) getActivity()).replaceFragments(SettingsFragment.class);
+            ((MainActivity) getActivity()).onBackPressed();
         });
     }
 }
