@@ -29,9 +29,7 @@ public class Post {
 
     private Boolean isDeleted;
 
-    //TODO add location
-    // enter location? then with google map
-    // add videos
+    private String location;
 //
 //    public Post(){
 //        this.postID = intIdHelper.incrementAndGet();
@@ -42,7 +40,7 @@ public class Post {
 //        dataType = 0;
 //    }
 
-    public Post(@NonNull String userEmail, String content, int dataType, String dataURL) {
+    public Post(@NonNull String userEmail, String content, int dataType, String dataURL,String location) {
         this.postID = intIdHelper.incrementAndGet();
         this.userEmail = userEmail;
         this.content = content;
@@ -50,6 +48,7 @@ public class Post {
         this.dataURL = dataURL;
         this.isDeleted = false;
         this.postDate = dateParse();
+        this.location=location;
     }
 
     private String dateParse(){
@@ -65,6 +64,10 @@ public class Post {
     @NonNull
     public String getUserEmail() {
         return userEmail;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public String getContent() {

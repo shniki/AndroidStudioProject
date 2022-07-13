@@ -129,8 +129,8 @@ public class CreatePostFragment extends Fragment {
                 return;
             }
 
-            Post p = new Post(email,content,type,url);
-            postsViewModel.add(p);
+         //   Post p = new Post(email,content,type,url,);
+           // postsViewModel.add(p);
 
             ((MainActivity)getActivity()).replaceFragments(FeedFragment.class);
         });

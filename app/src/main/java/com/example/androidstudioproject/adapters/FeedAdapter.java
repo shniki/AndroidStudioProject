@@ -44,19 +44,13 @@ public interface ItemClickListener{
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item,parent,false);
         return new ViewHolder(view);
     }
-    private User findUser(String userEmail)
-    {
-        for(int i=0;i<usersViewModel.getAllUsers().getValue().size();i++)
-            if(usersViewModel.getAllUsers().getValue().get(i).getEmail().equals(userEmail))
-                return usersViewModel.getAllUsers().getValue().get(i);
-       return null;
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (postsList != null) {
             Post post = postsList.get(position);
-            User user=findUser(post.getUserEmail());
+            User user=usersViewModel.getUserByEmail(post.getUserEmail());
         holder.userName.setText(user.getFirstName() + " " + user.getLastName());
         holder.date.setText(post.getPostDate());
         holder.description.setText(post.getContent());

@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case R.id.nav_profile:
                             if(!UserFragment.class.getName().equals(currentFragmentName))
-                                replaceFragments(UserFragment.class);
+                            gotoUserFragment(currEmail);
                             break;
                     }
                     return true;
