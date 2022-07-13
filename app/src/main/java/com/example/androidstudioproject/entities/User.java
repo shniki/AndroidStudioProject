@@ -16,6 +16,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private Boolean hasLoggedIn;
     //private String password;
 
     //personal info
@@ -26,7 +27,6 @@ public class User {
     //private List<String> moreInfo;
 
     //helpful
-    private Boolean isDeleted; // default: false
     private String profilePicture; // binary photo - convert to Uri
     // anything else?
 
@@ -40,8 +40,8 @@ public class User {
         this.bio = bio;
         this.age = age;
         this.gender = gender;
+        this.hasLoggedIn = false;
         this.sexualPreferences = sexualPreferences;
-        this.isDeleted = false;
         this.profilePicture = profilePicture;
     }
 
@@ -53,6 +53,8 @@ public class User {
     public String getLastName() {
         return lastName;
     }
+
+    public Boolean getHasLoggedIn() { return hasLoggedIn; }
 
     @NonNull
     public String getEmail() {
@@ -79,10 +81,6 @@ public class User {
         return sexualPreferences;
     }
 
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
     public String getProfilePicture() {
         return profilePicture;
     }
@@ -95,6 +93,8 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public void setLogIn() { this.hasLoggedIn = true; }
 
     public void setEmail(@NonNull String email) {
         this.email = email;
@@ -118,10 +118,6 @@ public class User {
 
     public void setSexualPreferences(int sexualPreferences) {
         this.sexualPreferences = sexualPreferences;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
     }
 
     public void setProfilePicture(String profilePicture) { this.profilePicture = profilePicture; }

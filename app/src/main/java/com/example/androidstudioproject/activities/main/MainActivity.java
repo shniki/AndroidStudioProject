@@ -21,6 +21,8 @@ import androidx.fragment.app.FragmentManager;
 import com.example.androidstudioproject.AppDB;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
+import com.example.androidstudioproject.activities.main.intro.IntroFragment;
+import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
@@ -47,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         bottomNavigationView=findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
@@ -83,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         currEmail = authenticationViewModel.getCurrentEmail();
+        User currUser = usersViewModel.getUserByEmail(currEmail);
+        if(currUser != null && !currUser.getHasLoggedIn()){
+            this.replaceFragments(IntroFragment.class);
+            currUser.setLogIn();
+            usersViewModel.update(currUser);
+        }
     }
 
     public void gotoLoginActivity(){

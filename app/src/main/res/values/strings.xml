@@ -54,6 +54,9 @@
     <string name="age">Age</string>
     <string name="bio">Bio</string>
     <string name="updateUser">Update User</string>
+    <string name="appSettings">App Settings</string>
+    <string name="gotIt">Got it</string>
+    <string name="skip">Skip</string>
 
 
 </resources>

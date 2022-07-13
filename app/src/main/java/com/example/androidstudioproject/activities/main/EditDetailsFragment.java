@@ -146,8 +146,9 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
             else toUpdate = 2;
             loggedInUser.setSexualPreferences(toUpdate);
             loggedInUser.setFirstName(strFullName.split(" ")[0]);
-            loggedInUser.setFirstName(strFullName.split(" ")[1]);
+            loggedInUser.setLastName(strFullName.split(" ")[1]);
             loggedInUser.setPhoneNumber(strPhoneNumber);
+            // todo: set profile picture if exists
             usersViewModel.update(loggedInUser);
             ((MainActivity) getActivity()).replaceFragments(SettingsFragment.class);
         });
