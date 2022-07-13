@@ -134,7 +134,7 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
             }
 
             ((LoginActivity) getActivity()).addUser(strEmail,strPasswd,strFullName,strPhoneNumber,strGender,strAge);
-            ((LoginActivity) getActivity()).gotoMainActivity();
+//            ((LoginActivity) getActivity()).gotoMainActivity();
         });
 
     }
