@@ -55,11 +55,11 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-         edtEmail = view.findViewById(R.id.fragLogin_userName_et); //get input line (edit text) by id
-         edtPasswd = view.findViewById(R.id.fragLogin_password_et); //get input line (edit text) by id
-         edtFullName = view.findViewById(R.id.fragLogin_fullName); //get input line (edit text) by id
-         edtPhoneNumber = view.findViewById(R.id.fragLogin_phoneNumber); //get input line (edit text) by id
-         edtAge = view.findViewById(R.id.fragLogin_age); //get input line (edit text) by id
+        edtEmail = view.findViewById(R.id.fragLogin_userName_et); //get input line (edit text) by id
+        edtPasswd = view.findViewById(R.id.fragLogin_password_et); //get input line (edit text) by id
+        edtFullName = view.findViewById(R.id.fragLogin_fullName); //get input line (edit text) by id
+        edtPhoneNumber = view.findViewById(R.id.fragLogin_phoneNumber); //get input line (edit text) by id
+        edtAge = view.findViewById(R.id.fragLogin_age); //get input line (edit text) by id
 
 
         Spinner edtGender = view.findViewById(R.id.fragLogin_gender);
@@ -75,7 +75,7 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
         TextView gotoLoginBtn = view.findViewById(R.id.fragLogin_login_btn);
         gotoLoginBtn.setOnClickListener(v -> {
 
-            if(edtEmail== null || edtPasswd==null || edtFullName==null || edtPhoneNumber==null || edtAge==null) //validate input
+            if (edtEmail == null || edtPasswd == null || edtFullName == null || edtPhoneNumber == null || edtAge == null) //validate input
             {
                 Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
                 return;
@@ -88,33 +88,32 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
             String strAge = edtAge.getText().toString();
             String strGender = edtGender.getSelectedItem().toString();
 
-            if (TextUtils.isEmpty(strGender)||TextUtils.isEmpty(strAge)||TextUtils.isEmpty(strEmail)||TextUtils.isEmpty(strPasswd)||TextUtils.isEmpty(strFullName)||TextUtils.isEmpty(strPhoneNumber)) {
+            if (TextUtils.isEmpty(strGender) || TextUtils.isEmpty(strAge) || TextUtils.isEmpty(strEmail) || TextUtils.isEmpty(strPasswd) || TextUtils.isEmpty(strFullName) || TextUtils.isEmpty(strPhoneNumber)) {
                 Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
                 return;
             }
 
-            if(!Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()) {
                 Snackbar.make(view, R.string.wrong_emails, Snackbar.LENGTH_LONG).show();
                 return;
             }
 
-            if(!Patterns.PHONE.matcher(strPhoneNumber).matches()) {
+            if (!Patterns.PHONE.matcher(strPhoneNumber).matches()) {
                 Snackbar.make(view, R.string.wrong_mobile, Snackbar.LENGTH_LONG).show();
                 return;
             }
 
-            if(strPasswd.length()<8)
-            {
+            if (strPasswd.length() < 8) {
                 Snackbar.make(view, R.string.short_password, Snackbar.LENGTH_LONG).show();
                 return;
             }
 
-            if(strGender.equals(getString(R.string.gender))){
+            if (strGender.equals(getString(R.string.gender))) {
                 Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
                 return;
             }
 
-            if(!strFullName.contains(getString(R.string.spaceChar))){
+            if (!strFullName.contains(getString(R.string.spaceChar))) {
                 Snackbar.make(view, R.string.no_full_name, Snackbar.LENGTH_LONG).show();
                 return;
             }
@@ -129,11 +128,10 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
                 return;
             }
 
-            if((((LoginActivity) getActivity()).isExistsUser(strEmail))){
+            if ((((LoginActivity) getActivity()).isExistsUser(strEmail))) {
                 Snackbar.make(view, R.string.user_already_exists, Snackbar.LENGTH_LONG).show();
                 return;
             }
-
 
 
             ((LoginActivity) getActivity()).gotoMainActivity();

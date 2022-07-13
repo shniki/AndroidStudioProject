@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.loginFragment, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 
