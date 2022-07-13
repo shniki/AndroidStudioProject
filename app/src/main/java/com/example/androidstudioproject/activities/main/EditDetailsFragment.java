@@ -1,5 +1,6 @@
 package com.example.androidstudioproject.activities.main;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -29,8 +31,10 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
     EditText edtAge;
     EditText edtFullName;
     EditText edtBio;
-    Button edtProfilePicture;
+    ImageView edtProfilePicture;
     Button btnSave;
+
+    Bitmap image;
 
     UsersViewModel usersViewModel;
 
@@ -51,12 +55,17 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        ((MainActivity)this.getActivity()).currentFragment = this;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return getActivity().getLayoutInflater().inflate(R.layout.fragment_edit_details, container, false);
+    }
+
+    public void setImage(Bitmap bitmap){
+        image=bitmap;
+        edtProfilePicture.setImageBitmap(image);
     }
 
     @Override
@@ -136,6 +145,15 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
                 return;
             }
 
+            String profileUrl = ((MainActivity)this.getActivity()).getStorageModelFirebase().addImage(image);
+
+            if(profileUrl==null)
+            {
+                Snackbar.make(view, R.string.media_upload_failed, Snackbar.LENGTH_LONG).show();
+                return;
+            }
+
+
             loggedInUser.setAge(Integer.parseInt(strAge));
             loggedInUser.setBio(strBio);
             int toUpdate;
@@ -148,6 +166,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
             loggedInUser.setFirstName(strFullName.split(" ")[0]);
             loggedInUser.setFirstName(strFullName.split(" ")[1]);
             loggedInUser.setPhoneNumber(strPhoneNumber);
+            loggedInUser.setProfilePicture(profileUrl);
             usersViewModel.update(loggedInUser);
             ((MainActivity) getActivity()).onBackPressed();
         });

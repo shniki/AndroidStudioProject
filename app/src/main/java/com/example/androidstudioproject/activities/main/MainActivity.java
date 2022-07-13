@@ -6,11 +6,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,7 @@ import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
 import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
+import com.example.androidstudioproject.repositories.storage.StorageModelFirebase;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
     PostsViewModel postViewModel;
     ConnectionsViewModel connectionsViewModel;
     AuthenticationViewModel authenticationViewModel;
+    StorageModelFirebase storageModelFirebase;
+
     BottomNavigationView bottomNavigationView;
     public static final int CAMERA_PIC_REQUEST = 1337;
     public static final int PICK_PHOTO = 1338;
-    public String currentFragmentName;
+    public Fragment currentFragment;
 
     public String currEmail;
 
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         usersViewModel = new UsersViewModel(this.getApplication());
         connectionsViewModel = new ConnectionsViewModel(this.getApplication());
         authenticationViewModel = new AuthenticationViewModel(this.getApplication());
+        storageModelFirebase = new StorageModelFirebase();
 
 
  //TODO use navigation to get to :
@@ -104,20 +111,22 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.nav_search:
-                            if(!SearchFragment.class.getName().equals(currentFragmentName))
+                            if(!SearchFragment.class.getName().equals(currentFragment.getClass().getName()))
                                 replaceFragments(SearchFragment.class);
                             break;
                         case R.id.nav_createP:
-                            if(!CreatePostFragment.class.getName().equals(currentFragmentName))
+                            if(!CreatePostFragment.class.getName().equals(currentFragment.getClass().getName()))
                                 replaceFragments(CreatePostFragment.class);
                             break;
                         case R.id.nav_home:
-                            if(!FeedFragment.class.getName().equals(currentFragmentName))
+                            if(!FeedFragment.class.getName().equals(currentFragment.getClass().getName()))
                                 replaceFragments(FeedFragment.class);
                             break;
                         case R.id.nav_profile:
-                            if(!UserFragment.class.getName().equals(currentFragmentName))
+                            if(!UserFragment.class.getName().equals(currentFragment.getClass().getName()))
                                 replaceFragments(UserFragment.class);
+                            else if(UserFragment.class.getName().equals(currentFragment.getClass().getName())
+                                    &&!((UserFragment)currentFragment).userEmail.equals(currEmail))
                             break;
                     }
                     return true;
@@ -142,17 +151,65 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(chooserIntent, PICK_PHOTO);
     }
 
+    public void pickMediaFromGallery(){
+        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getIntent.setType("image/* video/*");
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/* video/*");
+
+        Intent chooserIntent = Intent.createChooser(getIntent, "Select media");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+
+        startActivityForResult(chooserIntent, PICK_PHOTO);
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_PIC_REQUEST || requestCode == PICK_PHOTO) {
-                Bitmap image = data.getExtras().getParcelable("data");
-                ImageView imageview = (ImageView) findViewById(R.id.frag_addP_iv_p); //sets imageview as the bitmap
-                imageview.setImageBitmap(image);
+                if( data != null) {
+                    Uri selectedUri = data.getData();
+                    String[] columns = { MediaStore.Images.Media.DATA,
+                            MediaStore.Images.Media.MIME_TYPE };
+
+                    Cursor cursor = getContentResolver().query(selectedUri, columns, null, null, null);
+                    cursor.moveToFirst();
+
+                    int pathColumnIndex     = cursor.getColumnIndex( columns[0] );
+                    int mimeTypeColumnIndex = cursor.getColumnIndex( columns[1] );
+
+                    String contentPath = cursor.getString(pathColumnIndex);
+                    String mimeType    = cursor.getString(mimeTypeColumnIndex);
+                    cursor.close();
+
+                    if(mimeType.startsWith("image")) {
+                        Bitmap bitmap = data.getExtras().getParcelable("data");
+                        //It's an image
+                        if(EditDetailsFragment.class.getName().equals(currentFragment.getClass().getName()))
+                        {
+                            ((EditDetailsFragment)currentFragment).setImage(bitmap);
+                        }
+                        else if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName())){
+                            ((CreatePostFragment)currentFragment).setImage(bitmap);
+                        }
+                        //setImage(image);
+                    }
+                    else if(mimeType.startsWith("video")) {
+                        //TODO It's a video
+                        if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName())){
+                           // ((CreatePostFragment)currentFragment).setVideo(bitmap);
+                        }
+                    }
+                }
+                else {
+                    // show error or do nothing
+                }
+                //convert to URL and save in firebase after save
             }
         }
-        //todo: convert to URL and save in fireabse
     }
 
 
@@ -195,6 +252,10 @@ public class MainActivity extends AppCompatActivity {
 
     public AuthenticationViewModel getAuthenticationViewModel() {
         return authenticationViewModel;
+    }
+
+    public StorageModelFirebase getStorageModelFirebase() {
+        return storageModelFirebase;
     }
 
     public String getCurrEmail() {

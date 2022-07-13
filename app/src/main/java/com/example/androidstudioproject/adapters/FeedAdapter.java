@@ -1,5 +1,6 @@
 package com.example.androidstudioproject.adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,8 @@ public interface ItemClickListener{
         holder.description.setText(post.getContent());
         if(post.getDataType()==1)
         {
-            //TODO holder.image.setImageBitmap(post.getPicture());
+            holder.image.setImageURI(Uri.parse(post.getDataURL()));
+
             holder.image.setVisibility(View.VISIBLE);
         }
         else
@@ -70,13 +72,13 @@ public interface ItemClickListener{
         //TODO holder.location.setText(post.getLocation());
         if(post.getDataType()==2)
         {
-            //TODO holder.video.setImageBitmap(post.getPicture());
+            holder.video.setVideoURI(Uri.parse(post.getDataURL()));
             holder.video.setVisibility(View.VISIBLE);
         }
         else
             holder.video.setVisibility(View.GONE);
 
-        //TODO holder.userProfile.setImageBitmap(post.getUserName());
+            holder.userProfile.setImageURI(Uri.parse(user.getProfilePicture()));
 
             holder.userName.setText(user.getFirstName() + " " + user.getLastName());
             holder.date.setText(post.getPostDate());
@@ -145,7 +147,7 @@ public interface ItemClickListener{
             userProfile=itemView.findViewById((R.id.userProfilePost));
             image=itemView.findViewById((R.id.postImage));
 
-            //video=itemView.findViewById((R.id.^^^));
+            //TODO video=itemView.findViewById((R.id.^^^));
 
         }
     }

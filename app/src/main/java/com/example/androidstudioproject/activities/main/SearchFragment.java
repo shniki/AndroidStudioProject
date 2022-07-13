@@ -49,7 +49,7 @@ public class SearchFragment extends Fragment implements SelectListener {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        ((MainActivity)this.getActivity()).currentFragment = this;
     }
 
     @Override

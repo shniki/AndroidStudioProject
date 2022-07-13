@@ -52,7 +52,7 @@ public class FeedFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        ((MainActivity)this.getActivity()).currentFragment = this;
 
         //update info
         adapter.setPostsList(postsViewModel.getAllPosts().getValue());

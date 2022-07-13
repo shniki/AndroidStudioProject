@@ -2,6 +2,7 @@ package com.example.androidstudioproject.activities.main;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,6 @@ public class CreatePostFragment extends Fragment {
     String url;
     int type;
 
-    Button btnCancel;//fragEditAccount_cancel_btn
     Button btnUpload; //fragEditAccount_save_btn
     Button btnLocation;//addLocation;
     EditText edtContent;//fragNew_userName_et3
@@ -68,7 +68,7 @@ public class CreatePostFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        ((MainActivity)this.getActivity()).currentFragment = this;
     }
 
     @Override
@@ -76,6 +76,19 @@ public class CreatePostFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_create_post, container, false);
+    }
+
+    public void setImage(Bitmap bm){
+        image=bm;
+        visableImg.setImageBitmap(image);
+        type=1;
+    }
+
+    //TODO SET VIDEO
+    public void setVideo(){
+        //video=bm;
+        visableImg.setImageBitmap(image);
+        type=2;
     }
 
     @Override
@@ -91,16 +104,16 @@ public class CreatePostFragment extends Fragment {
         btnCamera =view.findViewById(R.id.frag_addP_cam_btn);
         btnCamera.setOnClickListener(v->{
             ((MainActivity)this.getActivity()).openCamera();
-            //TODO sent to take a new pic/vid intent
+            // sent to take a new pic/vid intent
             //then input to bitmap
             //change datatype to 1 or 2
-            //TODO add firebase cloud
-            //and update: visableImg
+            // add firebase cloud
+            //todo and update: visableImg
         });
         btnGallery =view.findViewById(R.id.frag_addP_gallery_btn);
         btnGallery.setOnClickListener(v->{
-            ((MainActivity)this.getActivity()).pickImageFromGallery();
-            //TODO sent to get pic/vid from gallery intent
+            ((MainActivity)this.getActivity()).pickMediaFromGallery();
+            // sent to get pic/vid from gallery intent
             //then input to bitmap
         });
         visableImg =view.findViewById(R.id.frag_addP_iv_p);
@@ -129,6 +142,17 @@ public class CreatePostFragment extends Fragment {
                 return;
             }
 
+            //add media to url
+            if(type==1)//image
+                url =((MainActivity)getActivity()).getStorageModelFirebase().addImage(image);
+            else if(type==2)
+                url = null;//TODO ADD VIDEO
+
+            if(url==null)//upload failed
+            {
+                Snackbar.make(view, R.string.media_upload_failed, Snackbar.LENGTH_LONG).show();
+                return;
+            }
             Post p = new Post(email,content,type,url);
             postsViewModel.add(p);
 

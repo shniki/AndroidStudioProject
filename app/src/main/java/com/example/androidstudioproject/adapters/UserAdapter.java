@@ -1,5 +1,6 @@
 package com.example.androidstudioproject.adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final User user=usersList.get(position);
         holder.userName.setText(user.getFirstName()+" "+user.getLastName());
-        //holder.userProfile.setImageBitmap(user.getProfilePicture());
+        holder.userProfile.setImageURI(Uri.parse(user.getProfilePicture()));
        // Glide.with()- image profile
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
