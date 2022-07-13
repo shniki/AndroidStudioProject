@@ -21,6 +21,9 @@ import android.widget.ImageView;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.snackbar.Snackbar;
 
 public class CreatePostFragment extends Fragment {
@@ -31,6 +34,8 @@ public class CreatePostFragment extends Fragment {
     Bitmap image;
     String url;
     int type;
+
+    int PLACE_PICKER_REQUEST=1;
 
     Button btnUpload; //fragEditAccount_save_btn
     Button btnLocation;//addLocation;
@@ -90,16 +95,25 @@ public class CreatePostFragment extends Fragment {
         visableImg.setImageBitmap(image);
         type=2;
     }
-
+    public void setLocation(String location_){
+        this.location=location_;
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         edtContent =view.findViewById(R.id.fragNew_userName_et3);
         btnLocation =  view.findViewById(R.id.addLocation);
+
         btnLocation.setOnClickListener(v->{
-            //TODO sent to get location intent
-            //then input to location
+            PlacePicker.IntentBuilder builder=new PlacePicker.IntentBuilder();
+            try {
+                startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
+            } catch (GooglePlayServicesRepairableException e) {
+                e.printStackTrace();
+            } catch (GooglePlayServicesNotAvailableException e) {
+                e.printStackTrace();
+            }
         });
         btnCamera =view.findViewById(R.id.frag_addP_cam_btn);
         btnCamera.setOnClickListener(v->{
@@ -142,8 +156,8 @@ public class CreatePostFragment extends Fragment {
                 return;
             }
 
-         //   Post p = new Post(email,content,type,url,);
-           // postsViewModel.add(p);
+            Post p = new Post(email,content,type,url,location);
+            postsViewModel.add(p);
             //add media to url
             if(type==1)//image
                 url =((MainActivity)getActivity()).getStorageModelFirebase().addImage(image);
