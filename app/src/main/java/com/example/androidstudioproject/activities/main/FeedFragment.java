@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.adapters.FeedAdapter;
 import com.example.androidstudioproject.entities.Post;
+import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 
@@ -30,11 +31,6 @@ public class FeedFragment extends Fragment {
 
     public static FeedFragment newInstance() {
         FeedFragment frag = new FeedFragment();
-
-//        Bundle b = new Bundle();
-//        b.putSerializable("data", data);
-//        b.putInt("position", position);
-//        frag.setArguments(b);
 
         return frag;
     }
@@ -55,7 +51,9 @@ public class FeedFragment extends Fragment {
         ((MainActivity)this.getActivity()).currentFragment = this;
 
         //update info
-        adapter.setPostsList(postsViewModel.getAllPosts().getValue());
+
+        User currUser = usersViewModel.getUserByEmail(((MainActivity)this.getActivity()).currEmail);
+        adapter.setPostsList(((MainActivity)this.getActivity()).getAllRelevantPosts(currUser.getSexualPreferences()));
     }
 
     @Override

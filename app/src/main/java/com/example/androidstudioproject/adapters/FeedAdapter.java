@@ -29,16 +29,16 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     private List<Post> postsList;
     MainActivity context;
 
-private ItemClickListener listener;
-public interface ItemClickListener{
-    void onClick(int i);//create function in the feed activity
-}
+    private ItemClickListener listener;
+    public interface ItemClickListener{
+        void onClick(int i);//create function in the feed activity
+    }
     //@NonNull
     //?
     public FeedAdapter(MainActivity context)
     {
         usersViewModel=context.getUsersViewModel();
-        context=context;
+        this.context=context;
     }
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,7 +58,9 @@ public interface ItemClickListener{
         if (postsList != null) {
             Post post = postsList.get(position);
             User user=findUser(post.getUserEmail());
-        holder.userName.setText(user.getFirstName() + " " + user.getLastName());
+
+        String text = user.getFirstName() + context.getString(R.string.spaceChar) + user.getLastName();
+        holder.userName.setText(text);
         holder.date.setText(post.getPostDate());
         holder.description.setText(post.getContent());
         if(post.getDataType()==1)
@@ -80,31 +82,31 @@ public interface ItemClickListener{
 
             holder.userProfile.setImageURI(Uri.parse(user.getProfilePicture()));
 
-            holder.userName.setText(user.getFirstName() + " " + user.getLastName());
-            holder.date.setText(post.getPostDate());
-            holder.description.setText(post.getContent());
+        holder.userName.setText(text);
+        holder.date.setText(post.getPostDate()); // todo why twice?
+        holder.description.setText(post.getContent());
 
 
-            //click to fragment
-            holder.image.setOnClickListener(v->{
-                gotoPostFragment(post.getPostID());
-            });
+        //click to fragment
+        holder.image.setOnClickListener(v->{
+            gotoPostFragment(post.getPostID());
+        });
 
 //            holder.video.setOnClickListener(v->{
 //                gotoPostFragment(post.getPostID());
 //            });
 
-            holder.description.setOnClickListener(v->{
-                gotoUserFragment(post.getUserEmail());
-            });
+        holder.description.setOnClickListener(v->{
+            gotoUserFragment(post.getUserEmail());
+        });
 
-            holder.userProfile.setOnClickListener(v->{
-                gotoUserFragment(post.getUserEmail());
-            });
+        holder.userProfile.setOnClickListener(v->{
+            gotoUserFragment(post.getUserEmail());
+        });
 
-            holder.userName.setOnClickListener(v->{
-                gotoUserFragment(post.getUserEmail());
-            });
+        holder.userName.setOnClickListener(v->{
+            gotoUserFragment(post.getUserEmail());
+        });
         }
     }
 

@@ -90,13 +90,13 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
         int preference = loggedInUser.getSexualPreferences();
         String prefString;
         if(preference == 0)
-            prefString = "Male";
+            prefString = getString(R.string.male);
         else if(preference == 1)
-            prefString = "Female";
-        else prefString = "Both";
+            prefString = getString(R.string.female);
+        else prefString = getString(R.string.both);
         edtSexualPreference.setPrompt(prefString);
 
-        String fullName = loggedInUser.getFirstName() + " " + loggedInUser.getLastName();
+        String fullName = loggedInUser.getFirstName() + getString(R.string.spaceChar) + loggedInUser.getLastName();
         edtFullName.setText(fullName);
         edtPhoneNumber.setText(loggedInUser.getPhoneNumber());
         edtAge.setText(loggedInUser.getAge());
@@ -130,7 +130,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
                 return;
             }
 
-            if(!strFullName.contains(" ")){
+            if(!strFullName.contains(getString(R.string.spaceChar))){
                 Snackbar.make(view, R.string.no_full_name, Snackbar.LENGTH_LONG).show();
                 return;
             }
@@ -157,15 +157,16 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
             loggedInUser.setAge(Integer.parseInt(strAge));
             loggedInUser.setBio(strBio);
             int toUpdate;
-            if(strSexualPreference.equals("Male"))
+            if(strSexualPreference.equals(getString(R.string.male)))
                 toUpdate = 0;
-            else if(strSexualPreference.equals("Female"))
+            else if(strSexualPreference.equals(getString(R.string.female)))
                 toUpdate = 1;
             else toUpdate = 2;
             loggedInUser.setSexualPreferences(toUpdate);
-            loggedInUser.setFirstName(strFullName.split(" ")[0]);
-            loggedInUser.setFirstName(strFullName.split(" ")[1]);
+            loggedInUser.setFirstName(strFullName.split(getString(R.string.spaceChar))[0]);
+            loggedInUser.setLastName(strFullName.split(getString(R.string.spaceChar))[1]);
             loggedInUser.setPhoneNumber(strPhoneNumber);
+            // todo: set profile picture if exists
             loggedInUser.setProfilePicture(profileUrl);
             usersViewModel.update(loggedInUser);
             ((MainActivity) getActivity()).onBackPressed();

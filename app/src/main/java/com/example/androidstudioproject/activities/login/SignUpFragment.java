@@ -109,12 +109,12 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
                 return;
             }
 
-            if(strGender.compareTo("Gender")==0){
+            if(strGender.equals(getString(R.string.gender))){
                 Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
                 return;
             }
 
-            if(!strFullName.contains(" ")){
+            if(!strFullName.contains(getString(R.string.spaceChar))){
                 Snackbar.make(view, R.string.no_full_name, Snackbar.LENGTH_LONG).show();
                 return;
             }

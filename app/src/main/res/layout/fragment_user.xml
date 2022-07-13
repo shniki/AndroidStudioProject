@@ -25,7 +25,7 @@
             android:id="@+id/userName_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ted Mosbey"
+            android:text="@string/sampleName"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="20sp"
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="14sp"
-            android:text="31  |  male  |  likes women"
+            android:text="@string/sampleStatus"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="16sp" />
@@ -53,7 +53,7 @@
             android:id="@+id/bio_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="fggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfw"
+            android:text="@string/placeFiller"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="16sp" />

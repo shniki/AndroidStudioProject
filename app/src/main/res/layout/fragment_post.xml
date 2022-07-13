@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="user_Name"
+                android:text="@string/username"
                 android:textColor="#090808"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -59,7 +59,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Tel aviv"
+        android:text="@string/location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -69,7 +69,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Description nxnxnxnnmmmmmmmmmmmmm"
+        android:text="@string/description"
         android:textColor="#0C0909"
         app:layout_constraintBottom_toTopOf="@+id/sendMessage"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="NOW"
+        android:text="@string/now"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.921"
@@ -131,14 +131,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Edit" />
+            android:text="@string/edit" />
 
         <Button
             android:id="@+id/deletePost_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Delete" />
+            android:text="@string/delete" />
 
         <Button
             android:id="@+id/buttonCancel"
@@ -147,7 +147,7 @@
             android:layout_weight="1"
             android:visibility="gone"
 
-            android:text="Cancel" />
+            android:text="@string/cancel" />
 
         <Button
             android:id="@+id/buttonDone"
@@ -156,7 +156,7 @@
             android:layout_weight="1"
             android:visibility="gone"
 
-            android:text="Done" />
+            android:text="@string/done" />
     </LinearLayout>
 
     <EditText
@@ -164,7 +164,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="input description"
+        android:hint="@string/inputDescription"
         app:layout_constraintBottom_toBottomOf="@+id/textMoveEdit_post"
         app:layout_constraintTop_toBottomOf="@+id/postImage_post"
         android:visibility="gone"
