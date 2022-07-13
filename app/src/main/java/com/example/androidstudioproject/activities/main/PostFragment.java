@@ -5,6 +5,7 @@ import static androidx.core.content.PermissionChecker.checkSelfPermission;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -84,7 +85,22 @@ public class PostFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        ((MainActivity)this.getActivity()).currentFragment = this;
+
+        //update info
+        Post post = postsViewModel.getPostById(postID);
+        if(post.getContent().equals(getString(R.string.emptyString)))
+            txtDesc.setVisibility(View.GONE);
+        else
+            txtDesc.setVisibility(View.VISIBLE);
+        txtDesc.setText(post.getContent());
+
+        User user = usersViewModel.getUserByEmail(post.getUserEmail());
+
+        //TODO imgProfile.setImageResource(user.getProfilePicture());
+        String text = user.getFirstName()+getString(R.string.spaceChar)+user.getLastName();
+        txtUserName.setText(text);
+
     }
 
     @Override
@@ -103,10 +119,11 @@ public class PostFragment extends Fragment {
 
 
         imgProfile = view.findViewById(R.id.userProfilePost_post);//userProfilePost_post
-        //TODO imgProfile.setImageResource(user.getProfilePicture());
+        imgProfile.setImageURI(Uri.parse(user.getProfilePicture()));
 
         txtUserName = view.findViewById(R.id.userName_post);//userName_post
-        txtUserName.setText(user.getFirstName()+" "+user.getLastName());
+        String text = user.getFirstName()+getString(R.string.spaceChar)+user.getLastName();
+        txtUserName.setText(text);
 
         txtLocation = view.findViewById(R.id.location_post);//location_post
         //TODO txtLocation.setText(post.getLocation());
@@ -115,7 +132,7 @@ public class PostFragment extends Fragment {
         if (post.getDataType()==1)//picture
         {
             image.setVisibility(View.VISIBLE);
-            //TODO image.setImageResource();
+            image.setImageURI(Uri.parse(post.getDataURL()));
         }
         else
         {
@@ -126,7 +143,7 @@ public class PostFragment extends Fragment {
         if (post.getDataType()==2)//picture
         {
             video.setVisibility(View.VISIBLE);
-            //TODO video.setVideoURI();
+            video.setVideoURI(Uri.parse(post.getDataURL()));
         }
         else
         {
@@ -134,7 +151,7 @@ public class PostFragment extends Fragment {
         }
 
         txtDesc = view.findViewById(R.id.description_post);//description_post
-        if(post.getContent().equals(""))
+        if(post.getContent().equals(getString(R.string.emptyString)))
             txtDesc.setVisibility(View.GONE);
         else
             txtDesc.setVisibility(View.VISIBLE);

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.adapters.FeedAdapter;
 import com.example.androidstudioproject.entities.Post;
+import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 
@@ -27,13 +28,10 @@ public class FeedFragment extends Fragment {
     PostsViewModel postsViewModel;
     UsersViewModel usersViewModel;
 
+    FeedAdapter adapter;
+
     public static FeedFragment newInstance() {
         FeedFragment frag = new FeedFragment();
-
-//        Bundle b = new Bundle();
-//        b.putSerializable("data", data);
-//        b.putInt("position", position);
-//        frag.setArguments(b);
 
         return frag;
     }
@@ -51,7 +49,12 @@ public class FeedFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        ((MainActivity)this.getActivity()).currentFragment = this;
+
+        //update info
+
+        User currUser = usersViewModel.getUserByEmail(((MainActivity)this.getActivity()).currEmail);
+        adapter.setPostsList(((MainActivity)this.getActivity()).getAllRelevantPosts(currUser.getSexualPreferences()));
     }
 
     @Override
@@ -64,7 +67,7 @@ public class FeedFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         RecyclerView rvFeed = view.findViewById(R.id.rvFeed); //get recycler-view by id
-        final FeedAdapter adapter = new FeedAdapter((MainActivity) this.getActivity()); //create adapter
+        adapter = new FeedAdapter((MainActivity) this.getActivity()); //create adapter
         rvFeed.setAdapter(adapter); //set adapter
         //choose type of layout: linear, horological or staggered
         rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));

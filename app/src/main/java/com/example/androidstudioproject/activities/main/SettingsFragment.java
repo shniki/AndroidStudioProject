@@ -40,7 +40,7 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        ((MainActivity)this.getActivity()).currentFragment = this;
     }
 
     @Override
@@ -67,8 +67,8 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
         edtChangeLanguage.setOnCheckedChangeListener( (buttonView, isChecked) -> {
             String language;
             if (isChecked)
-                language = "es";
-            else language = "en";
+                language = getString(R.string.spanish);
+            else language = getString(R.string.english);
             ((MainActivity)this.getActivity()).setLanguage(language);
         });
 

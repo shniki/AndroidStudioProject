@@ -81,12 +81,12 @@ public class LoginActivity extends AppCompatActivity {
 
     public void addUser(String email, String password, String name, String number, String gender, String age) {
         //adds to firebase database
-        String[] splitted = name.split(" ", 1);
+        String[] splitted = name.split(getString(R.string.spaceChar), 1);
 
         int _age = Integer.parseInt(age);
 
         int _gender;
-        if (gender.equals("Male")) _gender = 0;
+        if (gender.equals(getString(R.string.male))) _gender = 0;
         else _gender = 1;
 
         User u = new User(email, splitted[0], splitted[1], number, null, _age, _gender, 2, null);

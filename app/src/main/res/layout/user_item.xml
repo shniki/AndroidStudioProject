@@ -33,7 +33,7 @@
 
             android:layout_weight="8"
             android:maxLines="1"
-            android:text="userName"
+            android:text="@string/username"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
     </LinearLayout>

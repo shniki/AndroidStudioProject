@@ -33,6 +33,13 @@ public class UserFragment extends Fragment {
     String userEmail;
     FeedAdapter adapter;
 
+    CircleImageView profilePic;
+    Button followBtn;
+    TextView username;
+    TextView moreInfo;
+    TextView bio;
+
+
 
     public UserFragment() {
         // Required empty public constructor
@@ -47,7 +54,23 @@ public class UserFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        ((MainActivity)this.getActivity()).currentFragment = this;
+
+
+        //reset info
+        User user = usersViewModel.getUserByEmail(userEmail);
+
+        profilePic.setImageURI(Uri.parse(user.getProfilePicture()));
+
+        String text = user.getFirstName() + getString(R.string.spaceChar) + user.getLastName();
+        username.setText(text);
+
+        setFollowBtn();
+
+        setMoreInfo(user);
+
+        bio.setText(user.getBio());
+
         adapter.setPostsList(postsViewModel.getPostsByUser(userEmail));
     }
 
@@ -72,15 +95,24 @@ public class UserFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        User user = usersViewModel.getUserByEmail(userEmail);
-        CircleImageView profilePic = (CircleImageView) view.findViewById(R.id.profileImg_info);
-        profilePic.setImageURI(Uri.parse(user.getProfilePicture()));
+        profilePic = (CircleImageView) view.findViewById(R.id.profileImg_info);
 
-        TextView username = (TextView) view.findViewById(R.id.userName_info);
-        String text = user.getFirstName() + ' ' + user.getLastName();
-        username.setText(text);
+        username = (TextView) view.findViewById(R.id.userName_info);
 
-        Button followBtn = (Button) view.findViewById(R.id.followBtn_info);
+        followBtn = (Button) view.findViewById(R.id.followBtn_info);
+
+        moreInfo = (TextView) view.findViewById(R.id.moreInfo_info);
+
+        bio = (TextView) view.findViewById(R.id.bio_info);
+
+        //recycle view
+        RecyclerView rvFeed = view.findViewById(R.id.rvUserFeed); //get recycler-view by id
+        rvFeed.setAdapter(adapter); //set adapter
+        //choose type of layout: linear, horological or staggered
+        rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    private void setFollowBtn(){
         String loggedInUser = ((MainActivity)this.getActivity()).currEmail;
         if(userEmail.equals(loggedInUser)){
             followBtn.setText(R.string.edit_profile);
@@ -104,11 +136,11 @@ public class UserFragment extends Fragment {
             String textAfterClick;
             if(isFollowed != null) {
                 followBtn.setText(R.string.follow_back);
-                textAfterClick = "Its a Match!";
+                textAfterClick = getString(R.string.match);
             }
             else{
                 followBtn.setText(R.string.follow_txt);
-                textAfterClick = "Following";
+                textAfterClick = getString(R.string.following);
             }
 
             followBtn.setOnClickListener(v -> {
@@ -117,27 +149,19 @@ public class UserFragment extends Fragment {
             followBtn.setText(textAfterClick);
         }
 
-        TextView moreInfo = (TextView) view.findViewById(R.id.moreInfo_info);
-        //TODO non static
-        String gender;
-        if(user.getGender() == 0) gender = "Male";
-        else gender = "Female";
-        String preference;
-        if(user.getSexualPreferences() == 0) preference = "Likes men";
-        else if(user.getSexualPreferences() == 1) preference = "Likes women";
-        else preference = "Likes both";
-        String info = user.getAge() + " | " + gender + " | " + preference;
-        moreInfo.setText(info);
-
-
-        TextView bio = (TextView) view.findViewById(R.id.bio_info);
-        bio.setText(user.getBio());
-
-        //recycle view
-        RecyclerView rvFeed = view.findViewById(R.id.rvUserFeed); //get recycler-view by id
-        rvFeed.setAdapter(adapter); //set adapter
-        //choose type of layout: linear, horological or staggered
-        rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
+    private void setMoreInfo(User user){
+
+        //TODO non static
+        String gender;
+        if(user.getGender() == 0) gender = getString(R.string.male);
+        else gender = getString(R.string.female);
+        String preference;
+        if(user.getSexualPreferences() == 0) preference = getString(R.string.malePreference);
+        else if(user.getSexualPreferences() == 1) preference = getString(R.string.femalePreference);
+        else preference = getString(R.string.bothPreference);
+        String info = user.getAge() + getString(R.string.separator) + gender + getString(R.string.separator) + preference;
+        moreInfo.setText(info);
+    }
 }

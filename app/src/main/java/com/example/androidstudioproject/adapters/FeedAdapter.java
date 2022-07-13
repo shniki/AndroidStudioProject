@@ -1,5 +1,6 @@
 package com.example.androidstudioproject.adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +29,16 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     private List<Post> postsList;
     MainActivity context;
 
-private ItemClickListener listener;
-public interface ItemClickListener{
-    void onClick(int i);//create function in the feed activity
-}
+    private ItemClickListener listener;
+    public interface ItemClickListener{
+        void onClick(int i);//create function in the feed activity
+    }
     //@NonNull
     //?
     public FeedAdapter(MainActivity context)
     {
         usersViewModel=context.getUsersViewModel();
-        context=context;
+        this.context=context;
     }
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,14 +50,16 @@ public interface ItemClickListener{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (postsList != null) {
-            Post post = postsList.get(position);
-            User user=usersViewModel.getUserByEmail(post.getUserEmail());
+            Post post = postsList.get(position);User user=usersViewModel.getUserByEmail(post.getUserEmail());
+        String text = user.getFirstName() + context.getString(R.string.spaceChar) + user.getLastName();
+        holder.userName.setText(text);
         holder.userName.setText(user.getFirstName() + " " + user.getLastName());
         holder.date.setText(post.getPostDate());
         holder.description.setText(post.getContent());
         if(post.getDataType()==1)
         {
-            //TODO holder.image.setImageBitmap(post.getPicture());
+            holder.image.setImageURI(Uri.parse(post.getDataURL()));
+
             holder.image.setVisibility(View.VISIBLE);
         }
         else
@@ -64,39 +67,39 @@ public interface ItemClickListener{
         //TODO holder.location.setText(post.getLocation());
         if(post.getDataType()==2)
         {
-            //TODO holder.video.setImageBitmap(post.getPicture());
+            holder.video.setVideoURI(Uri.parse(post.getDataURL()));
             holder.video.setVisibility(View.VISIBLE);
         }
         else
             holder.video.setVisibility(View.GONE);
 
-        //TODO holder.userProfile.setImageBitmap(post.getUserName());
+            holder.userProfile.setImageURI(Uri.parse(user.getProfilePicture()));
 
-            holder.userName.setText(user.getFirstName() + " " + user.getLastName());
-            holder.date.setText(post.getPostDate());
-            holder.description.setText(post.getContent());
+        holder.userName.setText(text);
+        holder.date.setText(post.getPostDate()); // todo why twice?
+        holder.description.setText(post.getContent());
 
 
-            //click to fragment
-            holder.image.setOnClickListener(v->{
-                gotoPostFragment(post.getPostID());
-            });
+        //click to fragment
+        holder.image.setOnClickListener(v->{
+            gotoPostFragment(post.getPostID());
+        });
 
 //            holder.video.setOnClickListener(v->{
 //                gotoPostFragment(post.getPostID());
 //            });
 
-            holder.description.setOnClickListener(v->{
-                gotoUserFragment(post.getUserEmail());
-            });
+        holder.description.setOnClickListener(v->{
+            gotoUserFragment(post.getUserEmail());
+        });
 
-            holder.userProfile.setOnClickListener(v->{
-                gotoUserFragment(post.getUserEmail());
-            });
+        holder.userProfile.setOnClickListener(v->{
+            gotoUserFragment(post.getUserEmail());
+        });
 
-            holder.userName.setOnClickListener(v->{
-                gotoUserFragment(post.getUserEmail());
-            });
+        holder.userName.setOnClickListener(v->{
+            gotoUserFragment(post.getUserEmail());
+        });
         }
     }
 
@@ -139,7 +142,7 @@ public interface ItemClickListener{
             userProfile=itemView.findViewById((R.id.userProfilePost));
             image=itemView.findViewById((R.id.postImage));
 
-            //video=itemView.findViewById((R.id.^^^));
+            //TODO video=itemView.findViewById((R.id.^^^));
 
         }
     }

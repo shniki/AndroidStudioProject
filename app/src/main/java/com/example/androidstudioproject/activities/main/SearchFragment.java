@@ -52,7 +52,7 @@ public class SearchFragment extends Fragment implements SelectListener {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)this.getActivity()).currentFragmentName = this.getClass().getName();
+        ((MainActivity)this.getActivity()).currentFragment = this;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class SearchFragment extends Fragment implements SelectListener {
     public void filter(String text) {
         usersFilteredList.clear();
         for (int i = 0; i < usersViewModel.getAllUsers().getValue().size(); i++) {
-            String userName_ = usersFilteredList.get(i).getFirstName()+"_"+usersFilteredList.get(i).getLastName();
+            String userName_ = usersFilteredList.get(i).getFirstName()+getString(R.string.spaceChar)+usersFilteredList.get(i).getLastName();
             if (userName_.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)) ) {
                 usersFilteredList.add(usersViewModel.getAllUsers().getValue().get(i));
 
