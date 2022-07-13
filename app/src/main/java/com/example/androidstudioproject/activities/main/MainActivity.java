@@ -33,6 +33,8 @@ import com.example.androidstudioproject.repositories.connection.ConnectionsViewM
 import com.example.androidstudioproject.repositories.storage.StorageModelFirebase;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     public static final int CAMERA_PIC_REQUEST = 1337;
     public static final int PICK_PHOTO = 1338;
+    int PLACE_PICKER_REQUEST=1;
     public Fragment currentFragment;
 
     public String currEmail;
@@ -137,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                                 replaceFragments(UserFragment.class);
                             else if(UserFragment.class.getName().equals(currentFragment.getClass().getName())
                                     &&!((UserFragment)currentFragment).userEmail.equals(currEmail))
+                            gotoUserFragment(currEmail);
                             break;
                     }
                     return true;
@@ -235,7 +239,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //convert to URL and save in firebase after save
             }
+            else if(requestCode==PLACE_PICKER_REQUEST)
+            {
+                Place place= PlacePicker.getPlace(data,this);
+                if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName()))
+                {
+                    ((CreatePostFragment)currentFragment).setLocation(place.getAddress().toString());
+                }
+            }
         }
+
     }
 
 

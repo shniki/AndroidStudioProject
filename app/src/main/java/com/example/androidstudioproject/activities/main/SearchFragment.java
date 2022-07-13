@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class SearchFragment extends Fragment implements SelectListener {
     List<User> usersFilteredList;
     RecyclerView listUsers;
     SearchView searchView;
+    UserAdapter adapter;
     public SearchFragment(UsersViewModel uvm) {
         // Required empty public constructor
         usersViewModel=uvm;
@@ -43,7 +45,8 @@ public class SearchFragment extends Fragment implements SelectListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+         adapter = new UserAdapter(usersFilteredList,this,(MainActivity) getActivity());
+        listUsers.setAdapter(adapter);
     }
 
     @Override
@@ -64,12 +67,24 @@ public class SearchFragment extends Fragment implements SelectListener {
         super.onViewCreated(view, savedInstanceState);
 
         searchView = view.findViewById(R.id.searchView);
-         listUsers=view.findViewById(R.id.rvSearch);
+        listUsers=view.findViewById(R.id.rvSearch);
+       usersViewModel.getAllUsers().observe(this.getActivity(), new Observer<List<User>>() {
+          @Override
+            public void onChanged(@Nullable final List<User> users) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setUsersList(users);
+                filter(searchString);
+            }
+        });
+
          searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 if (s != null) {
                     filter(s);
+                    setStringSearch(s);
+
+                    adapter.setUsersList(usersFilteredList);
                 }
                 return false;
             }
@@ -78,25 +93,31 @@ public class SearchFragment extends Fragment implements SelectListener {
             public boolean onQueryTextChange(String text) {
                 if (text != null) {
                    filter(text);
+                   setStringSearch(text);
+                   adapter.setUsersList(usersFilteredList);
                 }
                 return false;
             }
         });
     }
+    String searchString;
+    private void setStringSearch(String searchString)
+    {this.searchString=searchString;}
     public void filter(String text) {
         usersFilteredList.clear();
         for (int i = 0; i < usersViewModel.getAllUsers().getValue().size(); i++) {
             String userName_ = usersFilteredList.get(i).getFirstName()+getString(R.string.spaceChar)+usersFilteredList.get(i).getLastName();
             if (userName_.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)) ) {
                 usersFilteredList.add(usersViewModel.getAllUsers().getValue().get(i));
+
             }
         }
-        UserAdapter adapter = new UserAdapter(usersFilteredList,this, (MainActivity) this.getActivity());
-        listUsers.setAdapter(adapter);
+
     }
 
     @Override
     public void onItemClicked(User userSelected) {
+        ((MainActivity)getActivity()).gotoUserFragment(userSelected.getEmail());
 
     }
 }

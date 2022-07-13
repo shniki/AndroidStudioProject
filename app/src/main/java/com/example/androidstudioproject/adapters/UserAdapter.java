@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.SelectListener;
 import com.example.androidstudioproject.activities.main.MainActivity;
+import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -40,6 +42,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item,parent,false);
         return new UserAdapter.ViewHolder(view);
+    }
+    public void setUsersList(List<User> users_List) {
+        this.usersList = users_List;
+        notifyDataSetChanged();
     }
 
     @Override

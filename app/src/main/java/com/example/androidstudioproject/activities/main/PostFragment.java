@@ -1,10 +1,18 @@
 package com.example.androidstudioproject.activities.main;
 
+import static androidx.core.content.PermissionChecker.checkSelfPermission;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
 
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -14,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.androidstudioproject.R;
@@ -25,12 +34,12 @@ import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class PostFragment extends Fragment {
-
+    private static final int SMS_REQUEST_ID = 123;
     PostsViewModel postsViewModel;
     UsersViewModel usersViewModel;
     ConnectionsViewModel connectionsViewModel;
     long postID;
-
+    String curremail;
     ImageView imgProfile;//userProfilePost_post
     TextView txtUserName;//userName_post
     TextView txtLocation;//location_post
@@ -106,7 +115,7 @@ public class PostFragment extends Fragment {
         //get post + user
         Post post = postsViewModel.getPostById(postID);
         User user = usersViewModel.getUserByEmail(post.getUserEmail());
-        String curremail = ((MainActivity)getActivity()).getCurrEmail();
+         curremail = ((MainActivity)getActivity()).getCurrEmail();
 
 
         imgProfile = view.findViewById(R.id.userProfilePost_post);//userProfilePost_post
@@ -155,9 +164,9 @@ public class PostFragment extends Fragment {
         //visible only when follows you
         edtDescMsg = view.findViewById(R.id.textMoveEdit_post);//textMoveEdit_post
          btnSend = view.findViewById(R.id.sendMessage);//sendMessage
-        //send btn fuctionality
+        //send btn functionality
         btnSend.setOnClickListener(v->{
-            //TODO chuck do send message
+            sendSms(view);
         });
 
         //visible only
@@ -232,5 +241,35 @@ public class PostFragment extends Fragment {
         }
 
 
+    }
+    public void sendSms(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(getActivity(),Manifest.permission.SEND_SMS) == PermissionChecker.PERMISSION_GRANTED) {
+                sendSMS();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.SEND_SMS}, SMS_REQUEST_ID);
+            }
+        } else {
+            sendSMS();
+        }
+
+    }
+
+    /**בקשת רשות לשליחת הודעות תוך התחשבות בסוג הגרסא*/
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == SMS_REQUEST_ID) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                sendSMS();
+            } else {
+                Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    /**שליחת sms לבעל העסק*/
+    public void sendSMS() {
+        SmsManager smsManager = SmsManager.getDefault();
+
+        smsManager.sendTextMessage(usersViewModel.getUserByEmail(curremail).getPhoneNumber(), null,edtDescMsg.getText().toString() , null, null);// pendingIntent, pendingIntent2);
     }
 }

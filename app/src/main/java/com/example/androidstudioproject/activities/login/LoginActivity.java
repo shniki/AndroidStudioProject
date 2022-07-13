@@ -49,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        authenticationViewModel.signOut(); //todo remove
-
     }
 
     public void replaceFragments(Class fragmentClass) {
@@ -63,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.loginFragment, fragment)
-                .addToBackStack(null)
                 .commit();
     }
 
@@ -86,7 +83,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void addUser(String email, String password, String name, String number, String gender, String age) {
         //adds to firebase database
-        String[] splitted = name.split(getString(R.string.spaceChar), 2);
+
+        String[] splitted = name.split(getString(R.string.spaceChar));
 
         int _age = Integer.parseInt(age);
 

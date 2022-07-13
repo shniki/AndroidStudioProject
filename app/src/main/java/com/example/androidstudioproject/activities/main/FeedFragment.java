@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import android.view.LayoutInflater;
@@ -70,7 +71,14 @@ public class FeedFragment extends Fragment {
         rvFeed.setAdapter(adapter); //set adapter
         //choose type of layout: linear, horological or staggered
         rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        SwipeRefreshLayout swipeToRefresh=view.findViewById(R.id.swipeToRefresh);
+        swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.setPostsList(postsViewModel.getAllPosts().getValue());
+            }
+        }
+  );
         //TODO ON REFRESH
 //        postsViewModel.getAllPosts().observe(this.getActivity(), new Observer<List<Post>>() {
 //            @Override

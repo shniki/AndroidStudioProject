@@ -45,22 +45,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item,parent,false);
         return new ViewHolder(view);
     }
-    private User findUser(String userEmail)
-    {
-        for(int i=0;i<usersViewModel.getAllUsers().getValue().size();i++)
-            if(usersViewModel.getAllUsers().getValue().get(i).getEmail().equals(userEmail))
-                return usersViewModel.getAllUsers().getValue().get(i);
-       return null;
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (postsList != null) {
-            Post post = postsList.get(position);
-            User user=findUser(post.getUserEmail());
-
+            Post post = postsList.get(position);User user=usersViewModel.getUserByEmail(post.getUserEmail());
         String text = user.getFirstName() + context.getString(R.string.spaceChar) + user.getLastName();
         holder.userName.setText(text);
+        holder.userName.setText(user.getFirstName() + " " + user.getLastName());
         holder.date.setText(post.getPostDate());
         holder.description.setText(post.getContent());
         if(post.getDataType()==1)
