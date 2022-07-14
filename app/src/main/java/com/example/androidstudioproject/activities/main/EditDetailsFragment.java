@@ -145,14 +145,6 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
                 return;
             }
 
-            String profileUrl = ((MainActivity)this.getActivity()).getStorageModelFirebase().addImage(image);
-
-            if(profileUrl==null)
-            {
-                Snackbar.make(view, R.string.media_upload_failed, Snackbar.LENGTH_LONG).show();
-                return;
-            }
-
 
             loggedInUser.setAge(Integer.parseInt(strAge));
             loggedInUser.setBio(strBio);
@@ -167,9 +159,9 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
             loggedInUser.setLastName(strFullName.split(getString(R.string.spaceChar))[1]);
             loggedInUser.setPhoneNumber(strPhoneNumber);
             // todo: set profile picture if exists
-            loggedInUser.setProfilePicture(profileUrl);
-            usersViewModel.update(loggedInUser);
-            ((MainActivity) getActivity()).onBackPressed();
+
+            ((MainActivity)this.getActivity()).getStorageViewModel().addImageAndUpdateUser(this,image,loggedInUser);
+//            ((MainActivity) getActivity()).onBackPressed();
         });
     }
 }

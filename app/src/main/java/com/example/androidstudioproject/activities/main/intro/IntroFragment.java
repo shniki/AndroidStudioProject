@@ -32,6 +32,13 @@ public class IntroFragment extends Fragment {
         else frag = GuideFragment.newInstance();
         return frag;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)this.getActivity()).currentFragment = this;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return getActivity().getLayoutInflater().inflate(R.layout.fragment_main_intro, container, false);

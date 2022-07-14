@@ -6,6 +6,11 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.example.androidstudioproject.activities.main.CreatePostFragment;
+import com.example.androidstudioproject.activities.main.EditDetailsFragment;
+import com.example.androidstudioproject.entities.Post;
+import com.example.androidstudioproject.entities.User;
+
 public class StorageViewModel extends AndroidViewModel {
 
     StorageModelFirebase mRepository;
@@ -15,8 +20,12 @@ public class StorageViewModel extends AndroidViewModel {
         mRepository = new StorageModelFirebase();
     }
 
-    public String addImage(Bitmap image) {
-        return mRepository.addImage(image);
+    public void addImageAndUploadPost(CreatePostFragment fragment, Bitmap image, Post p) {
+        mRepository.addImageAndUploadPost(fragment,image,p);
+    }
+
+    public  void addImageAndUpdateUser(EditDetailsFragment fragment, Bitmap image, User user){
+        mRepository.addImageAndUpdateUser( fragment, image, user);
     }
 
     public boolean isVaild(String uri) {
