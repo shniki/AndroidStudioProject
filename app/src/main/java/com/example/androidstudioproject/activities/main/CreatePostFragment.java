@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.androidstudioproject.R;
@@ -40,8 +41,8 @@ public class CreatePostFragment extends Fragment {
     Button btnUpload; //fragEditAccount_save_btn
     Button btnLocation;//addLocation;
     EditText edtContent;//fragNew_userName_et3
-    Button btnCamera;//frag_addP_cam_btn
-    Button btnGallery;//frag_addP_gallery_btn
+    ImageButton btnCamera;//frag_addP_cam_btn
+    ImageButton btnGallery;//frag_addP_gallery_btn
     ImageView visableImg; //frag_addP_iv_p
 
     public CreatePostFragment() {

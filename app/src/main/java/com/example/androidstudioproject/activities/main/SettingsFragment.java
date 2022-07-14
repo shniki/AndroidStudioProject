@@ -18,12 +18,16 @@ import com.example.androidstudioproject.repositories.authentication.Authenticati
 import com.google.android.material.snackbar.Snackbar;
 
 public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSelectedListener*/{
-    AuthenticationViewModel mAuth = new AuthenticationViewModel(this.getActivity().getApplication());
+    AuthenticationViewModel mAuth;
     Switch edtDarkMode;
     EditText edtChangePassword;
     Switch edtChangeLanguage;
     Button btnSignOut;
     Button btnChangeDetails;
+
+    public SettingsFragment() {
+
+    }
 
     public static SettingsFragment newInstance(/*Data data, int position*/) {
         SettingsFragment frag = new SettingsFragment();
@@ -57,6 +61,8 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
         edtChangeLanguage = (Switch) view.findViewById(R.id.fragSettings_ChangeLanguage); //get input line (edit text) by id
         btnSignOut = (Button) view.findViewById(R.id.fragSettings_signOut);
         btnChangeDetails = (Button) view.findViewById(R.id.fragSettings_changeDetails);
+
+        mAuth=((MainActivity)getActivity()).getAuthenticationViewModel();
 
         edtDarkMode.setOnCheckedChangeListener( (buttonView, isChecked) -> {
             if (isChecked)
