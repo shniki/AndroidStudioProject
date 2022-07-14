@@ -146,20 +146,7 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
             }
 
             DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("Users");
-            ((LoginActivity) getActivity()).addUser(strEmail,strPasswd,strFullName,strPhoneNumber,strGender,strAge);
-            eventListener = stRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if ((((LoginActivity) getActivity()).isExistsUser(strEmail))) {
-                        ((LoginActivity) getActivity()).gotoMainActivity(); //try auth instead
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
+            ((LoginActivity) getActivity()).addUser(this, strEmail,strPasswd,strFullName,strPhoneNumber,strGender,strAge);
         });
 
     }

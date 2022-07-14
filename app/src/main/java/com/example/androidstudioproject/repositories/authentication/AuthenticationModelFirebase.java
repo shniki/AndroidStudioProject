@@ -10,13 +10,23 @@ import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
 import com.example.androidstudioproject.activities.main.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.example.androidstudioproject.MyApplication;
+import com.example.androidstudioproject.R;
+import com.example.androidstudioproject.activities.login.LoginActivity;
+import com.example.androidstudioproject.activities.login.LoginFragment;
+import com.example.androidstudioproject.activities.login.SignUpFragment;
+import com.example.androidstudioproject.activities.main.MainActivity;
+import com.example.androidstudioproject.entities.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.concurrent.Executor;
@@ -49,7 +59,7 @@ public class AuthenticationModelFirebase {
         currUser = user;
     }
 
-    public void authenticate(Fragment fragment, String email, String password) {
+    public void authenticate(LoginFragment fragment, String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(executor, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -68,19 +78,24 @@ public class AuthenticationModelFirebase {
                 });
     }
 
-    public void add(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(executor, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails
-                            updateUI(null);
-                        }
+    public void add(SignUpFragment fragment, User u, String password) {
+        mAuth.createUserWithEmailAndPassword(u.getEmail(), password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                        DatabaseReference ref = mDatabase.child("Users");
+                        ref.child(ref.push().getKey()).setValue(u).addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        currUser = mAuth.getCurrentUser();
+                                        ((LoginActivity)fragment.getActivity()).gotoMainActivity();
+                                    } else {
+                                        Snackbar.make(fragment.getView(), R.string.failed_signup, Snackbar.LENGTH_LONG).show();
+                                        return;
+                                    }
+                                });
+                    } else {
+                        Snackbar.make(fragment.getView(), R.string.failed_signup, Snackbar.LENGTH_LONG).show();
+                        return;
                     }
                 });
     }

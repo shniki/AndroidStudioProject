@@ -111,6 +111,7 @@
     <string name="changeUserDetails">Change user details</string>
     <string name="media_upload_failed">Media upload failed</string>
     <string name="empty_content">Cannot assign empty content for content-only post</string>
+    <string name="failed_signup">Failed to sign up</string>
 
 
 </resources>

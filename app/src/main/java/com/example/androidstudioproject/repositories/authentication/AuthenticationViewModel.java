@@ -3,6 +3,7 @@ package com.example.androidstudioproject.repositories.authentication;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -14,6 +15,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.example.androidstudioproject.activities.login.LoginFragment;
+import com.example.androidstudioproject.activities.login.SignUpFragment;
+import com.example.androidstudioproject.entities.User;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
@@ -43,8 +47,8 @@ public class AuthenticationViewModel extends AndroidViewModel {
         return currUser.getEmail();
     }
 
-    public void authenticate(Fragment fragment,String email, String password){
-        mRepository.authenticate(fragment,email,password);
+    public void authenticate(LoginFragment fragment, String email, String password){
+        mRepository.authenticate(fragment, email,password);
         currUser = mRepository.getCurrentUser();
     }
 
@@ -52,7 +56,7 @@ public class AuthenticationViewModel extends AndroidViewModel {
         mRepository.googleLogin(activity,account);
     }
 
-    public void add(String email, String password) { mRepository.add(email,password); }
+    public void add(SignUpFragment fragment, User u, String password) { mRepository.add(fragment, u,password); }
     
     public void signOut(){
         mRepository.signOut();

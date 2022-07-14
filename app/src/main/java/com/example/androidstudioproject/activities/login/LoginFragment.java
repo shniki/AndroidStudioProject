@@ -92,7 +92,7 @@ public class LoginFragment extends Fragment {
 
             //authenticate using firebase
 
-            ((LoginActivity) getActivity()).authenticate(this,strEmail,strPasswd);
+            ((LoginActivity) getActivity()).authenticate(this, strEmail,strPasswd);
         });
 
     }

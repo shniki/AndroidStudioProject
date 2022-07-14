@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.main.MainActivity;
@@ -73,9 +74,9 @@ public class LoginActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void authenticate(Fragment fragment, String email, String password){
+    public void authenticate(LoginFragment fragment, String email, String password){
         //send to firebase auth email password
-        authenticationViewModel.authenticate(fragment, email, password);
+       authenticationViewModel.authenticate(fragment, email, password);
     }
 
     public void gotoMainActivity(){
@@ -90,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         //return false;
     }
 
-    public void addUser(String email, String password, String name, String number, String gender, String age) {
+    public void addUser(SignUpFragment fragment, String email, String password, String name, String number, String gender, String age) {
         //adds to firebase database
 
         String[] splitted = name.split(getString(R.string.spaceChar));
@@ -102,9 +103,8 @@ public class LoginActivity extends AppCompatActivity {
         else _gender = 1;
 
         User u = new User(email, splitted[0], splitted[1], number, "", _age, _gender, 2, "");
-        viewModel.add(u);
         // authenticate using firebase (+create new user)
-        authenticationViewModel.add(email,password);
+        authenticationViewModel.add(fragment, u,password);
     }
 
     public void authenticateGoogle(){
