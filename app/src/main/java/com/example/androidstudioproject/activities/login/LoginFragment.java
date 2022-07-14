@@ -92,15 +92,7 @@ public class LoginFragment extends Fragment {
 
             //authenticate using firebase
 
-            if(!(((LoginActivity) getActivity()).authenticate(strEmail,strPasswd))){
-                Snackbar.make(view, R.string.wrong_input, Snackbar.LENGTH_LONG).show();
-                return;
-            }
-
-            //else: right input
-
-            //login
-            ((LoginActivity) getActivity()).gotoMainActivity();
+            ((LoginActivity) getActivity()).authenticate(this,strEmail,strPasswd);
         });
 
     }

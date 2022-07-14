@@ -1,5 +1,6 @@
 package com.example.androidstudioproject.activities.login;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.main.MainActivity;
@@ -19,6 +21,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -61,12 +69,13 @@ public class LoginActivity extends AppCompatActivity {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.loginFragment, fragment)
+                .addToBackStack("")
                 .commit();
     }
 
-    public Boolean authenticate(String email, String password){
+    public void authenticate(Fragment fragment, String email, String password){
         //send to firebase auth email password
-       return authenticationViewModel.authenticate(email, password);
+        authenticationViewModel.authenticate(fragment, email, password);
     }
 
     public void gotoMainActivity(){
@@ -77,8 +86,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public boolean isExistsUser(String email){
         //todo use firebase auth - to check if email exists
-        //return viewModel.exists(email);
-        return false;
+        return viewModel.getUserByEmail(email)!=null;
+        //return false;
     }
 
     public void addUser(String email, String password, String name, String number, String gender, String age) {
@@ -117,13 +126,15 @@ public class LoginActivity extends AppCompatActivity {
                     User u = new User(account.getEmail(),
                             account.getGivenName(),
                             account.getFamilyName(),
-                            null, null, 18, 0, 2,
+                            "", "", 18, 0, 2,
                             account.getPhotoUrl().toString());
                     viewModel.add(u);
                 }
 
+                authenticationViewModel.googleLogin(this,account);
+
                 //goto main activity
-                gotoMainActivity();
+                //gotoMainActivity();
             }
         }
     }

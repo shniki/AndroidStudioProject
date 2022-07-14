@@ -1,6 +1,7 @@
 package com.example.androidstudioproject.entities;
 
 import androidx.annotation.NonNull;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.Entity;
 
@@ -45,6 +46,7 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
+    @Ignore
     public User(){
         this.hasLoggedIn = false;
     }

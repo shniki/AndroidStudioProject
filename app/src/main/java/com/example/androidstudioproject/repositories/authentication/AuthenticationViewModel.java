@@ -1,12 +1,21 @@
 package com.example.androidstudioproject.repositories.authentication;
 
+import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class AuthenticationViewModel extends AndroidViewModel {
     
@@ -34,10 +43,13 @@ public class AuthenticationViewModel extends AndroidViewModel {
         return currUser.getEmail();
     }
 
-    public boolean authenticate(String email, String password){
-        Boolean res = mRepository.authenticate(email,password);
+    public void authenticate(Fragment fragment,String email, String password){
+        mRepository.authenticate(fragment,email,password);
         currUser = mRepository.getCurrentUser();
-        return res;
+    }
+
+    public void googleLogin(Activity activity, GoogleSignInAccount account){
+        mRepository.googleLogin(activity,account);
     }
 
     public void add(String email, String password) { mRepository.add(email,password); }
