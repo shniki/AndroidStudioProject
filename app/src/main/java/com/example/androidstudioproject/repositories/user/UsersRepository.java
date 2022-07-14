@@ -26,7 +26,12 @@ public class UsersRepository {
     }
 
     public User getUserByEmail(String email){
-        return dao.get(email);
+        List<User> users = dao.index();
+        for(User user : users) {
+            if (user.getEmail().equals(email))
+                return user;
+        }
+        return null;
     }
 
     public void cancellGetAllUsers() {
