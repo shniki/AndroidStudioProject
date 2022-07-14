@@ -40,7 +40,7 @@
         <entry key="app/src/main/res/layout-sw600dp/activity_signup.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/layout/activity_add_post.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.13467293715262932" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_post_location.xml" value="0.22830269345874304" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/fragment_create_post.xml" value="0.16458333333333333" />

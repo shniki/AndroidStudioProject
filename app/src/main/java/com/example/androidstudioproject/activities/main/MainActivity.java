@@ -118,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
                             if(!FeedFragment.class.getName().equals(currentFragment.getClass().getName()))
                                 replaceFragments(FeedFragment.class);
                             break;
+                        case R.id.nav_setting:
+                            if(!SettingsFragment.class.getName().equals(currentFragment.getClass().getName()))
+                                replaceFragments(SettingsFragment.class);
+                            break;
                         case R.id.nav_profile:
                             if(!UserFragment.class.getName().equals(currentFragment.getClass().getName()))
                                 gotoUserFragment(currEmail);
