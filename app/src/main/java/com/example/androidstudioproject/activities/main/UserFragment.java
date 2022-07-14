@@ -117,7 +117,7 @@ public class UserFragment extends Fragment {
         if(userEmail.equals(loggedInUser)){
             followBtn.setText(R.string.edit_profile);
             followBtn.setOnClickListener(v -> {
-                ((MainActivity) this.getActivity()).replaceFragments(SettingsFragment.class);
+                ((MainActivity) this.getActivity()).replaceFragments(EditDetailsFragment.class);
             });
         }
         else {

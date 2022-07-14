@@ -37,6 +37,8 @@
         <entry key="app/src/main/res/layout-large/fragment_welcome_guide.xml" value="0.2573749465583583" />
         <entry key="app/src/main/res/layout-large/fragment_welcome_settings.xml" value="0.2573749465583583" />
         <entry key="app/src/main/res/layout-large/post_item.xml" value="0.246875" />
+        <entry key="app/src/main/res/layout-night/fragment_login.xml" value="0.2368659420289855" />
+        <entry key="app/src/main/res/layout-night/fragment_signup.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout-sw600dp/activity_signup.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/layout/activity_add_post.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />

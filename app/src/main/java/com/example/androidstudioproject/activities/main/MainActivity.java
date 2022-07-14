@@ -2,6 +2,7 @@ package com.example.androidstudioproject.activities.main;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private String imgPath;
     public Fragment currentFragment;
 
+    public static SharedPreferences settings;
+
     public String currEmail;
 
     @Override
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         connectionsViewModel = new ConnectionsViewModel(this.getApplication());
         authenticationViewModel = new AuthenticationViewModel(this.getApplication());
         storageViewModel = new StorageViewModel(this.getApplication());
+        settings = getSharedPreferences("UserInfo", 0);
     }
 
     @Override
@@ -155,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(getIntent());
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
-        if(isNightModeOn())
-            replaceFragments(SettingsFragment.class);
+//        if(isNightModeOn())
+//            replaceFragments(SettingsFragment.class);
 
     }
 
@@ -278,6 +282,17 @@ public class MainActivity extends AppCompatActivity {
         onConfigurationChanged(config);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(MainActivity.settings != null && MainActivity.settings.getBoolean("isDarkMode", false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+        if(MainActivity.settings != null && MainActivity.settings.getBoolean("isRomanian", false)){
+            setLanguage(getString(R.string.romanian));
+        }
+    }
     //getters
 
     public UsersViewModel getUsersViewModel() {
