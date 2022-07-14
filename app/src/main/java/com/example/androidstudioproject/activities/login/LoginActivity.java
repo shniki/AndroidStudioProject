@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
+        authenticationViewModel.signOut();//todo remove
     }
 
     public void replaceFragments(Class fragmentClass) {

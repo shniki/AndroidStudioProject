@@ -70,24 +70,6 @@ public class MainActivity extends AppCompatActivity {
         connectionsViewModel = new ConnectionsViewModel(this.getApplication());
         authenticationViewModel = new AuthenticationViewModel(this.getApplication());
         storageModelFirebase = new StorageModelFirebase();
-
-
- // use navigation to get to :
-        //user
-        //feed -
-                //single post
-                    //edit
-                    //delete
-                    //send message
-                //glide video + photo
-        //create
-                //goto pictures
-                //goto camera
-                //goto location
-                //intent back
-        //search - NOY
-                //on change mvvm
-        //settings DONE
     }
 
     @Override
@@ -105,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             currUser.setLogIn();
             usersViewModel.update(currUser);
         }
+        else replaceFragments(FeedFragment.class);
     }
 
     public void gotoLoginActivity(){
@@ -137,10 +120,10 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case R.id.nav_profile:
                             if(!UserFragment.class.getName().equals(currentFragment.getClass().getName()))
-                                replaceFragments(UserFragment.class);
+                                gotoUserFragment(currEmail);
                             else if(UserFragment.class.getName().equals(currentFragment.getClass().getName())
                                     &&!((UserFragment)currentFragment).userEmail.equals(currEmail))
-                            gotoUserFragment(currEmail);
+                                gotoUserFragment(currEmail);
                             break;
                     }
                     return true;

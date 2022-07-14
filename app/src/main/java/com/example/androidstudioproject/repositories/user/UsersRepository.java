@@ -86,6 +86,7 @@ public class UsersRepository {
         public UserListData() {
             super();
             setValue(new LinkedList<User>());
+            this.onActive();
         }
     }
 

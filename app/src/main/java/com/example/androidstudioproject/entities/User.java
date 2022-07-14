@@ -45,6 +45,10 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
+    public User(){
+        this.hasLoggedIn = false;
+    }
+
     //getters
     public String getFirstName() {
         return firstName;
