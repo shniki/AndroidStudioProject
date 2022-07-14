@@ -1,5 +1,7 @@
 package com.example.androidstudioproject.activities.main;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,11 +9,14 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LiveData;
 
+import com.example.androidstudioproject.AppDB;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
 import com.example.androidstudioproject.activities.main.intro.WelcomeFragment;
@@ -27,7 +34,7 @@ import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
-import com.example.androidstudioproject.repositories.storage.StorageModelFirebase;
+import com.example.androidstudioproject.repositories.storage.StorageViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 //import com.google.android.gms.location.places.Place;
@@ -35,20 +42,26 @@ import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     UsersViewModel usersViewModel;
     PostsViewModel postViewModel;
     ConnectionsViewModel connectionsViewModel;
     AuthenticationViewModel authenticationViewModel;
-    StorageModelFirebase storageModelFirebase;
+    StorageViewModel storageViewModel;
 
     BottomNavigationView bottomNavigationView;
     public static final int CAMERA_PIC_REQUEST = 1337;
     public static final int PICK_PHOTO = 1338;
     int PLACE_PICKER_REQUEST=1;
+    private String imgPath;
     public Fragment currentFragment;
 
     public static SharedPreferences settings;
@@ -66,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         usersViewModel = new UsersViewModel(this.getApplication());
         connectionsViewModel = new ConnectionsViewModel(this.getApplication());
         authenticationViewModel = new AuthenticationViewModel(this.getApplication());
-        storageModelFirebase = new StorageModelFirebase();
+        storageViewModel = new StorageViewModel(this.getApplication());
         settings = getSharedPreferences("UserInfo", 0);
     }
 
@@ -80,12 +93,13 @@ public class MainActivity extends AppCompatActivity {
 
         currEmail = authenticationViewModel.getCurrentEmail();
         User currUser = usersViewModel.getUserByEmail(currEmail);
-        if(currUser != null && !currUser.getHasLoggedIn()){
+        if(currUser != null && !currUser.getHasLoggedIn() && currentFragment==null){
             this.replaceFragments(WelcomeFragment.class);
             currUser.setLogIn();
             usersViewModel.update(currUser);
         }
-        else replaceFragments(FeedFragment.class);
+        else if(currentFragment==null)
+            replaceFragments(FeedFragment.class);
     }
 
     public void gotoLoginActivity(){
@@ -158,6 +172,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private Uri setImageUri() {
+        // Store image in dcim
+        File file = new File(Environment.getExternalStorageDirectory() + "/DCIM/", "image" + UUID.randomUUID() + ".png");
+        Uri imgUri = Uri.fromFile(file);
+        this.imgPath = file.getAbsolutePath();
+        return imgUri;
+    }
+
     public void pickImageFromGallery(){
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType(getString(R.string.imageType));
@@ -198,53 +220,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void setImageToActivity(Bitmap bitmap){
+        if(EditDetailsFragment.class.getName().equals(currentFragment.getClass().getName()))
+        {
+            ((EditDetailsFragment)currentFragment).setImage(bitmap);
+        }
+        else if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName())){
+            ((CreatePostFragment)currentFragment).setImage(bitmap);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK) {
-            if (requestCode == CAMERA_PIC_REQUEST || requestCode == PICK_PHOTO) {
-                Bitmap image = data.getExtras().getParcelable(getString(R.string.data));
-                ImageView imageview = (ImageView) findViewById(R.id.frag_addP_iv_p); //sets imageview as the bitmap
-                imageview.setImageBitmap(image);
-                if( data != null) {
-                    Uri selectedUri = data.getData();
-                    String[] columns = { MediaStore.Images.Media.DATA,
-                            MediaStore.Images.Media.MIME_TYPE };
-
-                    Cursor cursor = getContentResolver().query(selectedUri, columns, null, null, null);
-                    cursor.moveToFirst();
-
-                    int pathColumnIndex     = cursor.getColumnIndex( columns[0] );
-                    int mimeTypeColumnIndex = cursor.getColumnIndex( columns[1] );
-
-                    String contentPath = cursor.getString(pathColumnIndex);
-                    String mimeType    = cursor.getString(mimeTypeColumnIndex);
-                    cursor.close();
-
-                    if(mimeType.startsWith("image")) {
-                        Bitmap bitmap = data.getExtras().getParcelable("data");
-                        //It's an image
-                        if(EditDetailsFragment.class.getName().equals(currentFragment.getClass().getName()))
-                        {
-                            ((EditDetailsFragment)currentFragment).setImage(bitmap);
-                        }
-                        else if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName())){
-                            ((CreatePostFragment)currentFragment).setImage(bitmap);
-                        }
-                        //setImage(image);
-                    }
-                    else if(mimeType.startsWith("video")) {
-                        //TODO It's a video
-                        if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName())){
-                           // ((CreatePostFragment)currentFragment).setVideo(bitmap);
-                        }
-                    }
-                }
-                else {
-                    // show error or do nothing
-                }
-                //convert to URL and save in firebase after save
+            if(requestCode == CAMERA_PIC_REQUEST){
+                Bitmap image = (Bitmap) data.getExtras().get("data");
+                setImageToActivity(image);
+                return;
             }
+            else if(requestCode == PICK_PHOTO){
+                try {
+                    final Uri imageUri = data.getData();
+                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    final Bitmap image = BitmapFactory.decodeStream(imageStream);
+
+                    setImageToActivity(image);
+                    return;
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }//todo video
             else if(requestCode==PLACE_PICKER_REQUEST)
             {
 //                Place place= PlacePicker.getPlace(data,this);
@@ -312,8 +319,8 @@ public class MainActivity extends AppCompatActivity {
         return authenticationViewModel;
     }
 
-    public StorageModelFirebase getStorageModelFirebase() {
-        return storageModelFirebase;
+    public StorageViewModel getStorageViewModel() {
+        return storageViewModel;
     }
 
     public String getCurrEmail() {
@@ -354,5 +361,16 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.mainFragment, fragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+
+    @Override
+    public void onBackPressed(){
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+            finish();
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }

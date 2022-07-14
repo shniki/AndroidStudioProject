@@ -52,8 +52,8 @@ public class CreatePostFragment extends Fragment {
     public static CreatePostFragment newInstance() {
         CreatePostFragment fragment = new CreatePostFragment();
 
-        fragment.location=null;
-        fragment.url=null;
+        fragment.location="";
+        fragment.url="";
         fragment.type=0;
         fragment.image=null;
 
@@ -107,14 +107,14 @@ public class CreatePostFragment extends Fragment {
         btnLocation =  view.findViewById(R.id.addLocation);
 
         btnLocation.setOnClickListener(v->{
-            PlacePicker.IntentBuilder builder=new PlacePicker.IntentBuilder();
-            try {
-                startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
-            } catch (GooglePlayServicesRepairableException e) {
-                e.printStackTrace();
-            } catch (GooglePlayServicesNotAvailableException e) {
-                e.printStackTrace();
-            }
+//            PlacePicker.IntentBuilder builder=new PlacePicker.IntentBuilder();
+//            try {
+//                startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
+//            } catch (GooglePlayServicesRepairableException e) {
+//                e.printStackTrace();
+//            } catch (GooglePlayServicesNotAvailableException e) {
+//                e.printStackTrace();
+//            }
         });
         btnCamera =view.findViewById(R.id.frag_addP_cam_btn);
         btnCamera.setOnClickListener(v->{
@@ -152,31 +152,34 @@ public class CreatePostFragment extends Fragment {
                 return;
             }
 
-            if(content.length() > 140){
+            int len = content.length();
+            if(len > 140){
                 Snackbar.make(view, R.string.content_too_long, Snackbar.LENGTH_LONG).show();
                 return;
             }
 
-            if(location == null)
-                location = "";
+            email = ((MainActivity)getActivity()).getCurrEmail();
 
-            Post p = new Post(email,content,type,url,location);
-            postsViewModel.add(p);
+            if(location==null)
+                location="";
+
             //add media to url
+            url = "";
+            Post p = new Post(email, content, type, url, location);
+
             if(type==1)//image
-                url =((MainActivity)getActivity()).getStorageModelFirebase().addImage(image);
+                ((MainActivity)getActivity()).getStorageViewModel().addImageAndUploadPost(this,image,p);
             else if(type==2)
                 url = "";//TODO ADD VIDEO
 
-            if(url.equals(""))//upload failed
-            {
-                Snackbar.make(view, R.string.media_upload_failed, Snackbar.LENGTH_LONG).show();
-                return;
+           // Post p = new Post(email,content,type,url);
+           // postsViewModel.add(p);
+            if(type==0) {
+                postsViewModel.add(p);
+                ((MainActivity)getActivity()).onBackPressed();
             }
-            Post post = new Post(email,content,type,url, location);
-            postsViewModel.add(post);
 
-            ((MainActivity)getActivity()).replaceFragments(FeedFragment.class);
+            //((MainActivity)getActivity()).onBackPressed();
         });
     }
 
