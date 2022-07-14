@@ -3,6 +3,7 @@ package com.example.androidstudioproject.entities;
 import android.graphics.Bitmap;
 
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.annotation.NonNull;
@@ -11,10 +12,10 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Post {
-    private static final AtomicInteger intIdHelper = new AtomicInteger(0);
+    private static final Random random = new Random();
 //todo: intidhelper or use auto generate?
     @PrimaryKey(autoGenerate = true)
-    private long postID; //make this incremental + FINAL
+    private long postID; //make this random + FINAL
     //foreign key
     @NonNull
     private String userEmail; //(user) one to many (post)
@@ -39,7 +40,7 @@ public class Post {
 //    }
 
     public Post(@NonNull String userEmail, String content, int dataType, String dataURL,String location) {
-        this.postID = intIdHelper.incrementAndGet();
+        this.postID = Math.abs(random.nextInt());
         this.userEmail = userEmail;
         this.content = content;
         this.dataType = dataType;
