@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tindergram</string>
+    <string name="app_name">AndroidStudioProject</string>
     <string name="gender">Gender</string>
     <string name="title_activity_settings">SettingsActivity</string>
 

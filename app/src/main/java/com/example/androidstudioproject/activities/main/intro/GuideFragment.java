@@ -33,7 +33,7 @@ public class GuideFragment extends Fragment{
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return getActivity().getLayoutInflater().inflate(R.layout.fragment_welcome_settings, container, false);
+        return getActivity().getLayoutInflater().inflate(R.layout.fragment_welcome_guide, container, false);
     }
 
     @Override

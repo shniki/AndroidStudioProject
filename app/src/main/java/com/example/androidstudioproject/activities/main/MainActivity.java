@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -130,6 +131,27 @@ public class MainActivity extends AppCompatActivity {
     public void openCamera(){
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+    }
+
+    public Boolean isNightModeOn() {
+        return AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES;
+    }
+
+    public String getCurrentLanguage() {
+        return Locale.getDefault().getLanguage();
+    }
+
+    @Override
+    public void recreate() {
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+        startActivity(getIntent());
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+        if(isNightModeOn())
+            replaceFragments(SettingsFragment.class);
+
     }
 
     public void pickImageFromGallery(){
