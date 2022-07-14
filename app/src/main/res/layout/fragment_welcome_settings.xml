@@ -49,6 +49,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/secondarySettingsText_tv" />
 
+    <ImageView
+        android:id="@+id/fragSettings_next"
+        android:layout_width="62dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/input_bg"
+        android:src="@drawable/ic_next_arrow"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/fragSettings_prev"
+        android:layout_width="62dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/input_bg"
+        android:src="@drawable/ic_prev_arrow"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/skipBtnSettings"
         android:layout_width="wrap_content"

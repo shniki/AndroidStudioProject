@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class WelcomeFragment extends Fragment{
     Button btnGotoUpdateUser;
     Button btnSkip;
+    ImageView btnNext;
 
     public static WelcomeFragment newInstance() {
         WelcomeFragment frag = new WelcomeFragment();
@@ -51,6 +53,7 @@ public class WelcomeFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         btnGotoUpdateUser = view.findViewById(R.id.updateUser);
         btnSkip = view.findViewById(R.id.skipBtn);
+        btnNext = view.findViewById(R.id.nextBtn);
 
         btnGotoUpdateUser.setOnClickListener(v -> {
             ((MainActivity) getActivity()).replaceFragments(EditDetailsFragment.class);
@@ -59,6 +62,10 @@ public class WelcomeFragment extends Fragment{
         btnSkip.setOnClickListener(v -> {
             this.getFragmentManager().popBackStack();
             ((MainActivity) getActivity()).replaceFragments(FeedFragment.class);
+        });
+
+        btnNext.setOnClickListener(v -> {
+            ((MainActivity) getActivity()).replaceFragments(WelcomeSettingsFragment.class);
         });
     }
 }

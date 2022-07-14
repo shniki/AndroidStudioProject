@@ -24,7 +24,7 @@ import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-//import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.snackbar.Snackbar;
 
 public class CreatePostFragment extends Fragment {

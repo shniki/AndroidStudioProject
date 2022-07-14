@@ -33,7 +33,6 @@ import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
 import com.example.androidstudioproject.repositories.storage.StorageModelFirebase;
-import com.example.androidstudioproject.repositories.storage.StorageViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 //import com.google.android.gms.location.places.Place;
@@ -262,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
         Configuration config = resources.getConfiguration();
         config.setLocale(locale);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        onConfigurationChanged(config);
     }
 
     //getters

@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">AndroidStudioProject</string>
+    <string name="gender">Gen</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="privacy_header">Intimitate</string>
+    <string name="theme_header">Themă</string>
+    <string name="language_header">Limbă</string>
+
+    <!-- Messages Preferences -->
+    <string name="password_change_title">Schimbăți parola</string>
+    <string name="language_change_title">Schimbăți parola în Engleză</string>
+    <string name="theme_color_title">Themă cuztomizată</string>
+
+    <string name="change_theme_title">Schimbă Thema</string>
+    <string name="change_theme_off">Modul închis</string>
+    <string name="change_theme_on">Modul deschis</string>
+
+    <!-- Sync Preferences -->
+    <string name="title_activity_post_location">PostLocationActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Bună blank fragment</string>
+    <string name="send_message_icon">Trimite un mesaj spre user</string>
+    <string name="move_hint_text">Hai să te văd...</string>
+
+
+    <!-- errors -->
+    <string name="wrong_emails">Te rog scrie un mail valid</string>
+    <string name="wrong_input">Greșit nume sau parolă</string>
+    <string name="empty_input">Te rog completează tot</string>
+    <string name="user_already_exists">Acest Email este inscris deja</string>
+    <string name="no_full_name">Te rog scrie-ți tot numele</string>
+    <string name="underage">Este necesar sa fi peste 18 ani pentru a te inscrie</string>
+    <string name="overage">Este necesar sa fi sub 100 ani pentru a te inscrie</string>
+    <string name="wrong_mobile">Te rog scrie un numar de telefon valid</string>
+    <string name="non_valid_input">Te rog scrie un input valid</string>
+    <string name="short_password">Parola trebuie sa contină măcar 8 caractere</string>
+    <string name="signOut">Ieșire</string>
+    <string name="error_no_data">Te rog scrie un input</string>
+    <string name="follow_txt">Urmăreste</string>
+    <string name="settings">Setări</string>
+    <string name="match">Este un Match!</string>
+    <string name="following">Urmărești</string>
+    <string name="follow_back">Urmăreste înapoi</string>
+    <string name="edit_profile">Editeazăti Profilul</string>
+    <string name="deleted_post">Ne cerem scuze, acest post a fost șters</string>
+    <string name="content_too_long">Ați scris prea mult, va rugăm limitațivă la 140 de caractere</string>
+    <string name="bio_too_long">Bio prea lung, va rugăm limitațivă la 140 de caractere</string>
+    <string name="sexualPreference">Preferința sexului</string>
+    <string name="change_profile_picture">Schimbă-ți poza de profil</string>
+    <string name="phoneNumber">Număr de telefon</string>
+    <string name="fullName">Nume întreg</string>
+    <string name="age">Vârsta</string>
+    <string name="bio">Bio</string>
+    <string name="updateUser">Updateazați Userul</string>
+    <string name="appSettings">Configurările aplicați</string>
+    <string name="gotIt">Am ințeles</string>
+    <string name="skip">Treci peste</string>
+    <string name="male">Bărbat</string>
+    <string name="spaceChar">" "</string>
+    <string name="female">Femeie</string>
+    <string name="both">Amândoi</string>
+    <string name="gotoLoginErrorMsg">Errorare mergând spre login activity cu mesajul</string>
+    <string name="errorType">ERROR</string>
+    <string name="imageType">Poză/*</string>
+    <string name="selectImage">Selectare Imagine</string>
+    <string name="data">data</string>
+    <string name="emptyString" />
+    <string name="romanian">ro</string>
+    <string name="english">en</string>
+    <string name="malePreference">Îi plac bărbați</string>
+    <string name="femalePreference">Îi plac femeile</string>
+    <string name="bothPreference">Îi place pe toÎi plac bărbații</string>
+    <string name="separator">" | "</string>
+    <string name="tindergram">TINDERGRAM</string>
+    <string name="newPost">Nouă Postare</string>
+    <string name="addLocation">Adăugare locație</string>
+    <string name="content">Content</string>
+    <string name="uploadPhoto">Uploadeazăti poza</string>
+    <string name="save">salvare</string>
+    <string name="changeDetails">Schimbăți detalile</string>
+    <string name="login">Logare</string>
+    <string name="email">Email</string>
+    <string name="password">Parola</string>
+    <string name="createNewAccount">Creazăți un nou cont</string>
+    <string name="username">user_Name</string>
+    <string name="location">Locație</string>
+    <string name="description">Descriptie nxnxnxnnmmmmmmmmmmmmm</string>
+    <string name="now">ACUM</string>
+    <string name="edit">Editare</string>
+    <string name="delete">Șterge</string>
+    <string name="cancel">Anulează</string>
+    <string name="done">Gata</string>
+    <string name="inputDescription">Descripție input</string>
+    <string name="searchUsers">cautț useri....</string>
+    <string name="signUp">Înscriete</string>
+    <string name="createAccount">CreazÎ Cont</string>
+    <string name="sampleName">Ted Mosbey</string>
+    <string name="sampleStatus">31  |  barbat  |  îi plac femeile</string>
+    <string name="placeFiller">fggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfw</string>
+    <string name="welcomeText">Bun venit în Tindergram!</string>
+    <string name="editSecondary">Îți poți edita detalile inainte a explora aplicația</string>
+    <string name="aboutUs">Despre noi</string>
+    <string name="explanationFirst">Puteți să treceți prin feed să găsiți potențiale match-uri</string>
+    <string name="explanationSecond">Dacă apăsați pe un post, puteți vedea detalile acest post, chiar dacă nu este al vostru</string>
+    <string name="explanationThird">Dacă apăsați pe un post, puteți vedea detalile acest post și să trmiteți un SMS dacă este un match pentru tine...</string>
+    <string name="explanationFourth">Poți căuta useri si ați crea postările tale in orice timp dorit din bar-ul de jos</string>
+    <string name="txtAwesome">Extraordinar!</string>
+    <string name="textSettings">Acum vă puteți edita setările aplicatie-i</string>
+    <string name="changeUserDetails">Schimbă detalile user-ului</string>
+    <string name="media_upload_failed">Uploadarea media a eșuat</string>
+
+
+</resources>

@@ -1,6 +1,6 @@
 package com.example.androidstudioproject.activities.main;
-import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,29 +10,24 @@ import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.androidstudioproject.R;
-import com.example.androidstudioproject.activities.login.LoginActivity;
 import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
-public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSelectedListener*/{
+public class SettingsFragment extends Fragment {
     AuthenticationViewModel mAuth;
-    Switch edtDarkMode;
+    SwitchCompat edtDarkMode;
     EditText edtChangePassword;
-    Switch edtChangeLanguage;
+    SwitchCompat edtChangeLanguage;
     Button btnSignOut;
     Button btnChangeDetails;
 
     public SettingsFragment() {
 
-    }
-
-    public static SettingsFragment newInstance(/*Data data, int position*/) {
-        SettingsFragment frag = new SettingsFragment();
-
-        return frag;
     }
 
     @Override
@@ -48,17 +43,32 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return getActivity().getLayoutInflater().inflate(R.layout.fragment_settings, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_settings, container, false);
+    }
+
+    public static SettingsFragment newInstance(/*Data data, int position*/) {
+        SettingsFragment frag = new SettingsFragment();
+
+        return frag;
+    }
+
+    public void changeLanguageInFragment(){
+        edtDarkMode.setText(R.string.change_theme_title);
+        edtChangePassword.setText(R.string.password_change_title);
+        edtChangeLanguage.setText(R.string.language_change_title);
+        btnSignOut.setText(R.string.signOut);
+        btnChangeDetails.setText(R.string.changeUserDetails);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        edtDarkMode = (Switch) view.findViewById(R.id.fragSettings_DarkModeSwitch); //get input line (edit text) by id
+        edtDarkMode = (SwitchCompat) view.findViewById(R.id.fragSettings_DarkModeSwitch); //get input line (edit text) by id
         edtChangePassword = view.findViewById(R.id.fragSettings_ChangePassword); //get input line (edit text) by id
-        edtChangeLanguage = (Switch) view.findViewById(R.id.fragSettings_ChangeLanguage); //get input line (edit text) by id
+        edtChangeLanguage = (SwitchCompat) view.findViewById(R.id.fragSettings_ChangeLanguage); //get input line (edit text) by id
         btnSignOut = (Button) view.findViewById(R.id.fragSettings_signOut);
         btnChangeDetails = (Button) view.findViewById(R.id.fragSettings_changeDetails);
 
@@ -73,9 +83,10 @@ public class SettingsFragment extends Fragment /*implements AdapterView.OnItemSe
         edtChangeLanguage.setOnCheckedChangeListener( (buttonView, isChecked) -> {
             String language;
             if (isChecked)
-                language = getString(R.string.spanish);
+                language = getString(R.string.romanian);
             else language = getString(R.string.english);
             ((MainActivity)this.getActivity()).setLanguage(language);
+            changeLanguageInFragment();
         });
 
         edtChangePassword.setOnClickListener(v -> {
