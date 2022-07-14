@@ -1,4 +1,5 @@
 package com.example.androidstudioproject.activities.main;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.text.TextUtils;
@@ -69,31 +70,45 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mAuth=((MainActivity)getActivity()).getAuthenticationViewModel();
+        SharedPreferences settings = ((MainActivity)this.getActivity()).getSharedPreferences("UserInfo", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("email", mAuth.getCurrentEmail());
+        editor.commit();
         edtDarkMode = (SwitchCompat) view.findViewById(R.id.fragSettings_DarkModeSwitch); //get input line (edit text) by id
         edtChangePassword = view.findViewById(R.id.fragSettings_ChangePassword); //get input line (edit text) by id
         edtChangeLanguage = (SwitchCompat) view.findViewById(R.id.fragSettings_ChangeLanguage); //get input line (edit text) by id
         btnSignOut = (Button) view.findViewById(R.id.fragSettings_signOut);
         btnChangeDetails = (Button) view.findViewById(R.id.fragSettings_changeDetails);
         btnConfirmChange = (Button) view.findViewById(R.id.fragSettings_confirmChange);
-        edtDarkMode.setChecked(((MainActivity)this.getActivity()).isNightModeOn());
-        edtChangeLanguage.setChecked(((MainActivity)this.getActivity()).getCurrentLanguage().equals(getString(R.string.romanian)));
-
-        mAuth=((MainActivity)getActivity()).getAuthenticationViewModel();
 
         edtDarkMode.setOnCheckedChangeListener( (buttonView, isChecked) -> {
-            if (isChecked)
+            if (isChecked) {
+                editor.putBoolean("isDarkMode", true);
+                editor.commit();
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+            else {
+                editor.putBoolean("isDarkMode", false);
+                editor.commit();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            };
         });
 
         edtChangeLanguage.setOnCheckedChangeListener( (buttonView, isChecked) -> {
             String language;
-            if (isChecked)
+            if (isChecked) {
                 language = getString(R.string.romanian);
+            }
             else language = getString(R.string.english);
+            editor.putBoolean("isRomanian", language.equals(getString(R.string.romanian)));
+            editor.commit();
             ((MainActivity)this.getActivity()).setLanguage(language);
             changeLanguageInFragment();
         });
+
+        edtDarkMode.setChecked(settings.getBoolean("isDarkMode", false) || ((MainActivity)this.getActivity()).isNightModeOn());
+        edtChangeLanguage.setChecked(settings.getBoolean("isRomanian", false) || ((MainActivity)this.getActivity()).getCurrentLanguage().equals(getString(R.string.romanian)));
 
         btnConfirmChange.setOnClickListener(v -> {
             String text = edtChangePassword.getText().toString();

@@ -31,7 +31,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
     EditText edtAge;
     EditText edtFullName;
     EditText edtBio;
-    ImageView edtProfilePicture;
+    Button edtProfilePicture;
     Button btnSave;
 
     Bitmap image;
@@ -65,7 +65,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
 
     public void setImage(Bitmap bitmap){
         image=bitmap;
-        edtProfilePicture.setImageBitmap(image);
+//        edtProfilePicture.setImageBitmap(image);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
         String fullName = loggedInUser.getFirstName() + getString(R.string.spaceChar) + loggedInUser.getLastName();
         edtFullName.setText(fullName);
         edtPhoneNumber.setText(loggedInUser.getPhoneNumber());
-        edtAge.setText(loggedInUser.getAge());
+        edtAge.setText(String.valueOf(loggedInUser.getAge()));
         edtBio.setText(loggedInUser.getBio());
 
         edtProfilePicture.setOnClickListener(v -> {
