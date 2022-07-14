@@ -1,6 +1,7 @@
 package com.example.androidstudioproject.activities.main;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class SettingsFragment extends Fragment {
     SwitchCompat edtChangeLanguage;
     Button btnSignOut;
     Button btnChangeDetails;
+    Button btnConfirmChange;
 
     public SettingsFragment() {
 
@@ -61,6 +63,7 @@ public class SettingsFragment extends Fragment {
         edtChangeLanguage.setText(R.string.language_change_title);
         btnSignOut.setText(R.string.signOut);
         btnChangeDetails.setText(R.string.changeUserDetails);
+        btnConfirmChange.setText(R.string.confirmChange);
     }
 
     @Override
@@ -71,6 +74,9 @@ public class SettingsFragment extends Fragment {
         edtChangeLanguage = (SwitchCompat) view.findViewById(R.id.fragSettings_ChangeLanguage); //get input line (edit text) by id
         btnSignOut = (Button) view.findViewById(R.id.fragSettings_signOut);
         btnChangeDetails = (Button) view.findViewById(R.id.fragSettings_changeDetails);
+        btnConfirmChange = (Button) view.findViewById(R.id.fragSettings_confirmChange);
+        edtDarkMode.setChecked(((MainActivity)this.getActivity()).isNightModeOn());
+        edtChangeLanguage.setChecked(((MainActivity)this.getActivity()).getCurrentLanguage().equals(getString(R.string.romanian)));
 
         mAuth=((MainActivity)getActivity()).getAuthenticationViewModel();
 
@@ -89,16 +95,16 @@ public class SettingsFragment extends Fragment {
             changeLanguageInFragment();
         });
 
-        edtChangePassword.setOnClickListener(v -> {
-            if(edtChangePassword == null)
+        btnConfirmChange.setOnClickListener(v -> {
+            String text = edtChangePassword.getText().toString();
+            if(TextUtils.isEmpty(text))
             {
-                Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, R.string.empty_password, Snackbar.LENGTH_LONG).show();
                 return;
             }
-            String text = edtChangePassword.getText().toString();
-            if(text.length() == 0)
+            if(text.length() < 8)
             {
-                Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, R.string.short_password, Snackbar.LENGTH_LONG).show();
                 return;
             }
             mAuth.changePassword(text);

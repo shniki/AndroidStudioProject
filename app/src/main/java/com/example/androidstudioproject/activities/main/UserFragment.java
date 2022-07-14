@@ -120,35 +120,31 @@ public class UserFragment extends Fragment {
                 ((MainActivity) this.getActivity()).replaceFragments(SettingsFragment.class);
             });
         }
+        else {
+            UserConnections isFollowing = connectionsViewModel.getConnectionIfExists(loggedInUser, userEmail);
+            UserConnections isFollowed = connectionsViewModel.getConnectionIfExists(userEmail, loggedInUser);
+            if (isFollowing != null) {
+                if (isFollowed != null) {
+                    followBtn.setText(R.string.match);
+                } else {
+                    followBtn.setText(R.string.following);
+                }
+            } else {
+                String textAfterClick;
+                if (isFollowed != null) {
+                    followBtn.setText(R.string.follow_back);
+                    textAfterClick = getString(R.string.match);
+                } else {
+                    followBtn.setText(R.string.follow_txt);
+                    textAfterClick = getString(R.string.following);
+                }
 
-        UserConnections isFollowing = connectionsViewModel.getConnectionIfExists(loggedInUser, userEmail);
-        UserConnections isFollowed = connectionsViewModel.getConnectionIfExists(userEmail, loggedInUser);
-        if(isFollowing != null){
-            if(isFollowed != null) {
-                followBtn.setText(R.string.match);
-            }
-            else{
-                followBtn.setText(R.string.following);
+                followBtn.setOnClickListener(v -> {
+                    connectionsViewModel.add(new UserConnections(loggedInUser, userEmail));
+                });
+                followBtn.setText(textAfterClick);
             }
         }
-
-        else{
-            String textAfterClick;
-            if(isFollowed != null) {
-                followBtn.setText(R.string.follow_back);
-                textAfterClick = getString(R.string.match);
-            }
-            else{
-                followBtn.setText(R.string.follow_txt);
-                textAfterClick = getString(R.string.following);
-            }
-
-            followBtn.setOnClickListener(v -> {
-                connectionsViewModel.add(new UserConnections(loggedInUser, userEmail));
-            });
-            followBtn.setText(textAfterClick);
-        }
-
     }
 
     private void setMoreInfo(User user){

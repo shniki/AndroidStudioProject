@@ -20,6 +20,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LiveData;
@@ -28,6 +29,7 @@ import com.example.androidstudioproject.AppDB;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
 import com.example.androidstudioproject.activities.main.intro.IntroFragment;
+import com.example.androidstudioproject.activities.main.intro.WelcomeFragment;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         currEmail = authenticationViewModel.getCurrentEmail();
         User currUser = usersViewModel.getUserByEmail(currEmail);
         if(currUser != null && !currUser.getHasLoggedIn() && currentFragment==null){
-            this.replaceFragments(IntroFragment.class);
+            this.replaceFragments(WelcomeFragment.class);
             currUser.setLogIn();
             usersViewModel.update(currUser);
         }
@@ -144,6 +146,27 @@ public class MainActivity extends AppCompatActivity {
     public void openCamera(){
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+    }
+
+    public Boolean isNightModeOn() {
+        return AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES;
+    }
+
+    public String getCurrentLanguage() {
+        return Locale.getDefault().getLanguage();
+    }
+
+    @Override
+    public void recreate() {
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+        startActivity(getIntent());
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+        if(isNightModeOn())
+            replaceFragments(SettingsFragment.class);
+
     }
 
     private Uri setImageUri() {
