@@ -129,6 +129,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="confirmChange">Confirm Change</string>
     <string name="empty_password">Enter password to update</string>
+    <string name="updated_successfuly">Updated user successfuly</string>
 
 
 </resources>

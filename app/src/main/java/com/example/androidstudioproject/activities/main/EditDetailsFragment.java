@@ -66,6 +66,8 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
     public void setImage(Bitmap bitmap){
         image=bitmap;
 //        edtProfilePicture.setImageBitmap(image);
+//        Snackbar.make(view, R.string.underage, Snackbar.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -163,8 +165,8 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
                 ((MainActivity)this.getActivity()).getStorageViewModel().addImageAndUpdateUser(this,image,loggedInUser);
             else{
                 usersViewModel.update(loggedInUser);
+                Snackbar.make(view, R.string.updated_successfuly, Snackbar.LENGTH_LONG).show();
             }
-            //            ((MainActivity) getActivity()).onBackPressed();
         });
     }
 }
