@@ -1,7 +1,5 @@
 package com.example.androidstudioproject.activities.main;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,19 +11,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
-import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LiveData;
 
-import com.example.androidstudioproject.AppDB;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
-import com.example.androidstudioproject.activities.main.intro.IntroFragment;
+import com.example.androidstudioproject.activities.main.intro.WelcomeFragment;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.authentication.AuthenticationViewModel;
@@ -38,8 +33,6 @@ import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
@@ -83,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         currEmail = authenticationViewModel.getCurrentEmail();
         User currUser = usersViewModel.getUserByEmail(currEmail);
         if(currUser != null && !currUser.getHasLoggedIn()){
-            this.replaceFragments(IntroFragment.class);
+            this.replaceFragments(WelcomeFragment.class);
             currUser.setLogIn();
             usersViewModel.update(currUser);
         }

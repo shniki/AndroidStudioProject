@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,8 @@ import com.example.androidstudioproject.activities.main.SettingsFragment;
 public class WelcomeSettingsFragment extends Fragment{
     Button btnGotoSettings;
     Button btnSkip;
+    ImageView btnNext;
+    ImageView btnPrev;
 
     public static WelcomeSettingsFragment newInstance() {
         WelcomeSettingsFragment frag = new WelcomeSettingsFragment();
@@ -41,6 +44,8 @@ public class WelcomeSettingsFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         btnGotoSettings = view.findViewById(R.id.gotoSettings);
         btnSkip = view.findViewById(R.id.skipBtnSettings);
+        btnNext = view.findViewById(R.id.fragSettings_next);
+        btnPrev = view.findViewById(R.id.fragSettings_prev);
 
         btnGotoSettings.setOnClickListener(v -> {
             ((MainActivity) getActivity()).replaceFragments(SettingsFragment.class);
@@ -50,6 +55,14 @@ public class WelcomeSettingsFragment extends Fragment{
             this.getFragmentManager().popBackStack();
             this.getFragmentManager().popBackStack();
             ((MainActivity) getActivity()).replaceFragments(FeedFragment.class);
+        });
+
+        btnNext.setOnClickListener(v -> {
+            ((MainActivity) getActivity()).replaceFragments(GuideFragment.class);
+        });
+
+        btnPrev.setOnClickListener(v -> {
+            ((MainActivity) getActivity()).replaceFragments(WelcomeFragment.class);
         });
     }
 }
