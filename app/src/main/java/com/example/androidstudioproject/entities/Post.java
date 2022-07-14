@@ -27,8 +27,6 @@ public class Post {
     private int dataType; //0-text only, 1-video, 2-video
     private String dataURL;//photo will be binary, then convert with function that I guess exist
 
-    private Boolean isDeleted;
-
     private String location;
 //
 //    public Post(){
@@ -46,7 +44,6 @@ public class Post {
         this.content = content;
         this.dataType = dataType;
         this.dataURL = dataURL;
-        this.isDeleted = false;
         this.postDate = dateParse();
         this.location=location;
     }
@@ -86,11 +83,6 @@ public class Post {
         return dataURL;
     }
 
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-
     //setters
     public void setUserEmail(@NonNull String userEmail) {
         this.userEmail = userEmail;
@@ -106,10 +98,6 @@ public class Post {
 
     public void setDataURL(String dataURL) {
         this.dataURL = dataURL;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
     }
 
     public void setPostID(long postID) {

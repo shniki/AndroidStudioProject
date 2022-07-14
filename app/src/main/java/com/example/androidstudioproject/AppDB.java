@@ -12,7 +12,7 @@ import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.entities.UserConnections;
 
-@Database(entities = {User.class, Post.class, UserConnections.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Post.class, UserConnections.class}, version = 2, exportSchema = false)
 public abstract class AppDB extends RoomDatabase{
 
     private static AppDB instance;
@@ -25,7 +25,7 @@ public abstract class AppDB extends RoomDatabase{
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     AppDB.class,
-                    "mydatabase").build();
+                    "mydatabase").fallbackToDestructiveMigration().allowMainThreadQueries().build();
         }
         return instance;
     }

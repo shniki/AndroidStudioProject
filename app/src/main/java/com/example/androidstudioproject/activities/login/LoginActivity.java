@@ -94,9 +94,8 @@ public class LoginActivity extends AppCompatActivity {
 
         User u = new User(email, splitted[0], splitted[1], number, "", _age, _gender, 2, "");
         viewModel.add(u);
-        int x = 1;
         // authenticate using firebase (+create new user)
-//        authenticationViewModel.add(email,password);
+        authenticationViewModel.add(email,password);
     }
 
     public void authenticateGoogle(){

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.androidstudioproject.R;
+import com.example.androidstudioproject.entities.UserConnections;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSelectedListener*/{
 
@@ -25,6 +35,8 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
     EditText edtFullName;
     EditText edtPhoneNumber;
     EditText edtAge;
+
+    ValueEventListener eventListener;
 
     public static SignUpFragment newInstance(/*Data data, int position*/) {
         SignUpFragment frag = new SignUpFragment();
@@ -132,9 +144,19 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
                 Snackbar.make(view, R.string.user_already_exists, Snackbar.LENGTH_LONG).show();
                 return;
             }
-
+            DatabaseReference stRef = FirebaseDatabase.getInstance().getReference().child("Users");
             ((LoginActivity) getActivity()).addUser(strEmail,strPasswd,strFullName,strPhoneNumber,strGender,strAge);
-//            ((LoginActivity) getActivity()).gotoMainActivity();
+            eventListener = stRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    ((LoginActivity) getActivity()).gotoMainActivity(); //try auth instead
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         });
 
     }
