@@ -67,7 +67,7 @@
     <string name="selectImage">Select Image</string>
     <string name="data">data</string>
     <string name="emptyString" />
-    <string name="spanish">es</string>
+    <string name="romanian">ro</string>
     <string name="english">en</string>
     <string name="malePreference">Likes men</string>
     <string name="femalePreference">Likes women</string>
@@ -112,6 +112,21 @@
     <string name="media_upload_failed">Media upload failed</string>
     <string name="empty_content">Cannot assign empty content for content-only post</string>
     <string name="failed_signup">Failed to sign up</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 
 </resources>

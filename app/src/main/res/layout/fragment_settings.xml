@@ -1,11 +1,88 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/settings"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/settingsFragment"
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/fragSettings_DarkModeSwitch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-    />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textStyle="bold"
+        android:gravity="center|left"
+        android:text="@string/change_theme_title"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/fragSettings_ChangePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:textStyle="bold"
+        android:hint="@string/password_change_title"
+        android:icon="@drawable/lock_img_foreground"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="#757575"
+        app:key="Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragSettings_DarkModeSwitch" />
+
+    <Button
+        android:id="@+id/fragSettings_changeDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:background="#686868"
+        android:backgroundTint="#686868"
+        android:icon="@drawable/ic_change_details"
+        android:key="@string/changeUserDetails"
+        android:summary="@string/changeUserDetails"
+        android:text="@string/changeUserDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragSettings_ChangePassword" />
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/fragSettings_ChangeLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/language_change_title"
+        android:visibility="visible"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragSettings_changeDetails" />
+
+    <Button
+        android:id="@+id/fragSettings_signOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="#686868"
+        android:backgroundTint="#686868"
+        android:icon="@drawable/ic_sign_out"
+        android:key="@string/signOut"
+        android:summary="@string/signOut"
+        android:text="@string/signOut"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragSettings_ChangeLanguage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

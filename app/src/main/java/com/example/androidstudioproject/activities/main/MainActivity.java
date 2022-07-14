@@ -254,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
         Configuration config = resources.getConfiguration();
         config.setLocale(locale);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        onConfigurationChanged(config);
     }
 
     //getters
