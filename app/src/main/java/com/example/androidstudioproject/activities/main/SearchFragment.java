@@ -32,13 +32,12 @@ public class SearchFragment extends Fragment implements SelectListener {
     RecyclerView listUsers;
     SearchView searchView;
     UserAdapter adapter;
-    public SearchFragment(UsersViewModel uvm) {
+    public SearchFragment() {
         // Required empty public constructor
-        usersViewModel=uvm;
         usersFilteredList=new ArrayList<>();
     }
-    public static SearchFragment newInstance(UsersViewModel uvm) {
-        SearchFragment fragment = new SearchFragment(uvm);
+    public static SearchFragment newInstance() {
+        SearchFragment fragment = new SearchFragment();
         return fragment;
     }
 
@@ -46,7 +45,6 @@ public class SearchFragment extends Fragment implements SelectListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
          adapter = new UserAdapter(usersFilteredList,this,(MainActivity) getActivity());
-        listUsers.setAdapter(adapter);
     }
 
     @Override
@@ -59,6 +57,7 @@ public class SearchFragment extends Fragment implements SelectListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        usersViewModel=((MainActivity)getActivity()).getUsersViewModel();
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
@@ -68,6 +67,7 @@ public class SearchFragment extends Fragment implements SelectListener {
 
 //        searchView = view.findViewById(R.id.searchView);
         listUsers=view.findViewById(R.id.rvSearch);
+        listUsers.setAdapter(adapter);
        usersViewModel.getAllUsers().observe(this.getActivity(), new Observer<List<User>>() {
           @Override
             public void onChanged(@Nullable final List<User> users) {
