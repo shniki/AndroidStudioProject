@@ -158,10 +158,13 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
             loggedInUser.setFirstName(strFullName.split(getString(R.string.spaceChar))[0]);
             loggedInUser.setLastName(strFullName.split(getString(R.string.spaceChar))[1]);
             loggedInUser.setPhoneNumber(strPhoneNumber);
-            // todo: set profile picture if exists
-
-            ((MainActivity)this.getActivity()).getStorageViewModel().addImageAndUpdateUser(this,image,loggedInUser);
-//            ((MainActivity) getActivity()).onBackPressed();
+            // set profile picture if exists
+            if(image!=null)
+                ((MainActivity)this.getActivity()).getStorageViewModel().addImageAndUpdateUser(this,image,loggedInUser);
+            else{
+                usersViewModel.update(loggedInUser);
+            }
+            //            ((MainActivity) getActivity()).onBackPressed();
         });
     }
 }

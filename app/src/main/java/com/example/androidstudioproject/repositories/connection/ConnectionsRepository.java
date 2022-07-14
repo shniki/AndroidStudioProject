@@ -31,8 +31,6 @@ public class ConnectionsRepository {
 
     public UserConnections getConnectionIfExists(String firstEmail, String secondEmail) { return dao.getConnectionIfExists(firstEmail, secondEmail);}
 
-    public void delete(UserConnections connection) { dao.delete(connection); }
-
     class ConnectionListData extends MutableLiveData<List<UserConnections>> {
 
         @Override
@@ -94,6 +92,15 @@ public class ConnectionsRepository {
             @Override
             public void run() {
                 ConnectionModelFirebase.instance.addConnection(connection);
+            }
+        });
+    }
+
+    public void delete (final UserConnections connection) {
+        new ConnectionsAsyncTask().execute(new Runnable() {
+            @Override
+            public void run() {
+                ConnectionModelFirebase.instance.deleteConnection(connection);
             }
         });
     }

@@ -38,10 +38,6 @@ public class UsersRepository {
         UserModelFirebase.instance.cancellGetAllUsers();
     }
 
-    public void update(User user) {
-        dao.update(user);
-    }
-
     class UserListData extends MutableLiveData<List<User>> {
 
         @Override
@@ -104,6 +100,15 @@ public class UsersRepository {
             @Override
             public void run() {
                 UserModelFirebase.instance.addUser(user);
+            }
+        });
+    }
+
+    public void update (final User user) {
+        new UsersAsyncTask().execute(new Runnable() {
+            @Override
+            public void run() {
+                UserModelFirebase.instance.updateUser(user);
             }
         });
     }

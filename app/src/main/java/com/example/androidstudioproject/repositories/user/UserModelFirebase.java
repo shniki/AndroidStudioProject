@@ -23,7 +23,23 @@ public class UserModelFirebase {
     public void addUser(User user){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = mDatabase.child("Users");
-        ref.child(ref.push().getKey()).setValue(user);
+        ref.child(String.valueOf(user.getEmail().hashCode())).setValue(user);
+    }
+
+    public void updateUser(User user){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = mDatabase.child("Users");
+
+//        ref
+//                .orderByChild("email")
+//                .equalTo(user.getEmail())
+//                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+//                            String clubkey = childSnapshot.getKey();
+        String key = String.valueOf(user.getEmail().hashCode());
+        ref.child(key).setValue(user);
     }
 
     public void cancellGetAllUsers() {

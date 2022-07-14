@@ -4,6 +4,7 @@ import android.util.Log;
 
 
 import com.example.androidstudioproject.entities.Post;
+import com.example.androidstudioproject.entities.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +24,25 @@ public class PostModelFirebase {
     public void addPost(Post post){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = mDatabase.child("Posts");
-        ref.child(ref.push().getKey()).setValue(post);
+        ref.child(String.valueOf(post.getPostID())).setValue(post);
+    }
+
+    public void updatePost(Post post){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = mDatabase.child("Posts");
+
+
+        String key = String.valueOf(post.getPostID());
+        ref.child(key).setValue(post);
+    }
+
+    public void deletePost(Post post){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = mDatabase.child("Posts");
+
+
+        String key = String.valueOf(post.getPostID());
+        ref.child(key).removeValue();
     }
 
     public void cancellGetAllPosts() {

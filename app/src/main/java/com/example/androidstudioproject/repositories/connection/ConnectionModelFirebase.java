@@ -2,6 +2,7 @@ package com.example.androidstudioproject.repositories.connection;
 
 import android.util.Log;
 
+import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.UserConnections;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,10 +20,24 @@ public class ConnectionModelFirebase {
 
     private ConnectionModelFirebase(){}
 
+    private String hash(final UserConnections connection){
+        String mash = connection.getUserEmail()+" "+connection.getSecondUserEmail();
+        return String.valueOf(mash.hashCode());
+    }
+
     public void addConnection(UserConnections connection){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = mDatabase.child("Connections");
-        ref.child(ref.push().getKey()).setValue(connection);
+        ref.child(hash(connection)).setValue(connection);
+    }
+
+    public void deleteConnection(UserConnections connection){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = mDatabase.child("Connections");
+
+
+        String key = hash(connection);
+        ref.child(key).removeValue();
     }
 
     public void cancellGetAllConnections() {

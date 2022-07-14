@@ -10,6 +10,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.androidstudioproject.AppDB;
 import com.example.androidstudioproject.daos.PostDao;
 import com.example.androidstudioproject.entities.Post;
+import com.example.androidstudioproject.entities.User;
+import com.example.androidstudioproject.repositories.user.UserModelFirebase;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,11 +34,6 @@ public class PostsRepository {
     public List<Post> getUserPosts(String userEmail){
         return dao.getByUser(userEmail);
     }
-
-    public void delete(Post post) { dao.delete(post); }
-
-    public void update(Post post) { dao.update(post); }
-
 
     public void cancellGetAllPosts() {
         PostModelFirebase.instance.cancellGetAllPosts();
@@ -103,6 +100,24 @@ public class PostsRepository {
             @Override
             public void run() {
                 PostModelFirebase.instance.addPost(post);
+            }
+        });
+    }
+
+    public void update (final Post post) {
+        new PostsAsyncTask().execute(new Runnable() {
+            @Override
+            public void run() {
+                PostModelFirebase.instance.updatePost(post);
+            }
+        });
+    }
+
+    public void delete (final Post post) {
+        new PostsAsyncTask().execute(new Runnable() {
+            @Override
+            public void run() {
+                PostModelFirebase.instance.deletePost(post);
             }
         });
     }

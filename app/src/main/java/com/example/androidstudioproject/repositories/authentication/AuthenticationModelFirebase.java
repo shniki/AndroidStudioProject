@@ -84,7 +84,7 @@ public class AuthenticationModelFirebase {
                     if (task.isSuccessful()) {
                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                         DatabaseReference ref = mDatabase.child("Users");
-                        ref.child(ref.push().getKey()).setValue(u).addOnCompleteListener(task1 -> {
+                        ref.child(String.valueOf(u.getEmail().hashCode())).setValue(u).addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         currUser = mAuth.getCurrentUser();
                                         ((LoginActivity)fragment.getActivity()).gotoMainActivity();
