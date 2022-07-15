@@ -165,7 +165,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
                 ((MainActivity)this.getActivity()).getStorageViewModel().addImageAndUpdateUser(this,image,loggedInUser);
             else{
                 usersViewModel.update(loggedInUser);
-                Snackbar.make(view, R.string.updated_successfuly, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, R.string.updated_successfully, Snackbar.LENGTH_LONG).show();
             }
         });
     }

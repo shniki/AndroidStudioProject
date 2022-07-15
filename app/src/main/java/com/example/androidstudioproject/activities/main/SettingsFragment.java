@@ -84,11 +84,13 @@ public class SettingsFragment extends Fragment {
         edtDarkMode.setOnCheckedChangeListener( (buttonView, isChecked) -> {
             if (isChecked) {
                 editor.putBoolean("isDarkMode", true);
+                editor.putBoolean("returnToSettings", true);
                 editor.commit();
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             }
             else {
                 editor.putBoolean("isDarkMode", false);
+                editor.putBoolean("returnToSettings", true);
                 editor.commit();
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             };

@@ -160,9 +160,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(getIntent());
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
-//        if(isNightModeOn())
-//            replaceFragments(SettingsFragment.class);
-
+        if(settings.getBoolean("returnToSettings", false)) {
+            settings.edit().putBoolean("returnToSettings", false).commit();
+            replaceFragments(SettingsFragment.class);
+        }
     }
 
     private Uri setImageUri() {

@@ -75,7 +75,7 @@ public class StorageModelFirebase {
                     else {
                         user.setProfilePicture(downloadUri.toString());
                         ((MainActivity)fragment.getActivity()).getUsersViewModel().update(user);
-                        Snackbar.make(fragment.getView(), R.string.updated_successfuly, Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(fragment.getView(), R.string.updated_successfully, Snackbar.LENGTH_LONG).show();
                     }
                 }
                 else{

@@ -112,25 +112,9 @@
     <string name="media_upload_failed">Media upload failed</string>
     <string name="empty_content">Cannot assign empty content for content-only post</string>
     <string name="failed_signup">Failed to sign up</string>
-
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="confirmChange">Confirm Change</string>
     <string name="empty_password">Enter password to update</string>
-    <string name="updated_successfuly">Updated user successfuly</string>
-    <string name="update_success">Updated user successfuly</string>
+    <string name="updated_successfully">Updated user successfully</string>
     <string name="maps_api_key">AIzaSyDr9boN1KwBHcaeXw9hlGtt_MSMp-d2yw4</string>
     <string name="no_users_found">No users found</string>
     <string name="send_msg">"You just sent a message to "</string>
