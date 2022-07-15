@@ -51,10 +51,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (postsList != null) {
-            Post post = postsList.get(position);User user=usersViewModel.getUserByEmail(post.getUserEmail());
+            Post post = postsList.get(position);
+            User user=usersViewModel.getUserByEmail(post.getUserEmail());
         String text = user.getFirstName() + context.getString(R.string.spaceChar) + user.getLastName();
         holder.userName.setText(text);
-        holder.userName.setText(user.getFirstName() + " " + user.getLastName());
+
         holder.date.setText(post.getPostDate());
         holder.description.setText(post.getContent());
         if(post.getDataType()==1)
@@ -71,16 +72,17 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             holder.video.setVideoURI(Uri.parse(post.getDataURL()));
             holder.video.setVisibility(View.VISIBLE);
         }
-        else
-            holder.video.setVisibility(View.GONE);
+        else {
+            //holder.video.setVisibility(View.GONE);
+        }
 
-        if(!user.getProfilePicture().equals(""));
+        if(!user.getProfilePicture().equals(""))
             Glide.with(context).load(user.getProfilePicture()).into(holder.userProfile);
+        else
+            holder.userProfile.setImageResource(R.drawable.ic_profile);
 
 
-        holder.userName.setText(text);
-        holder.date.setText(post.getPostDate()); // todo why twice?
-        holder.description.setText(post.getContent());
+        holder.location.setText(post.getLocation());
 
 
         //click to fragment
@@ -93,7 +95,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 //            });
 
         holder.description.setOnClickListener(v->{
-            gotoUserFragment(post.getUserEmail());
+            gotoPostFragment(post.getPostID());
         });
 
         holder.userProfile.setOnClickListener(v->{

@@ -168,7 +168,15 @@ public class CreatePostFragment extends Fragment {
             Post p = new Post(email, content, type, url, location);
 
             if(type==1)//image
-                ((MainActivity)getActivity()).getStorageViewModel().addImageAndUploadPost(this,image,p);
+            {
+                if(image!=null)
+                    ((MainActivity) getActivity()).getStorageViewModel().addImageAndUploadPost(this, image, p);
+                else
+                {
+                    Snackbar.make(getView(), R.string.media_upload_failed, Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+            }
             else if(type==2)
                 url = "";//TODO ADD VIDEO
 

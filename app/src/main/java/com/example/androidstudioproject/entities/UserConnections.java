@@ -2,6 +2,7 @@ package com.example.androidstudioproject.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 
 @Entity(primaryKeys = {"userEmail", "secondUserEmail"})
 public class UserConnections {
@@ -13,6 +14,12 @@ public class UserConnections {
     public UserConnections(@NonNull String userEmail, @NonNull String secondUserEmail) {
         this.userEmail = userEmail;
         this.secondUserEmail = secondUserEmail;
+    }
+
+    @Ignore
+    public UserConnections(){
+        this.userEmail = "";
+        this.secondUserEmail = "";
     }
 
     //getters

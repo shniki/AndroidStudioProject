@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -48,6 +49,18 @@ public class Post {
         this.postDate = dateParse();
         this.location=location;
     }
+
+    @Ignore
+    public Post() {
+        this.postID = 0;
+        this.userEmail = "";
+        this.content = "";
+        this.dataType = 0;
+        this.dataURL = "";
+        this.postDate = "";
+        this.location="";
+    }
+
 
     private String dateParse(){
         String[] fullDate= new Date().toString().split(" ");
@@ -102,11 +115,11 @@ public class Post {
     }
 
     public void setPostID(long postID) {
-        //this.postID = postID;
+        this.postID = postID;
     }
 
     public void setPostDate(@NonNull String postDate) {
-        //this.postDate = postDate;
+        this.postDate = postDate;
     }
 }
 

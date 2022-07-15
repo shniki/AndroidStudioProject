@@ -88,6 +88,7 @@ public class PostsRepository {
         public PostListData() {
             super();
             setValue(new LinkedList<Post>());
+            this.onActive();
         }
     }
 

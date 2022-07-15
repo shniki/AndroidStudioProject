@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +52,7 @@ public class PostFragment extends Fragment {
 
     //visible only when follows you
     EditText edtDescMsg;//textMoveEdit_post
-    Button btnSend;//sendMessage
+    ImageButton btnSend;//sendMessage
     //send btn fuctionality
 
     //visible only
@@ -98,7 +99,7 @@ public class PostFragment extends Fragment {
 
         User user = usersViewModel.getUserByEmail(post.getUserEmail());
 
-        //TODO imgProfile.setImageResource(user.getProfilePicture());
+        Glide.with(getContext()).load(user.getProfilePicture()).into(imgProfile);
         String text = user.getFirstName()+getString(R.string.spaceChar)+user.getLastName();
         txtUserName.setText(text);
 
@@ -120,28 +121,30 @@ public class PostFragment extends Fragment {
 
 
         imgProfile = view.findViewById(R.id.userProfilePost_post);//userProfilePost_post
-        if(!user.getProfilePicture().equals(""));
+        if(!user.getProfilePicture().equals(""))
             Glide.with(getContext()).load(user.getProfilePicture()).into(imgProfile);
+        else
+            imgProfile.setImageResource(R.drawable.ic_profile);
 
         txtUserName = view.findViewById(R.id.userName_post);//userName_post
         String text = user.getFirstName()+getString(R.string.spaceChar)+user.getLastName();
         txtUserName.setText(text);
 
         txtLocation = view.findViewById(R.id.location_post);//location_post
-        //TODO txtLocation.setText(post.getLocation());
+        txtLocation.setText(post.getLocation());
 
         image = view.findViewById(R.id.postImage_post);//postImage_post
         if (post.getDataType()==1)//picture
         {
             image.setVisibility(View.VISIBLE);
-            Glide.with(getContext()).load(user.getProfilePicture()).into(image);
+            Glide.with(getContext()).load(post.getDataURL()).into(image);
         }
         else
         {
             image.setVisibility(View.GONE);
         }
 
-        video = view.findViewById(R.id.postImage_post);//postImage_post
+        //video = view.findViewById(R.id.postImage_post);//postImage_post
         if (post.getDataType()==2)//picture
         {
             video.setVisibility(View.VISIBLE);
@@ -149,7 +152,7 @@ public class PostFragment extends Fragment {
         }
         else
         {
-            video.setVisibility(View.GONE);
+            //video.setVisibility(View.GONE);
         }
 
         txtDesc = view.findViewById(R.id.description_post);//description_post
@@ -184,6 +187,7 @@ public class PostFragment extends Fragment {
             //make textbox appear
             edtDesc.setVisibility(View.VISIBLE);
             edtDesc.setText(post.getContent());
+            txtDesc.setVisibility(View.GONE);
             btnDone.setVisibility(View.VISIBLE);
             btnCancel.setVisibility(View.VISIBLE);
             btnEdit.setVisibility(View.GONE);
@@ -206,6 +210,7 @@ public class PostFragment extends Fragment {
             postsViewModel.update(post);
 
             edtDesc.setVisibility(View.GONE);
+            txtDesc.setVisibility(View.VISIBLE);
             btnDone.setVisibility(View.GONE);
             btnCancel.setVisibility(View.GONE);
             btnEdit.setVisibility(View.VISIBLE);
@@ -214,6 +219,7 @@ public class PostFragment extends Fragment {
         btnCancel.setOnClickListener(v->{
             edtDesc.setVisibility(View.GONE);
             btnDone.setVisibility(View.GONE);
+            txtDesc.setVisibility(View.VISIBLE);
             btnCancel.setVisibility(View.GONE);
             btnEdit.setVisibility(View.VISIBLE);
             btnDelete.setVisibility(View.VISIBLE);
@@ -248,7 +254,19 @@ public class PostFragment extends Fragment {
         }
 
 
+        imgProfile.setOnClickListener(v->{
+            gotoUserFragment(post.getUserEmail());
+        });
+
+        txtUserName.setOnClickListener(v->{
+            gotoUserFragment(post.getUserEmail());
+        });
     }
+
+    private void gotoUserFragment(String email){
+        ((MainActivity)getActivity()).gotoUserFragment(email);
+    }
+
     public void sendSms(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(getActivity(),Manifest.permission.SEND_SMS) == PermissionChecker.PERMISSION_GRANTED) {

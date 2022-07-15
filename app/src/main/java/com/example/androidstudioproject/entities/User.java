@@ -48,7 +48,17 @@ public class User {
 
     @Ignore
     public User(){
+        this.firstName = "";
+        this.lastName = "";
+        this.email = "";
+        this.phoneNumber = "";
+//        this.password = password;
+        this.bio = "";
+        this.age = 18;
+        this.gender = 0;
         this.hasLoggedIn = false;
+        this.sexualPreferences = 2;
+        this.profilePicture = "";
     }
 
     //getters

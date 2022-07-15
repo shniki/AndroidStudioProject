@@ -76,6 +76,8 @@ public class FeedFragment extends Fragment {
             @Override
             public void onRefresh() {
                 adapter.setPostsList(postsViewModel.getAllPosts().getValue());
+
+                swipeToRefresh.setRefreshing(false);
             }
         }
   );

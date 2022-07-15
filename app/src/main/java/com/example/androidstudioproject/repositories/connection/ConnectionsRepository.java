@@ -80,6 +80,7 @@ public class ConnectionsRepository {
         public ConnectionListData() {
             super();
             setValue(new LinkedList<UserConnections>());
+            this.onActive();
         }
     }
 

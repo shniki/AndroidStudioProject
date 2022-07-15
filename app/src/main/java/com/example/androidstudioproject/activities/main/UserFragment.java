@@ -65,7 +65,11 @@ public class UserFragment extends Fragment {
         //profilePic.setImageURI(Uri.parse(user.getProfilePicture()));
 //        ((MainActivity)getActivity()).getStorageViewModel().
 //                getImageAndSetInView(user.getProfilePicture(),profilePic);
-        Glide.with(getContext()).load(user.getProfilePicture()).into(profilePic);
+        if(!user.getProfilePicture().equals(""))
+            Glide.with(getContext()).load(user.getProfilePicture()).into(profilePic);
+        else
+            profilePic.setImageResource(R.drawable.ic_profile);
+
 
         String text = user.getFirstName() + getString(R.string.spaceChar) + user.getLastName();
         username.setText(text);
