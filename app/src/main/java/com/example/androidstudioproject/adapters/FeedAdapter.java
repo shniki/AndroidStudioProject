@@ -123,9 +123,48 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         return 0;
     }
 
+
+    public Integer convertMonthToInt(String month){
+        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        int index = 1;
+        for(String m: months){
+            if(m.equals(month))
+                return index;
+            index++;
+        }
+        return null;
+    }
+
+    public Boolean isLater(Post p1, Post p2){
+        try {
+            String[] splittedOne = p1.getPostDate().split(" ");
+            String[] splittedTwo = p2.getPostDate().split(" ");
+            Integer yearOne = Integer.parseInt(splittedOne[2]), monthOne = convertMonthToInt(splittedOne[1]), dayOne = Integer.parseInt(splittedOne[0]);
+            Integer yearTwo = Integer.parseInt(splittedOne[2]), monthTwo = convertMonthToInt(splittedOne[1]), dayTwo = Integer.parseInt(splittedOne[0]);
+            if (monthOne == null || monthTwo == null)
+                return false;
+
+            if (yearOne > yearTwo)
+                return true;
+            else if (yearOne.equals(yearTwo) && monthOne > monthTwo)
+                return true;
+            else if (yearOne.equals(yearTwo) && monthOne.equals(monthTwo) && dayOne > dayTwo)
+                return true;
+            return false;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    public List<Post> sortPostListDataByDate(List<Post> posts) {
+        posts.sort((p1, p2) -> isLater(p1, p2) ? -1 : 1);
+        return posts;
+    }
+
     public void setPostsList(List<Post> postsList) {
         this.postsList = postsList;
-        Collections.reverse(this.postsList);
+        this.postsList = sortPostListDataByDate(this.postsList);
         notifyDataSetChanged();
     }
 

@@ -60,7 +60,6 @@ public class SettingsFragment extends Fragment {
 
     public void changeLanguageInFragment(){
         edtDarkMode.setText(R.string.change_theme_title);
-        edtChangePassword.setText(R.string.password_change_title);
         edtChangeLanguage.setText(R.string.language_change_title);
         btnSignOut.setText(R.string.signOut);
         btnChangeDetails.setText(R.string.changeUserDetails);

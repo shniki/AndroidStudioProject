@@ -130,6 +130,7 @@
     <string name="confirmChange">Confirm Change</string>
     <string name="empty_password">Enter password to update</string>
     <string name="updated_successfuly">Updated user successfuly</string>
+    <string name="update_success">Updated user successfuly</string>
 
 
 </resources>

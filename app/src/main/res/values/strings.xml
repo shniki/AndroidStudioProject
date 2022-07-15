@@ -130,6 +130,8 @@
     <string name="confirmChange">Confirm Change</string>
     <string name="empty_password">Enter password to update</string>
     <string name="updated_successfuly">Updated user successfuly</string>
+    <string name="update_success">Updated user successfuly</string>
+    <string name="maps_api_key">AIzaSyDr9boN1KwBHcaeXw9hlGtt_MSMp-d2yw4</string>
 
 
 </resources>
