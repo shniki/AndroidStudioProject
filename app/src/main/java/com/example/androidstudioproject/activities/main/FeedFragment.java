@@ -72,12 +72,11 @@ public class FeedFragment extends Fragment {
         //choose type of layout: linear, horological or staggered
         rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
         SwipeRefreshLayout swipeToRefresh=view.findViewById(R.id.swipeToRefresh);
+        refreshFeed(swipeToRefresh);
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                adapter.setPostsList(postsViewModel.getAllPosts().getValue());
-
-                swipeToRefresh.setRefreshing(false);
+                refreshFeed(swipeToRefresh);
             }
         }
   );
@@ -89,6 +88,11 @@ public class FeedFragment extends Fragment {
 //                adapter.setPostsList(posts);
 //            }
 //        });
+    }
+
+    public void refreshFeed(SwipeRefreshLayout component){
+        adapter.setPostsList(postsViewModel.getAllPosts().getValue());
+        component.setRefreshing(false);
     }
 
 

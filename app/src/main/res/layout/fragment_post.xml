@@ -88,6 +88,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/postImage_post" />
 
+        <EditText
+            android:id="@+id/textDescriptionEdit_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/inputDescription"
+            app:layout_constraintBottom_toBottomOf="@+id/textMoveEdit_post"
+            app:layout_constraintTop_toBottomOf="@+id/postImage_post"
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="12dp" />
+
         <TextView
             android:id="@+id/date_post"
             android:layout_width="match_parent"
@@ -180,17 +191,6 @@
 
             android:visibility="gone" />
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/textDescriptionEdit_post"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/inputDescription"
-        app:layout_constraintBottom_toBottomOf="@+id/textMoveEdit_post"
-        app:layout_constraintTop_toBottomOf="@+id/postImage_post"
-        android:visibility="gone"
-        tools:layout_editor_absoluteX="12dp" />
 
     </LinearLayout>
     </ScrollView>
