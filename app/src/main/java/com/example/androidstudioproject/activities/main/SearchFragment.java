@@ -22,6 +22,8 @@ import com.example.androidstudioproject.SelectListener;
 import com.example.androidstudioproject.adapters.UserAdapter;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -116,8 +118,7 @@ public class SearchFragment extends Fragment implements SelectListener {
             }
         }
         if(usersFilteredList.isEmpty())
-            Toast.makeText(this.getActivity(),"NO USERS FOUND",Toast.LENGTH_SHORT).show();
-
+            Snackbar.make(getView(), R.string.no_users_found, Snackbar.LENGTH_LONG).show();
             adapter.setUsersList(usersFilteredList);
     }
 

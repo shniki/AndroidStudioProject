@@ -121,7 +121,7 @@ public class SettingsFragment extends Fragment {
                 Snackbar.make(view, R.string.short_password, Snackbar.LENGTH_LONG).show();
                 return;
             }
-            mAuth.changePassword(text);
+            mAuth.changePassword(this, text);
         });
 
         btnSignOut.setOnClickListener(v -> {

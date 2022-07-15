@@ -42,6 +42,7 @@ public class PostFragment extends Fragment {
     ConnectionsViewModel connectionsViewModel;
     long postID;
     String curremail;
+    String posteremail;
     ImageView imgProfile;//userProfilePost_post
     TextView txtUserName;//userName_post
     TextView txtLocation;//location_post
@@ -117,6 +118,7 @@ public class PostFragment extends Fragment {
         //get post + user
         Post post = postsViewModel.getPostById(postID);
         User user = usersViewModel.getUserByEmail(post.getUserEmail());
+        posteremail = post.getUserEmail();
          curremail = ((MainActivity)getActivity()).getCurrEmail();
 
 
@@ -209,6 +211,8 @@ public class PostFragment extends Fragment {
             post.setContent(strNewDesc);
             postsViewModel.update(post);
 
+            txtDesc.setText(strNewDesc);
+
             edtDesc.setVisibility(View.GONE);
             txtDesc.setVisibility(View.VISIBLE);
             btnDone.setVisibility(View.GONE);
@@ -293,6 +297,14 @@ public class PostFragment extends Fragment {
     public void sendSMS() {
         SmsManager smsManager = SmsManager.getDefault();
 
-        smsManager.sendTextMessage(usersViewModel.getUserByEmail(curremail).getPhoneNumber(), null,edtDescMsg.getText().toString() , null, null);// pendingIntent, pendingIntent2);
+        smsManager.sendTextMessage(usersViewModel.getUserByEmail(posteremail).getPhoneNumber(), null,edtDescMsg.getText().toString() , null, null);// pendingIntent, pendingIntent2);
+
+        String pop_up =
+                getString(R.string.send_msg)
+                        +
+                usersViewModel.getUserByEmail(posteremail).getFirstName();
+
+        Snackbar.make(getView(), pop_up, Snackbar.LENGTH_LONG).show();
+
     }
 }

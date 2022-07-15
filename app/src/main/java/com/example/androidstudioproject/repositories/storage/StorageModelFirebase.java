@@ -50,7 +50,8 @@ public class StorageModelFirebase {
                     else {
                         p.setDataURL(downloadUri.toString());
                         ((MainActivity)fragment.getActivity()).getPostViewModel().add(p);
-                        ((MainActivity)fragment.getActivity()).onBackPressed();
+                        Snackbar.make(fragment.getView(), R.string.post_finish_upload, Snackbar.LENGTH_LONG).show();
+                        return;
                     }
                 }
                 else{

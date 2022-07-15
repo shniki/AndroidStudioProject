@@ -127,13 +127,14 @@ public class AuthenticationModelFirebase {
         mAuth.signOut();
     }
 
-    public void changePassword(String password) {
+    public void changePassword(Fragment fragment, String password) {
         getCurrentUser().updatePassword(password)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            //successfully
+                            Snackbar.make(fragment.getView(), R.string.changed_password, Snackbar.LENGTH_LONG).show();
+                            return;
                         }
                     }
                 });

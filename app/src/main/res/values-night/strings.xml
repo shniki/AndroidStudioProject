@@ -131,6 +131,10 @@
     <string name="empty_password">Enter password to update</string>
     <string name="updated_successfuly">Updated user successfuly</string>
     <string name="update_success">Updated user successfuly</string>
+    <string name="no_users_found">No users found</string>
+    <string name="send_msg">"You just sent a message to "</string>
+    <string name="post_finish_upload">Posted!</string>
+    <string name="changed_password">Password changed</string>
 
 
 </resources>

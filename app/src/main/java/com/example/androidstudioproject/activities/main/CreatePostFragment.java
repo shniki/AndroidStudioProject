@@ -169,6 +169,7 @@ public class CreatePostFragment extends Fragment {
 
             if(type==1)//image
             {
+
                 if(image!=null)
                     ((MainActivity) getActivity()).getStorageViewModel().addImageAndUploadPost(this, image, p);
                 else
@@ -184,7 +185,7 @@ public class CreatePostFragment extends Fragment {
            // postsViewModel.add(p);
             if(type==0) {
                 postsViewModel.add(p);
-                ((MainActivity)getActivity()).onBackPressed();
+                Snackbar.make(getView(), R.string.post_finish_upload, Snackbar.LENGTH_LONG).show();
             }
 
             //((MainActivity)getActivity()).onBackPressed();

@@ -62,7 +62,7 @@ public class AuthenticationViewModel extends AndroidViewModel {
         mRepository.signOut();
     }
 
-    public void changePassword(String password){
-        mRepository.changePassword(password);
+    public void changePassword(Fragment fragment, String password){
+        mRepository.changePassword(fragment, password);
     }
 }
