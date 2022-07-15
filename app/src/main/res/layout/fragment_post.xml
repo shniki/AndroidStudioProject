@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/moveText_post"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/fui_heading_padding_bottom">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
@@ -30,7 +44,7 @@
 
             <TextView
                 android:id="@+id/userName_post"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/username"
@@ -40,12 +54,9 @@
 
         </LinearLayout>
 
-
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/postImage_post"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="224dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_profile"
@@ -56,7 +67,7 @@
 
     <TextView
         android:id="@+id/location_post"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/location"
@@ -64,64 +75,75 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <TextView
-        android:id="@+id/description_post"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/description"
-        android:textColor="#0C0909"
-        app:layout_constraintBottom_toTopOf="@+id/sendMessage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.296"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postImage_post" />
+        <TextView
+            android:id="@+id/description_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/description"
+            android:textColor="#0C0909"
+            app:layout_constraintBottom_toTopOf="@+id/sendMessage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.296"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postImage_post" />
 
-    <ImageButton
-        android:id="@+id/sendMessage"
-        android:layout_width="57dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#FFFFFF"
-        android:contentDescription="@string/send_message_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.005"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postImage_post"
-        app:srcCompat="@drawable/ic_send_message" />
+        <TextView
+            android:id="@+id/date_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/now"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.921"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/date_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/now"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/textMoveEdit_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/move_hint_text"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/sendMessage"
-        app:layout_constraintTop_toBottomOf="@+id/postImage_post"
-        app:layout_constraintVertical_bias="0.976" />
+
+            <ImageButton
+                android:id="@+id/sendMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#FFFFFF"
+                android:contentDescription="@string/send_message_icon"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.005"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description_post"
+                app:srcCompat="@drawable/ic_send_message" />
+
+        <EditText
+            android:id="@+id/textMoveEdit_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:hint="@string/move_hint_text"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/sendMessage"
+            app:layout_constraintTop_toBottomOf="@+id/description_post" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/sendMessage"
         tools:layout_editor_absoluteX="1dp">
@@ -145,18 +167,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
+            android:text="@string/cancel"
 
-            android:text="@string/cancel" />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/buttonDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
+            android:text="@string/done"
 
-            android:text="@string/done" />
+            android:visibility="gone" />
     </LinearLayout>
 
     <EditText
@@ -170,7 +192,6 @@
         android:visibility="gone"
         tools:layout_editor_absoluteX="12dp" />
 
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>
