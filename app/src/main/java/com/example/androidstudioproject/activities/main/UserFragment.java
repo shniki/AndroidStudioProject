@@ -1,5 +1,7 @@
 package com.example.androidstudioproject.activities.main;
 
+import static java.lang.Thread.sleep;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,9 +44,6 @@ public class UserFragment extends Fragment {
     TextView username;
     TextView moreInfo;
     TextView bio;
-
-    private String textAfterClick;
-
 
 
     public UserFragment() {
@@ -133,8 +132,9 @@ public class UserFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final List<UserConnections> connections) {
                 // Update the cached copy of the words in the adapter.
-                if(!loggedInUser.equals(userEmail))
+                if(!loggedInUser.equals(userEmail)) {
                     setButton();
+                }
             }
         });
     }
@@ -147,7 +147,7 @@ public class UserFragment extends Fragment {
             });
         }
         else {
-            setButton();
+            //setButton();
 
             followBtn.setOnClickListener(v -> {
                 UserConnections isFollowing = connectionsViewModel.getConnectionIfExists(loggedInUser, userEmail);
@@ -156,8 +156,6 @@ public class UserFragment extends Fragment {
                     connectionsViewModel.add(new UserConnections(loggedInUser, userEmail));
                 else //!=null
                     connectionsViewModel.delete(new UserConnections(loggedInUser, userEmail));
-
-                followBtn.setText(textAfterClick);
 
             });
 
@@ -186,19 +184,15 @@ public class UserFragment extends Fragment {
         if (isFollowing != null) {
             if (isFollowed != null) {
                 followBtn.setText(R.string.match);
-                textAfterClick = getString(R.string.follow_back);
             } else {
                 followBtn.setText(R.string.following);
-                textAfterClick = getString(R.string.follow_txt);
             }
         }
         else {
             if (isFollowed != null) {
                 followBtn.setText(R.string.follow_back);
-                textAfterClick = getString(R.string.match);
             } else {
                 followBtn.setText(R.string.follow_txt);
-                textAfterClick = getString(R.string.following);
             }
 
 
