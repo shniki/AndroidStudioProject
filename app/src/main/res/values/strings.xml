@@ -136,6 +136,7 @@
     <string name="send_msg">"You just sent a message to "</string>
     <string name="post_finish_upload">Posted!</string>
     <string name="changed_password">Password changed</string>
+    <string name="post_deleted">Post deleted successfuly</string>
 
 
 </resources>

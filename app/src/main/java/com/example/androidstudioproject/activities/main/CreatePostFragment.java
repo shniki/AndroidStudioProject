@@ -139,8 +139,11 @@ public class CreatePostFragment extends Fragment {
         });
         btnUpload =view.findViewById(R.id.fragEditAccount_save_btn);
         btnUpload.setOnClickListener(v->{
+            setNonAble();
+
             if(edtContent== null) //validate input
             {
+                setAble();
                 Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
                 return;
             }
@@ -148,12 +151,14 @@ public class CreatePostFragment extends Fragment {
 
             if(TextUtils.isEmpty(content)&&type==0)
             {
+                setAble();
                 Snackbar.make(view, R.string.error_no_data, Snackbar.LENGTH_LONG).show();
                 return;
             }
 
             int len = content.length();
             if(len > 140){
+                setAble();
                 Snackbar.make(view, R.string.content_too_long, Snackbar.LENGTH_LONG).show();
                 return;
             }
@@ -167,6 +172,7 @@ public class CreatePostFragment extends Fragment {
             url = "";
             Post p = new Post(email, content, type, url, location);
 
+
             if(type==1)//image
             {
 
@@ -174,6 +180,7 @@ public class CreatePostFragment extends Fragment {
                     ((MainActivity) getActivity()).getStorageViewModel().addImageAndUploadPost(this, image, p);
                 else
                 {
+                    setAble();
                     Snackbar.make(getView(), R.string.media_upload_failed, Snackbar.LENGTH_LONG).show();
                     return;
                 }
@@ -192,4 +199,23 @@ public class CreatePostFragment extends Fragment {
         });
     }
 
+
+    private void setNonAble(){
+        btnUpload.setClickable(false);
+        btnGallery.setClickable(false);
+        btnCamera.setClickable(false);
+        btnLocation.setClickable(false);
+        edtContent.setEnabled(false);
+        visableImg.setClickable(false);
+    }
+
+    private void setAble(){
+        btnUpload.setClickable(true);
+        btnGallery.setClickable(true);
+        btnCamera.setClickable(true);
+        btnLocation.setClickable(true);
+        edtContent.setEnabled(true);
+        visableImg.setClickable(true);
+
+    }
 }

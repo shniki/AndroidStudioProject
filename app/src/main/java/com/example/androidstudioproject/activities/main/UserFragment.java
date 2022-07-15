@@ -1,12 +1,6 @@
 package com.example.androidstudioproject.activities.main;
 
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +8,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.androidstudioproject.R;
-import com.example.androidstudioproject.activities.login.LoginActivity;
-import com.example.androidstudioproject.activities.login.SignUpFragment;
 import com.example.androidstudioproject.adapters.FeedAdapter;
+import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.entities.UserConnections;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
+import com.google.firebase.database.annotations.Nullable;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -33,6 +34,7 @@ public class UserFragment extends Fragment {
     UsersViewModel usersViewModel;
     ConnectionsViewModel connectionsViewModel;
     String userEmail;
+    String loggedInUser;
     FeedAdapter adapter;
 
     ImageView profilePic;
@@ -40,6 +42,8 @@ public class UserFragment extends Fragment {
     TextView username;
     TextView moreInfo;
     TextView bio;
+
+    private String textAfterClick;
 
 
 
@@ -92,6 +96,9 @@ public class UserFragment extends Fragment {
         connectionsViewModel = ((MainActivity)getActivity()).getConnectionsViewModel();
 
         adapter = new FeedAdapter((MainActivity) this.getActivity()); //create adapter
+
+        loggedInUser = ((MainActivity)this.getActivity()).currEmail;
+
     }
 
     @Override
@@ -119,10 +126,20 @@ public class UserFragment extends Fragment {
         rvFeed.setAdapter(adapter); //set adapter
         //choose type of layout: linear, horological or staggered
         rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+
+        connectionsViewModel.getAllConnections().observe(this.getActivity(), new Observer<List<UserConnections>>() {
+            @Override
+            public void onChanged(@Nullable final List<UserConnections> connections) {
+                // Update the cached copy of the words in the adapter.
+                if(!loggedInUser.equals(userEmail))
+                    setButton();
+            }
+        });
     }
 
     private void setFollowBtn(){
-        String loggedInUser = ((MainActivity)this.getActivity()).currEmail;
         if(userEmail.equals(loggedInUser)){
             followBtn.setText(R.string.edit_profile);
             followBtn.setOnClickListener(v -> {
@@ -130,29 +147,20 @@ public class UserFragment extends Fragment {
             });
         }
         else {
-            UserConnections isFollowing = connectionsViewModel.getConnectionIfExists(loggedInUser, userEmail);
-            UserConnections isFollowed = connectionsViewModel.getConnectionIfExists(userEmail, loggedInUser);
-            if (isFollowing != null) {
-                if (isFollowed != null) {
-                    followBtn.setText(R.string.match);
-                } else {
-                    followBtn.setText(R.string.following);
-                }
-            } else {
-                String textAfterClick;
-                if (isFollowed != null) {
-                    followBtn.setText(R.string.follow_back);
-                    textAfterClick = getString(R.string.match);
-                } else {
-                    followBtn.setText(R.string.follow_txt);
-                    textAfterClick = getString(R.string.following);
-                }
+            setButton();
 
-                followBtn.setOnClickListener(v -> {
+            followBtn.setOnClickListener(v -> {
+                UserConnections isFollowing = connectionsViewModel.getConnectionIfExists(loggedInUser, userEmail);
+
+                if(isFollowing == null)
                     connectionsViewModel.add(new UserConnections(loggedInUser, userEmail));
-                });
+                else //!=null
+                    connectionsViewModel.delete(new UserConnections(loggedInUser, userEmail));
+
                 followBtn.setText(textAfterClick);
-            }
+
+            });
+
         }
     }
 
@@ -168,5 +176,32 @@ public class UserFragment extends Fragment {
         else preference = getString(R.string.bothPreference);
         String info = user.getAge() + getString(R.string.separator) + gender + getString(R.string.separator) + preference;
         moreInfo.setText(info);
+    }
+
+    private void setButton(){
+
+        UserConnections isFollowing = connectionsViewModel.getConnectionIfExists(loggedInUser, userEmail);
+        UserConnections isFollowed = connectionsViewModel.getConnectionIfExists(userEmail, loggedInUser);
+
+        if (isFollowing != null) {
+            if (isFollowed != null) {
+                followBtn.setText(R.string.match);
+                textAfterClick = getString(R.string.follow_back);
+            } else {
+                followBtn.setText(R.string.following);
+                textAfterClick = getString(R.string.follow_txt);
+            }
+        }
+        else {
+            if (isFollowed != null) {
+                followBtn.setText(R.string.follow_back);
+                textAfterClick = getString(R.string.match);
+            } else {
+                followBtn.setText(R.string.follow_txt);
+                textAfterClick = getString(R.string.following);
+            }
+
+
+        }
     }
 }

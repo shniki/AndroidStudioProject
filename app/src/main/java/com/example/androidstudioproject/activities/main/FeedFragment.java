@@ -51,10 +51,10 @@ public class FeedFragment extends Fragment {
         super.onResume();
         ((MainActivity)this.getActivity()).currentFragment = this;
 
-        //update info
-
-        User currUser = usersViewModel.getUserByEmail(((MainActivity)this.getActivity()).currEmail);
-        adapter.setPostsList(((MainActivity)this.getActivity()).getAllRelevantPosts(currUser.getSexualPreferences()));
+        //todo update info
+        adapter.setPostsList(postsViewModel.getAllPosts().getValue());
+        //User currUser = usersViewModel.getUserByEmail(((MainActivity)this.getActivity()).currEmail);
+        //adapter.setPostsList(((MainActivity)this.getActivity()).getAllRelevantPosts(currUser.getSexualPreferences()));
     }
 
     @Override
@@ -81,7 +81,7 @@ public class FeedFragment extends Fragment {
             }
         }
   );
-        //TODO ON REFRESH
+        // ON REFRESH
 //        postsViewModel.getAllPosts().observe(this.getActivity(), new Observer<List<Post>>() {
 //            @Override
 //            public void onChanged(@Nullable final List<Post> posts) {

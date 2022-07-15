@@ -2,6 +2,8 @@ package com.example.androidstudioproject.activities.main;
 
 import static androidx.core.content.PermissionChecker.checkSelfPermission;
 
+import static java.lang.Thread.sleep;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import android.telephony.SmsManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -230,6 +233,9 @@ public class PostFragment extends Fragment {
         });
         btnDelete.setOnClickListener(v->{
             postsViewModel.delete(post);
+            //todo FIX DELETE
+            Snackbar.make(getView(), R.string.post_deleted, Snackbar.LENGTH_LONG).show();
+            Log.d("delete", "from main");
             ((MainActivity)this.getActivity()).onBackPressed();
         });
 
@@ -246,7 +252,9 @@ public class PostFragment extends Fragment {
             btnDelete.setVisibility(View.GONE);
         }
 
-        if(connectionsViewModel.getConnectionIfExists(post.getUserEmail(), curremail) != null){
+        if(connectionsViewModel.getConnectionIfExists(curremail, post.getUserEmail()) != null
+            &&
+                connectionsViewModel.getConnectionIfExists(post.getUserEmail(), curremail) != null){
             //make send message visible
             edtDescMsg.setVisibility(View.VISIBLE);
             btnSend.setVisibility(View.VISIBLE);
