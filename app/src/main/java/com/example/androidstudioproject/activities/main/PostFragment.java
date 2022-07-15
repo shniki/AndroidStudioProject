@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
@@ -119,7 +120,8 @@ public class PostFragment extends Fragment {
 
 
         imgProfile = view.findViewById(R.id.userProfilePost_post);//userProfilePost_post
-        imgProfile.setImageURI(Uri.parse(user.getProfilePicture()));
+        if(!user.getProfilePicture().equals(""));
+            Glide.with(getContext()).load(user.getProfilePicture()).into(imgProfile);
 
         txtUserName = view.findViewById(R.id.userName_post);//userName_post
         String text = user.getFirstName()+getString(R.string.spaceChar)+user.getLastName();
@@ -132,7 +134,7 @@ public class PostFragment extends Fragment {
         if (post.getDataType()==1)//picture
         {
             image.setVisibility(View.VISIBLE);
-            image.setImageURI(Uri.parse(post.getDataURL()));
+            Glide.with(getContext()).load(user.getProfilePicture()).into(image);
         }
         else
         {
@@ -260,7 +262,6 @@ public class PostFragment extends Fragment {
 
     }
 
-    /**בקשת רשות לשליחת הודעות תוך התחשבות בסוג הגרסא*/
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == SMS_REQUEST_ID) {
@@ -271,7 +272,6 @@ public class PostFragment extends Fragment {
             }
         }
     }
-    /**שליחת sms לבעל העסק*/
     public void sendSMS() {
         SmsManager smsManager = SmsManager.getDefault();
 

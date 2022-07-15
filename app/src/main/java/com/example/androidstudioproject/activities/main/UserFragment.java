@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.login.LoginActivity;
 import com.example.androidstudioproject.activities.login.SignUpFragment;
@@ -33,7 +35,7 @@ public class UserFragment extends Fragment {
     String userEmail;
     FeedAdapter adapter;
 
-    CircleImageView profilePic;
+    ImageView profilePic;
     Button followBtn;
     TextView username;
     TextView moreInfo;
@@ -60,7 +62,10 @@ public class UserFragment extends Fragment {
         //reset info
         User user = usersViewModel.getUserByEmail(userEmail);
 
-        profilePic.setImageURI(Uri.parse(user.getProfilePicture()));
+        //profilePic.setImageURI(Uri.parse(user.getProfilePicture()));
+//        ((MainActivity)getActivity()).getStorageViewModel().
+//                getImageAndSetInView(user.getProfilePicture(),profilePic);
+        Glide.with(getContext()).load(user.getProfilePicture()).into(profilePic);
 
         String text = user.getFirstName() + getString(R.string.spaceChar) + user.getLastName();
         username.setText(text);

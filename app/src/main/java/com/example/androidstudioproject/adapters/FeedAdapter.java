@@ -12,6 +12,7 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.main.FeedFragment;
 import com.example.androidstudioproject.activities.main.MainActivity;
@@ -58,7 +59,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         holder.description.setText(post.getContent());
         if(post.getDataType()==1)
         {
-            holder.image.setImageURI(Uri.parse(post.getDataURL()));
+            Glide.with(context).load(post.getDataURL()).into(holder.image);
 
             holder.image.setVisibility(View.VISIBLE);
         }
@@ -73,7 +74,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         else
             holder.video.setVisibility(View.GONE);
 
-            holder.userProfile.setImageURI(Uri.parse(user.getProfilePicture()));
+        if(!user.getProfilePicture().equals(""));
+            Glide.with(context).load(user.getProfilePicture()).into(holder.userProfile);
+
 
         holder.userName.setText(text);
         holder.date.setText(post.getPostDate()); // todo why twice?

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.SelectListener;
 import com.example.androidstudioproject.activities.main.MainActivity;
@@ -52,7 +53,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final User user=usersList.get(position);
         holder.userName.setText(user.getFirstName()+" "+user.getLastName());
-        holder.userProfile.setImageURI(Uri.parse(user.getProfilePicture()));
+
+        if(!user.getProfilePicture().equals(""));
+            Glide.with(context).load(user.getProfilePicture()).into(holder.userProfile);
+
+
         String text = user.getFirstName()+context.getString(R.string.spaceChar)+user.getLastName();
         holder.userName.setText(text);
         //holder.userProfile.setImageBitmap(user.getProfilePicture());
