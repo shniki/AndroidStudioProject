@@ -53,13 +53,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final User user=usersList.get(position);
         holder.userName.setText(user.getFirstName()+" "+user.getLastName());
-
-        if(!user.getProfilePicture().equals(""));
-            Glide.with(context).load(user.getProfilePicture()).into(holder.userProfile);
-
-
+        //holder.userProfile.setImageURI(Uri.parse(user.getProfilePicture()));
         String text = user.getFirstName()+context.getString(R.string.spaceChar)+user.getLastName();
         holder.userName.setText(text);
+        if(!user.getProfilePicture().equals(""))
+            Glide.with(context).load(user.getProfilePicture()).into(holder.userProfile);
+        else
+            holder.userProfile.setImageResource(R.drawable.ic_profile);
+
         //holder.userProfile.setImageBitmap(user.getProfilePicture());
        // Glide.with()- image profile
         holder.cardView.setOnClickListener(new View.OnClickListener() {

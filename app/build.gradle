@@ -42,6 +42,12 @@ dependencies {
     // Declare the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     // Also declare the dependency for the Google Play services library and specify its version
+   // implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    //implementation 'com.google.android.gms:play-services-ads:21.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
+    implementation 'com.google.android.gms:play-services-vision:17.0.2'
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
     implementation 'com.firebaseui:firebase-ui-database:7.2.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
