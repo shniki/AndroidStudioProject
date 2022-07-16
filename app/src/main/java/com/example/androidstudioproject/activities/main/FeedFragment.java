@@ -89,10 +89,11 @@ public class FeedFragment extends Fragment {
             public void onChanged(@Nullable final List<Post> posts) {
                 if (!loaded){
                     setPosts();
-                    loaded=true;
                 }
             }
         });
+
+        //setPosts();
     }
 
     public void refreshFeed(SwipeRefreshLayout component){
@@ -106,6 +107,7 @@ public class FeedFragment extends Fragment {
         adapter.setPostsList(((MainActivity)this.getActivity()).getAllRelevantPosts(currUser.getSexualPreferences(),currUser.getGender()));
         if(adapter.getItemCount()==0)
             loaded=false;
+        else loaded=true;
         //adapter.setPostsList(postsViewModel.getAllPosts().getValue());
 
     }
