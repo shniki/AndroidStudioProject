@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,12 +61,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
             holder.image.setVisibility(View.VISIBLE);
         }
-        else
-            holder.image.setVisibility(View.GONE);
-        holder.location.setText(post.getLocation());
-        if(post.getDataType()==2)
+        else if(post.getDataType()==2)
         {
-            holder.video.setVisibility(View.GONE);
+            //holder.video.setVisibility(View.GONE);
 
             holder.image.setVisibility(View.VISIBLE);
             RequestOptions requestOptions = new RequestOptions();
@@ -81,9 +77,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 //            holder.video.setMediaController(mediaController);
 //            holder.video.start();
         }
-        else {
-            holder.video.setVisibility(View.GONE);
-        }
+        else
+            holder.image.setVisibility(View.GONE);
+
+        holder.location.setText(post.getLocation());
 
         if(!user.getProfilePicture().equals(""))
             Glide.with(context).load(user.getProfilePicture()).into(holder.userProfile);
@@ -97,7 +94,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         //click to fragment
         holder.image.setOnClickListener(v-> gotoPostFragment(post.getPostID()));
 
-        holder.video.setOnClickListener(v-> gotoPostFragment(post.getPostID()));
+        //holder.video.setOnClickListener(v-> gotoPostFragment(post.getPostID()));
 
         holder.description.setOnClickListener(v-> gotoPostFragment(post.getPostID()));
 
@@ -174,7 +171,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         TextView date;
         ImageView userProfile;
         ImageView image;
-        VideoView video;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -185,7 +181,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             userProfile=itemView.findViewById((R.id.userProfilePost));
             image=itemView.findViewById((R.id.postImage));
 
-            video=itemView.findViewById((R.id.videoView));
 
         }
     }
