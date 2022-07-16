@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:textColor = "?android:textColorPrimary"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
@@ -33,7 +34,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/username"
-                android:textColor="#090808"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -75,7 +75,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/description"
-        android:textColor="#0C0909"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.296"
         app:layout_constraintStart_toStartOf="parent"
