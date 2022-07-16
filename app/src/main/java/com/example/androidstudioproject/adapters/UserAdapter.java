@@ -1,7 +1,6 @@
 package com.example.androidstudioproject.adapters;
 
 import android.annotation.SuppressLint;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,9 @@ import com.bumptech.glide.Glide;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.SelectListener;
 import com.example.androidstudioproject.activities.main.MainActivity;
-import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

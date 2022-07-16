@@ -120,6 +120,7 @@
     <string name="post_finish_upload">Posted!</string>
     <string name="changed_password">Password changed</string>
     <string name="post_deleted">Post deleted successfuly</string>
+    <string name="location_added">Remove location</string>
 
 
 </resources>

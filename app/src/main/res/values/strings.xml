@@ -121,6 +121,9 @@
     <string name="post_finish_upload">Posted!</string>
     <string name="changed_password">Password changed</string>
     <string name="post_deleted">Post deleted successfully</string>
+    <string name="no_premissions">Permission denied</string>
+    <string name="location_added">Remove location</string>
+    <string name="show_location">Show location</string>
 
 
 </resources>

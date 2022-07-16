@@ -1,19 +1,11 @@
 package com.example.androidstudioproject.activities.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.ThumbnailUtils;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,16 +15,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.androidstudioproject.GPShelper;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.snackbar.Snackbar;
 
 public class CreatePostFragment extends Fragment {
@@ -44,8 +36,6 @@ public class CreatePostFragment extends Fragment {
     String url;
     int type;
 
-    int PLACE_PICKER_REQUEST=1;
-
     Button btnUpload; //fragEditAccount_save_btn
     Button btnLocation;//addLocation;
     EditText edtContent;//fragNew_userName_et3
@@ -53,6 +43,11 @@ public class CreatePostFragment extends Fragment {
     ImageButton btnGallery;//frag_addP_gallery_btn
     ImageView visableImg; //frag_addP_iv_p
     int status;
+
+
+    protected LocationManager locationManager;
+    private GPShelper gpShelper;
+
     public CreatePostFragment() {
         // Required empty public constructor
     }
@@ -60,10 +55,10 @@ public class CreatePostFragment extends Fragment {
     public static CreatePostFragment newInstance() {
         CreatePostFragment fragment = new CreatePostFragment();
 
-        fragment.location="";
-        fragment.url="";
-        fragment.type=0;
-        fragment.image=null;
+        fragment.location = "";
+        fragment.url = "";
+        fragment.type = 0;
+        fragment.image = null;
 
         return fragment;
     }
@@ -76,7 +71,11 @@ public class CreatePostFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        postsViewModel = ((MainActivity)getActivity()).getPostViewModel();
+        postsViewModel = ((MainActivity) getActivity()).getPostViewModel();
+
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        gpShelper = new GPShelper();
     }
 
     @Override
@@ -118,16 +117,20 @@ public class CreatePostFragment extends Fragment {
         edtContent =view.findViewById(R.id.fragNew_userName_et3);
         btnLocation =  view.findViewById(R.id.addLocation);
 
+        location = "";
 
         btnLocation.setOnClickListener(v->{
 
-            PlacePicker.IntentBuilder builder=new PlacePicker.IntentBuilder();
-            try {
-                startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
-            } catch (GooglePlayServicesRepairableException e) {
-                e.printStackTrace();
-            } catch (GooglePlayServicesNotAvailableException e) {
-                e.printStackTrace();
+            if(location.equals("")) {
+                Location l = gpShelper.getCurrentLocation(getContext());
+
+                //location = latitude + " " + longitude
+                location=String.valueOf(l.getLatitude())+getString(R.string.spaceChar)+String.valueOf(l.getLongitude());
+                btnLocation.setText(R.string.location_added);
+            }
+            else {
+                location="";
+                btnLocation.setText(R.string.addLocation);
             }
         });
         btnCamera =view.findViewById(R.id.frag_addP_cam_btn);
@@ -181,6 +184,9 @@ public class CreatePostFragment extends Fragment {
 
             if(location==null)
                 location="";
+
+
+            String strLongitude = "", strLatitude = "";
 
             //add media to url
             url = "";
@@ -241,4 +247,5 @@ public class CreatePostFragment extends Fragment {
         visableImg.setClickable(true);
 
     }
+
 }

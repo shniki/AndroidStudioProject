@@ -80,7 +80,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         else
             holder.image.setVisibility(View.GONE);
 
-        holder.location.setText(post.getLocation());
+        holder.location.setVisibility(View.GONE);
 
         if(!user.getProfilePicture().equals(""))
             Glide.with(context).load(user.getProfilePicture()).into(holder.userProfile);
@@ -88,7 +88,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             holder.userProfile.setImageResource(R.drawable.ic_profile);
 
 
-        holder.location.setText(post.getLocation());
+        //holder.location.setText(post.getLocation());
 
 
         //click to fragment

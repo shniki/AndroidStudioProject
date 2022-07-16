@@ -5,6 +5,7 @@ import static androidx.core.content.PermissionChecker.checkSelfPermission;
 import static java.lang.Thread.sleep;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.net.Uri;
@@ -43,6 +44,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.annotations.Nullable;
 
 import java.util.List;
+import java.util.Locale;
 
 public class PostFragment extends Fragment {
     private static final int SMS_REQUEST_ID = 123;
@@ -148,7 +150,21 @@ public class PostFragment extends Fragment {
         txtUserName.setText(text);
 
         txtLocation = view.findViewById(R.id.location_post);//location_post
-        txtLocation.setText(post.getLocation());
+        txtLocation.setText(R.string.show_location);
+
+        if(post.getLocation().equals("")){
+            txtLocation.setVisibility(View.GONE);
+        }
+        else{
+            String[] location_args = post.getLocation().split(" ");
+            //location = latitude + " " + longitude
+
+            txtLocation.setOnClickListener( v-> {
+                String uri = String.format(Locale.ENGLISH, "geo:%f,%f", Float.parseFloat(location_args[0]), Float.parseFloat(location_args[1]));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                getContext().startActivity(intent);
+            });
+        }
 
         image = view.findViewById(R.id.postImage_post);//postImage_post
         if (post.getDataType()==1)//picture

@@ -32,6 +32,8 @@ import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 //import com.google.android.gms.location.places.Place;
 //import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -54,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     public static final int CAMERA_PIC_REQUEST = 1337;
     public static final int PICK_PHOTO = 1338;
-    int PLACE_PICKER_REQUEST=1;
+    public static final int PLACE_PICKER_REQUEST=1543;
     private String imgPath;
     public Fragment currentFragment;
+
 
     public static SharedPreferences settings;
 
@@ -230,6 +233,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void getLocation(){
+
+        PlacePicker.IntentBuilder builder=new PlacePicker.IntentBuilder();
+        try {
+            startActivityForResult(builder.build(this),
+                    PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -260,14 +276,14 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            else if(requestCode==PLACE_PICKER_REQUEST)
-            {
-                Place place= PlacePicker.getPlace(data,this);
-                if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName()))
-                {
-                    ((CreatePostFragment)currentFragment).setLocation(place.getAddress().toString());
-            }
-            }
+//            else if(requestCode==PLACE_PICKER_REQUEST)
+//            {
+//                Place place= PlacePicker.getPlace(data,this);
+//                if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName()))
+//                {
+//                    ((CreatePostFragment)currentFragment).setLocation(place.getAddress().toString());
+//            }
+//            }
         }
 
     }
