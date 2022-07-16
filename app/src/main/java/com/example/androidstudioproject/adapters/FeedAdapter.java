@@ -67,6 +67,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         holder.location.setText(post.getLocation());
         if(post.getDataType()==2)
         {
+            holder.video.setVisibility(View.GONE);
+
             holder.image.setVisibility(View.VISIBLE);
             RequestOptions requestOptions = new RequestOptions();
             Boolean cacheable = requestOptions.isMemoryCacheable();
@@ -80,7 +82,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 //            holder.video.start();
         }
         else {
-            holder.image.setVisibility(View.GONE);
             holder.video.setVisibility(View.GONE);
         }
 
