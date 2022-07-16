@@ -117,4 +117,7 @@
     <string name="post_finish_upload">Uploadat!</string>
     <string name="changed_password">Parola schimbată</string>
     <string name="post_deleted">Post șters cu succes</string>
+    <string name="no_premissions">Acces refuzat</string>
+    <string name="location_added">eliminați locația</string>
+    <string name="show_location">arata locatia</string>
 </resources>
