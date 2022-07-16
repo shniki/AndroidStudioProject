@@ -1,5 +1,6 @@
 package com.example.androidstudioproject.activities.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,13 +28,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.snackbar.Snackbar;
 
 public class CreatePostFragment extends Fragment {
-
     PostsViewModel postsViewModel;
     String email;
     String location;
@@ -50,7 +52,7 @@ public class CreatePostFragment extends Fragment {
     ImageButton btnCamera;//frag_addP_cam_btn
     ImageButton btnGallery;//frag_addP_gallery_btn
     ImageView visableImg; //frag_addP_iv_p
-
+    int status;
     public CreatePostFragment() {
         // Required empty public constructor
     }
@@ -116,15 +118,17 @@ public class CreatePostFragment extends Fragment {
         edtContent =view.findViewById(R.id.fragNew_userName_et3);
         btnLocation =  view.findViewById(R.id.addLocation);
 
+
         btnLocation.setOnClickListener(v->{
-//            PlacePicker.IntentBuilder builder=new PlacePicker.IntentBuilder();
-//            try {
-//                startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
-//            } catch (GooglePlayServicesRepairableException e) {
-//                e.printStackTrace();
-//            } catch (GooglePlayServicesNotAvailableException e) {
-//                e.printStackTrace();
-//            }
+
+            PlacePicker.IntentBuilder builder=new PlacePicker.IntentBuilder();
+            try {
+                startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
+            } catch (GooglePlayServicesRepairableException e) {
+                e.printStackTrace();
+            } catch (GooglePlayServicesNotAvailableException e) {
+                e.printStackTrace();
+            }
         });
         btnCamera =view.findViewById(R.id.frag_addP_cam_btn);
         btnCamera.setOnClickListener(v->{

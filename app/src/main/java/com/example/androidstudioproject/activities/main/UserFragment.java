@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.androidstudioproject.R;
@@ -126,6 +127,15 @@ public class UserFragment extends Fragment {
         //choose type of layout: linear, horological or staggered
         rvFeed.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //refresh posts
+        SwipeRefreshLayout swipeToRefreshP=view.findViewById(R.id.swipeToRefreshProfile);
+        refreshProfile(swipeToRefreshP);
+        swipeToRefreshP.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                                                @Override
+                                                public void onRefresh() {
+                                                    refreshProfile(swipeToRefreshP);
+                                                }
+                                            });
 
 
         connectionsViewModel.getAllConnections().observe(this.getActivity(), new Observer<List<UserConnections>>() {
@@ -172,7 +182,10 @@ public class UserFragment extends Fragment {
 
         }
     }
-
+    public void refreshProfile(SwipeRefreshLayout component){
+        adapter.setPostsList(postsViewModel.getAllPosts().getValue());
+        component.setRefreshing(false);
+    }
     private void setMoreInfo(User user){
 
         //TODO non static
