@@ -136,7 +136,25 @@ public class UserFragment extends Fragment {
                                                     refreshProfile(swipeToRefreshP);
                                                 }
                                             });
+        usersViewModel.getAllUsers().observe(this.getActivity(), new Observer<List<User>>() {
+            @Override
+            public void onChanged(@Nullable final List<User> users) {
+                // Update the cached copy of the words in the adapter.
+                for (User u: users){
+                    if(u.getEmail().equals(userEmail)){
+                        if(!u.getProfilePicture().equals(""))
+                            Glide.with(getContext()).load(u.getProfilePicture()).into(profilePic);
+                        else
+                            profilePic.setImageResource(R.drawable.ic_profile);
 
+                        String text = u.getFirstName() + getString(R.string.spaceChar) + u.getLastName();
+                        username.setText(text);
+
+                        setMoreInfo(u);
+                    }
+                }
+            }
+        });
 
         connectionsViewModel.getAllConnections().observe(this.getActivity(), new Observer<List<UserConnections>>() {
             @Override
@@ -188,7 +206,6 @@ public class UserFragment extends Fragment {
     }
     private void setMoreInfo(User user){
 
-        //TODO non static
         String gender;
         if(user.getGender() == 0) gender = getString(R.string.male);
         else gender = getString(R.string.female);

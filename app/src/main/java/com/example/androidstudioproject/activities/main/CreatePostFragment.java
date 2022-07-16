@@ -137,7 +137,7 @@ public class CreatePostFragment extends Fragment {
             //then input to bitmap
             //change datatype to 1 or 2
             // add firebase cloud
-            //todo and update: visableImg
+            // and update: visableImg
         });
         btnGallery =view.findViewById(R.id.frag_addP_gallery_btn);
         btnGallery.setOnClickListener(v->{
