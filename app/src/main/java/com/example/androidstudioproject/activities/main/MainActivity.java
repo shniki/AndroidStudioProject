@@ -186,16 +186,19 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(chooserIntent, PICK_PHOTO);
     }
 
-    public Boolean isRelevantPost(Post post, int sexualPreference){
-        int gender = usersViewModel.getUserByEmail(post.getUserEmail()).getGender();
-        if((sexualPreference == 1 && gender == 0) || (sexualPreference == 0 && gender == 1))
+    public Boolean isRelevantPost(Post post, int sexualPreference, int gender){
+        int otherGender = usersViewModel.getUserByEmail(post.getUserEmail()).getGender();
+        if((sexualPreference == 1 && otherGender == 0) || (sexualPreference == 0 && otherGender == 1))
+            return false;
+        int otherPreference = usersViewModel.getUserByEmail(post.getUserEmail()).getSexualPreferences();
+        if((otherPreference == 1 && gender == 0) || (otherPreference == 0 && gender == 1))
             return false;
         return true;
     }
 
-    public List<Post> getAllRelevantPosts(int sexualPreference){
+    public List<Post> getAllRelevantPosts(int sexualPreference, int gender){
         List<Post> updatedPosts = postViewModel.getAllPosts().getValue();
-        updatedPosts.removeIf(p -> !isRelevantPost(p, sexualPreference));
+        updatedPosts.removeIf(p -> !isRelevantPost(p, sexualPreference, gender));
         return updatedPosts;
     }
 
@@ -251,10 +254,10 @@ public class MainActivity extends AppCompatActivity {
                         return;                    }
 
                 } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
+                    //  Auto-generated catch block
                     e.printStackTrace();
                 }
-            }//todo video
+            }
             else if(requestCode==PLACE_PICKER_REQUEST)
             {
 //                Place place= PlacePicker.getPlace(data,this);

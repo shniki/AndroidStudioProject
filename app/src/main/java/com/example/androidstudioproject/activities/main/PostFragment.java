@@ -251,8 +251,9 @@ public class PostFragment extends Fragment {
             btnEdit.setClickable(false);
 
             postsViewModel.delete(post);
-            //todo FIX DELETE
+            //  DELETE
             Snackbar.make(getView(), R.string.post_deleted, Snackbar.LENGTH_LONG).show();
+            lockAfterDeleted();
         });
 
         View layout = view.findViewById(R.id.linearLayout2);
@@ -307,8 +308,8 @@ public class PostFragment extends Fragment {
 
                     if (!exists) {
                         Snackbar.make(getView(), R.string.deleted_post, Snackbar.LENGTH_LONG).show();
-                        ((MainActivity) getActivity()).onBackPressed();
-
+                       // ((MainActivity) getActivity()).onBackPressed();
+                        lockAfterDeleted();
                     }
                 }
             }
@@ -371,7 +372,7 @@ public class PostFragment extends Fragment {
             }
         }
     }
-    public void sendSMS() {
+    private void sendSMS() {
         SmsManager smsManager = SmsManager.getDefault();
 
         smsManager.sendTextMessage(usersViewModel.getUserByEmail(posteremail).getPhoneNumber(), null,edtDescMsg.getText().toString() , null, null);// pendingIntent, pendingIntent2);
@@ -383,5 +384,26 @@ public class PostFragment extends Fragment {
 
         Snackbar.make(getView(), pop_up, Snackbar.LENGTH_LONG).show();
 
+    }
+
+    private void lockAfterDeleted(){
+         edtDescMsg.setEnabled(false);
+         btnSend.setClickable(false);
+
+         btnEdit.setClickable(false);
+         btnDone.setClickable(false);
+         btnCancel.setClickable(false);
+         edtDesc.setEnabled(false);
+         btnDelete.setClickable(false);
+
+        imgProfile.setClickable(false);
+        txtUserName.setClickable(false);
+        txtLocation.setClickable(false);
+
+        video.pause();
+
+        this.getFragmentManager().popBackStack();
+
+        ((MainActivity) getActivity()).replaceFragments(FeedFragment.class);
     }
 }

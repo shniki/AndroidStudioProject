@@ -33,9 +33,9 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
     EditText edtBio;
     Button edtProfilePicture;
     Button btnSave;
+    Spinner edtSexualPreference;
 
     Bitmap image;
-
     UsersViewModel usersViewModel;
 
 
@@ -56,6 +56,23 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
     public void onResume() {
         super.onResume();
         ((MainActivity)this.getActivity()).currentFragment = this;
+
+        User loggedInUser = usersViewModel.getUserByEmail(((MainActivity)this.getActivity()).currEmail);
+
+        int preference = loggedInUser.getSexualPreferences();
+        String prefString;
+        if(preference == 0)
+            prefString = getString(R.string.male);
+        else if(preference == 1)
+            prefString = getString(R.string.female);
+        else prefString = getString(R.string.both);
+        edtSexualPreference.setSelection(preference+1);//.setPrompt(prefString);
+
+        String fullName = loggedInUser.getFirstName() + getString(R.string.spaceChar) + loggedInUser.getLastName();
+        edtFullName.setText(fullName);
+        edtPhoneNumber.setText(loggedInUser.getPhoneNumber());
+        edtAge.setText(String.valueOf(loggedInUser.getAge()));
+        edtBio.setText(loggedInUser.getBio());
     }
 
     @Override
@@ -81,28 +98,14 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
         edtProfilePicture = view.findViewById(R.id.fragEditDetails_profilePicture);
         btnSave = view.findViewById(R.id.fragEditDetails_save);
 
-        Spinner edtSexualPreference = view.findViewById(R.id.fragEditDetails_sexualPreference);
+        edtSexualPreference = view.findViewById(R.id.fragEditDetails_sexualPreference);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.sexual_preference_array, R.layout.gender_spinner_item);
+                R.array.sexual_preference_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         edtSexualPreference.setAdapter(adapter);
-        int preference = loggedInUser.getSexualPreferences();
-        String prefString;
-        if(preference == 0)
-            prefString = getString(R.string.male);
-        else if(preference == 1)
-            prefString = getString(R.string.female);
-        else prefString = getString(R.string.both);
-        edtSexualPreference.setPrompt(prefString);
-
-        String fullName = loggedInUser.getFirstName() + getString(R.string.spaceChar) + loggedInUser.getLastName();
-        edtFullName.setText(fullName);
-        edtPhoneNumber.setText(loggedInUser.getPhoneNumber());
-        edtAge.setText(String.valueOf(loggedInUser.getAge()));
-        edtBio.setText(loggedInUser.getBio());
 
         edtProfilePicture.setOnClickListener(v -> {
             ((MainActivity)this.getActivity()).pickImageFromGallery();
