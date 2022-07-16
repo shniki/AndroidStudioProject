@@ -201,7 +201,7 @@ public class UserFragment extends Fragment {
         }
     }
     public void refreshProfile(SwipeRefreshLayout component){
-        adapter.setPostsList(postsViewModel.getAllPosts().getValue());
+        adapter.setPostsList(postsViewModel.getPostsByUser(userEmail));
         component.setRefreshing(false);
     }
     private void setMoreInfo(User user){

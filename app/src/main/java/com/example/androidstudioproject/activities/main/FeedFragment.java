@@ -2,7 +2,6 @@ package com.example.androidstudioproject.activities.main;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +19,8 @@ import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.annotations.Nullable;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class FeedFragment extends Fragment {
 
     PostsViewModel postsViewModel;
     UsersViewModel usersViewModel;
+
+    private boolean loaded;
 
     FeedAdapter adapter;
 
@@ -51,8 +54,8 @@ public class FeedFragment extends Fragment {
         super.onResume();
         ((MainActivity)this.getActivity()).currentFragment = this;
 
-        //todo update info
-        adapter.setPostsList(postsViewModel.getAllPosts().getValue());
+        //update info
+        setPosts();
     }
 
     @Override
@@ -78,22 +81,33 @@ public class FeedFragment extends Fragment {
             }
         }
   );
-        // ON REFRESH
-//        postsViewModel.getAllPosts().observe(this.getActivity(), new Observer<List<Post>>() {
-//            @Override
-//            public void onChanged(@Nullable final List<Post> posts) {
-//                // Update the cached copy of the words in the adapter.
-//                adapter.setPostsList(posts);
-//            }
-//        });
+
+
+
+        postsViewModel.getAllPosts().observe(this.getActivity(), new Observer<List<Post>>() {
+            @Override
+            public void onChanged(@Nullable final List<Post> posts) {
+                if (!loaded){
+                    setPosts();
+                    loaded=true;
+                }
+            }
+        });
     }
 
     public void refreshFeed(SwipeRefreshLayout component){
+        setPosts();
+        component.setRefreshing(false);
+    }
+
+    private void setPosts(){
 
         User currUser = usersViewModel.getUserByEmail(((MainActivity)this.getActivity()).currEmail);
         adapter.setPostsList(((MainActivity)this.getActivity()).getAllRelevantPosts(currUser.getSexualPreferences(),currUser.getGender()));
+        if(adapter.getItemCount()==0)
+            loaded=false;
         //adapter.setPostsList(postsViewModel.getAllPosts().getValue());
-        component.setRefreshing(false);
+
     }
 
 

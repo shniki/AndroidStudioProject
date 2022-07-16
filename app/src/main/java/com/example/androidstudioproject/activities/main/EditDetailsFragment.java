@@ -150,6 +150,10 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
                 return;
             }
 
+            if (strSexualPreference.equals(getString(R.string.sexualPreference))) {
+                Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
+                return;
+            }
 
             loggedInUser.setAge(Integer.parseInt(strAge));
             loggedInUser.setBio(strBio);
