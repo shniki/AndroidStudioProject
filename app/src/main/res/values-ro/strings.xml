@@ -110,6 +110,10 @@
     <string name="textSettings">Acum vă puteți edita setările aplicatie-i</string>
     <string name="changeUserDetails">Schimbă detalile user-ului</string>
     <string name="media_upload_failed">Uploadarea media a eșuat</string>
-
+    <string name="empty_content">Trebuie scris ceva</string>
+    <string name="failed_signup">Sign up eșuat</string>
+    <string name="confirmChange">Confirmare schimbare</string>
+    <string name="empty_password">Introduceți parola pentru a schimba</string>
+    <string name="updated_successfully">Schimbarea user-ului reusita</string>
 
 </resources>
