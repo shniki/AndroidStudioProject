@@ -63,9 +63,7 @@ public class LoginFragment extends Fragment {
 
         //fragLogin_newAccount_tv
         TextView newAccountBtn = view.findViewById(R.id.fragLogin_newAccount_tv);
-        newAccountBtn.setOnClickListener(v -> {
-            ((LoginActivity) getActivity()).replaceFragments(SignUpFragment.class);
-        });
+        newAccountBtn.setOnClickListener(v -> ((LoginActivity) getActivity()).replaceFragments(SignUpFragment.class));
 
 
         //fragLogin_login_btn

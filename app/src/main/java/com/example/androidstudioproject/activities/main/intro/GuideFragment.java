@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.main.FeedFragment;
 import com.example.androidstudioproject.activities.main.MainActivity;
-import com.example.androidstudioproject.activities.main.SettingsFragment;
 import com.example.androidstudioproject.entities.User;
 
 public class GuideFragment extends Fragment{
@@ -55,8 +54,6 @@ public class GuideFragment extends Fragment{
             ((MainActivity) getActivity()).replaceFragments(FeedFragment.class);
         });
 
-        btnPrev.setOnClickListener(v -> {
-            ((MainActivity) getActivity()).replaceFragments(WelcomeSettingsFragment.class);
-        });
+        btnPrev.setOnClickListener(v -> ((MainActivity) getActivity()).replaceFragments(WelcomeSettingsFragment.class));
     }
 }

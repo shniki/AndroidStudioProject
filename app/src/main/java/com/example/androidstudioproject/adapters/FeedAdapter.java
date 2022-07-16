@@ -4,9 +4,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -16,14 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.androidstudioproject.R;
-import com.example.androidstudioproject.activities.main.FeedFragment;
 import com.example.androidstudioproject.activities.main.MainActivity;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Collections;
 import java.util.List;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
@@ -32,10 +27,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     private List<Post> postsList;
     MainActivity context;
 
-    private ItemClickListener listener;
-    public interface ItemClickListener{
-        void onClick(int i);//create function in the feed activity
-    }
+    //private ItemClickListener listener;
+//    public interface ItemClickListener{
+//        void onClick(int i);//create function in the feed activity
+//    }
     //@NonNull
     //?
     public FeedAdapter(MainActivity context)
@@ -43,6 +38,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         usersViewModel=context.getUsersViewModel();
         this.context=context;
     }
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item,parent,false);
@@ -73,7 +69,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         {
             holder.image.setVisibility(View.VISIBLE);
             RequestOptions requestOptions = new RequestOptions();
-            requestOptions.isMemoryCacheable();
+            Boolean cacheable = requestOptions.isMemoryCacheable();
             Glide.with(context).setDefaultRequestOptions(requestOptions)
                     .load(Uri.parse(post.getDataURL()))
                     .into(holder.image);
@@ -98,25 +94,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
 
         //click to fragment
-        holder.image.setOnClickListener(v->{
-            gotoPostFragment(post.getPostID());
-        });
+        holder.image.setOnClickListener(v-> gotoPostFragment(post.getPostID()));
 
-        holder.video.setOnClickListener(v->{
-            gotoPostFragment(post.getPostID());
-        });
+        holder.video.setOnClickListener(v-> gotoPostFragment(post.getPostID()));
 
-        holder.description.setOnClickListener(v->{
-            gotoPostFragment(post.getPostID());
-        });
+        holder.description.setOnClickListener(v-> gotoPostFragment(post.getPostID()));
 
-        holder.userProfile.setOnClickListener(v->{
-            gotoUserFragment(post.getUserEmail());
-        });
+        holder.userProfile.setOnClickListener(v-> gotoUserFragment(post.getUserEmail()));
 
-        holder.userName.setOnClickListener(v->{
-            gotoUserFragment(post.getUserEmail());
-        });
+        holder.userName.setOnClickListener(v-> gotoUserFragment(post.getUserEmail()));
         }
     }
 
