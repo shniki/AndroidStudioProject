@@ -86,7 +86,6 @@
     <string name="createNewAccount">Create new Account</string>
     <string name="username">user_Name</string>
     <string name="location">Location</string>
-    <string name="description">Description nxnxnxnnmmmmmmmmmmmmm</string>
     <string name="now">NOW</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
@@ -96,9 +95,7 @@
     <string name="searchUsers">search users....</string>
     <string name="signUp">Sign Up</string>
     <string name="createAccount">Create Account</string>
-    <string name="sampleName">Ted Mosbey</string>
     <string name="sampleStatus">31  |  male  |  likes women</string>
-    <string name="placeFiller">fggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfw</string>
     <string name="welcomeText">Welcome to Tindergram!</string>
     <string name="editSecondary">You can go and edit your details before exploring the app</string>
     <string name="aboutUs">About us</string>

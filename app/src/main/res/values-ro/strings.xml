@@ -86,7 +86,6 @@
     <string name="createNewAccount">Creazăți un nou cont</string>
     <string name="username">user_Name</string>
     <string name="location">Locație</string>
-    <string name="description">Descriptie nxnxnxnnmmmmmmmmmmmmm</string>
     <string name="now">ACUM</string>
     <string name="edit">Editare</string>
     <string name="delete">Șterge</string>
@@ -96,9 +95,7 @@
     <string name="searchUsers">cautț useri....</string>
     <string name="signUp">Înscriete</string>
     <string name="createAccount">CreazÎ Cont</string>
-    <string name="sampleName">Ted Mosbey</string>
     <string name="sampleStatus">31  |  barbat  |  îi plac femeile</string>
-    <string name="placeFiller">fggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfwfggfofbfbojfojbfw</string>
     <string name="welcomeText">Bun venit în Tindergram!</string>
     <string name="editSecondary">Îți poți edita detalile inainte a explora aplicația</string>
     <string name="aboutUs">Despre noi</string>
@@ -115,5 +112,9 @@
     <string name="confirmChange">Confirmare schimbare</string>
     <string name="empty_password">Introduceți parola pentru a schimba</string>
     <string name="updated_successfully">Schimbarea user-ului reusita</string>
-
+    <string name="no_users_found">Nici un user găsit</string>
+    <string name="send_msg">"Abia ai trimis un mesaj"</string>
+    <string name="post_finish_upload">Uploadat!</string>
+    <string name="changed_password">Parola schimbată</string>
+    <string name="post_deleted">Post șters cu succes</string>
 </resources>
