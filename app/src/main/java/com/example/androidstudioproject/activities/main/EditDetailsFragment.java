@@ -75,7 +75,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
             genderString = getString(R.string.male);
         else
             genderString = getString(R.string.female);
-        edtSexualPreference.setSelection(gender+1);
+        edtGender.setSelection(gender+1);
 
         String fullName = loggedInUser.getFirstName() + getString(R.string.spaceChar) + loggedInUser.getLastName();
         edtFullName.setText(fullName);
@@ -123,7 +123,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
         // Specify the layout to use when the list of choices appears
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        edtSexualPreference.setAdapter(genderAdapter);
+        edtGender.setAdapter(genderAdapter);
 
         edtProfilePicture.setOnClickListener(v -> {
             ((MainActivity)this.getActivity()).pickImageFromGallery();

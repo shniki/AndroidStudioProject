@@ -241,7 +241,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sexualPreferenceLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/genderLabel" />
 
 
             <Button
@@ -254,7 +254,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragEditDetails_sexualPreference" />
+                app:layout_constraintTop_toBottomOf="@+id/fragEditDetails_gender" />
 
             <Button
                 android:id="@+id/fragEditDetails_save"

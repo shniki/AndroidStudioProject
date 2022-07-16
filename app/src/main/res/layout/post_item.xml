@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/postImage"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/postImage" />
 
