@@ -34,6 +34,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
     Button edtProfilePicture;
     Button btnSave;
     Spinner edtSexualPreference;
+    Spinner edtGender;
 
     Bitmap image;
     UsersViewModel usersViewModel;
@@ -68,6 +69,14 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
         else prefString = getString(R.string.both);
         edtSexualPreference.setSelection(preference+1);//.setPrompt(prefString);
 
+        int gender = loggedInUser.getGender();
+        String genderString;
+        if(gender == 0)
+            genderString = getString(R.string.male);
+        else
+            genderString = getString(R.string.female);
+        edtSexualPreference.setSelection(gender+1);
+
         String fullName = loggedInUser.getFirstName() + getString(R.string.spaceChar) + loggedInUser.getLastName();
         edtFullName.setText(fullName);
         edtPhoneNumber.setText(loggedInUser.getPhoneNumber());
@@ -100,12 +109,21 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
 
         edtSexualPreference = view.findViewById(R.id.fragEditDetails_sexualPreference);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+        ArrayAdapter<CharSequence> prefAdapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.sexual_preference_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prefAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        edtSexualPreference.setAdapter(adapter);
+        edtSexualPreference.setAdapter(prefAdapter);
+
+        edtGender = view.findViewById(R.id.fragEditDetails_gender);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.gender_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        edtSexualPreference.setAdapter(genderAdapter);
 
         edtProfilePicture.setOnClickListener(v -> {
             ((MainActivity)this.getActivity()).pickImageFromGallery();
@@ -115,6 +133,7 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
 
             String strAge = edtAge.getText().toString();
             String strSexualPreference = edtSexualPreference.getSelectedItem().toString();
+            String strGender = edtGender.getSelectedItem().toString();
             String strFullName = edtFullName.getText().toString();
             String strPhoneNumber = edtPhoneNumber.getText().toString();
             String strBio = edtBio.getText().toString();
@@ -155,6 +174,11 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
                 return;
             }
 
+            if (strGender.equals(getString(R.string.gender))) {
+                Snackbar.make(view, R.string.empty_input, Snackbar.LENGTH_LONG).show();
+                return;
+            }
+
             loggedInUser.setAge(Integer.parseInt(strAge));
             loggedInUser.setBio(strBio);
             int toUpdate;
@@ -164,6 +188,12 @@ public class EditDetailsFragment extends Fragment /*implements AdapterView.OnIte
                 toUpdate = 1;
             else toUpdate = 2;
             loggedInUser.setSexualPreferences(toUpdate);
+
+            if(strGender.equals(getString(R.string.male)))
+                toUpdate = 0;
+            else
+                toUpdate = 1;
+            loggedInUser.setGender(toUpdate);
             loggedInUser.setFirstName(strFullName.split(getString(R.string.spaceChar))[0]);
             loggedInUser.setLastName(strFullName.split(getString(R.string.spaceChar))[1]);
             loggedInUser.setPhoneNumber(strPhoneNumber);

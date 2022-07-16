@@ -208,6 +208,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sexualPreferenceLabel" />
 
+            <TextView
+                android:id="@+id/genderLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/fragEditDetails_phoneNumber"
+                app:layout_constraintTop_toBottomOf="@+id/fragEditDetails_sexualPreference" />
+
+            <Spinner
+                android:id="@+id/fragEditDetails_gender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:contentDescription="@string/gender"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:minHeight="48dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:spinnerMode="dropdown"
+                android:text="@string/gender"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sexualPreferenceLabel" />
+
+
             <Button
                 android:id="@+id/fragEditDetails_profilePicture"
                 android:layout_width="wrap_content"
