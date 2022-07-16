@@ -3,6 +3,8 @@ package com.example.androidstudioproject.activities.main;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
@@ -33,6 +38,7 @@ public class CreatePostFragment extends Fragment {
     String email;
     String location;
     Bitmap image;
+    Uri video;
     String url;
     int type;
 
@@ -90,10 +96,14 @@ public class CreatePostFragment extends Fragment {
         type=1;
     }
 
-    //TODO SET VIDEO
-    public void setVideo(){
-        //video=bm;
-        visableImg.setImageBitmap(image);
+    public void setVideo(Uri uri){
+        video=uri;
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.isMemoryCacheable();
+        Glide.with(getContext()).setDefaultRequestOptions(requestOptions)
+                .load(video)
+                .into(visableImg);
+        //visableImg.setImageBitmap(thumbnail);
         type=2;
     }
     public void setLocation(String location_){
@@ -123,7 +133,7 @@ public class CreatePostFragment extends Fragment {
             //then input to bitmap
             //change datatype to 1 or 2
             // add firebase cloud
-            //todo and update: visableImg
+            // and update: visableImg
         });
         btnGallery =view.findViewById(R.id.frag_addP_gallery_btn);
         btnGallery.setOnClickListener(v->{
@@ -185,8 +195,17 @@ public class CreatePostFragment extends Fragment {
                     return;
                 }
             }
-            else if(type==2)
-                url = "";//TODO ADD VIDEO
+            else if(type==2) {
+                if(video!=null)
+                    ((MainActivity) getActivity()).getStorageViewModel()
+                            .addVideoAndUploadPost(this, video, p);
+                else
+                {
+                    setAble();
+                    Snackbar.make(getView(), R.string.media_upload_failed, Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+            }
 
            // Post p = new Post(email,content,type,url);
            // postsViewModel.add(p);

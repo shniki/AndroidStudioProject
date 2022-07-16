@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean isExistsUser(String email){
-        //todo use firebase auth - to check if email exists
+        // use firebase auth - to check if email exists
         return viewModel.getUserByEmail(email)!=null;
         //return false;
     }

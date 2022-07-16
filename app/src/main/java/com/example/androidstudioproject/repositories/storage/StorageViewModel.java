@@ -2,6 +2,7 @@ package com.example.androidstudioproject.repositories.storage;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -17,7 +18,7 @@ public class StorageViewModel extends AndroidViewModel {
 
     public StorageViewModel(@NonNull Application application) {
         super(application);
-        mRepository = new StorageModelFirebase();
+        mRepository = new StorageModelFirebase(application);
     }
 
     public void addImageAndUploadPost(CreatePostFragment fragment, Bitmap image, Post p) {
@@ -30,5 +31,9 @@ public class StorageViewModel extends AndroidViewModel {
 
     public boolean isVaild(String uri) {
         return isVaild(uri);
+    }
+
+    public void addVideoAndUploadPost(CreatePostFragment createPostFragment, Uri video, Post p) {
+        mRepository.addVideoAndUploadPost(createPostFragment, video, p);
     }
 }

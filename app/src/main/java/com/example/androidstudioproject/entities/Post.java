@@ -14,7 +14,6 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Post {
     private static final Random random = new Random();
-//todo: intidhelper or use auto generate?
     @PrimaryKey(autoGenerate = true)
     private long postID; //make this random + FINAL
     //foreign key

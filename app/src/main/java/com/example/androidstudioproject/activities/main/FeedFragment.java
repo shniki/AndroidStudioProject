@@ -53,8 +53,6 @@ public class FeedFragment extends Fragment {
 
         //todo update info
         adapter.setPostsList(postsViewModel.getAllPosts().getValue());
-        //User currUser = usersViewModel.getUserByEmail(((MainActivity)this.getActivity()).currEmail);
-        //adapter.setPostsList(((MainActivity)this.getActivity()).getAllRelevantPosts(currUser.getSexualPreferences()));
     }
 
     @Override
@@ -91,7 +89,10 @@ public class FeedFragment extends Fragment {
     }
 
     public void refreshFeed(SwipeRefreshLayout component){
-        adapter.setPostsList(postsViewModel.getAllPosts().getValue());
+
+        User currUser = usersViewModel.getUserByEmail(((MainActivity)this.getActivity()).currEmail);
+        adapter.setPostsList(((MainActivity)this.getActivity()).getAllRelevantPosts(currUser.getSexualPreferences(),currUser.getGender()));
+        //adapter.setPostsList(postsViewModel.getAllPosts().getValue());
         component.setRefreshing(false);
     }
 

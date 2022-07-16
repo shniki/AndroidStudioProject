@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -66,14 +67,17 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         }
         else
             holder.image.setVisibility(View.GONE);
-        //TODO holder.location.setText(post.getLocation());
+        holder.location.setText(post.getLocation());
         if(post.getDataType()==2)
         {
+            MediaController mediaController = new MediaController(context);
             holder.video.setVideoURI(Uri.parse(post.getDataURL()));
             holder.video.setVisibility(View.VISIBLE);
+            holder.video.setMediaController(mediaController);
+            holder.video.start();
         }
         else {
-            //holder.video.setVisibility(View.GONE);
+            holder.video.setVisibility(View.GONE);
         }
 
         if(!user.getProfilePicture().equals(""))
@@ -90,9 +94,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             gotoPostFragment(post.getPostID());
         });
 
-//            holder.video.setOnClickListener(v->{
-//                gotoPostFragment(post.getPostID());
-//            });
+        holder.video.setOnClickListener(v->{
+            gotoPostFragment(post.getPostID());
+        });
 
         holder.description.setOnClickListener(v->{
             gotoPostFragment(post.getPostID());
@@ -139,8 +143,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         try {
             String[] splittedOne = p1.getPostDate().split(" ");
             String[] splittedTwo = p2.getPostDate().split(" ");
-            Integer yearOne = Integer.parseInt(splittedOne[2]), monthOne = convertMonthToInt(splittedOne[1]), dayOne = Integer.parseInt(splittedOne[0]);
-            Integer yearTwo = Integer.parseInt(splittedOne[2]), monthTwo = convertMonthToInt(splittedOne[1]), dayTwo = Integer.parseInt(splittedOne[0]);
+            Integer yearOne = Integer.parseInt(splittedOne[2]), monthOne = convertMonthToInt(splittedOne[0]), dayOne = Integer.parseInt(splittedOne[1]);
+            Integer yearTwo = Integer.parseInt(splittedTwo[2]), monthTwo = convertMonthToInt(splittedTwo[0]), dayTwo = Integer.parseInt(splittedTwo[1]);
             if (monthOne == null || monthTwo == null)
                 return false;
 
@@ -186,7 +190,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             userProfile=itemView.findViewById((R.id.userProfilePost));
             image=itemView.findViewById((R.id.postImage));
 
-            //TODO video=itemView.findViewById((R.id.^^^));
+            video=itemView.findViewById((R.id.videoView));
 
         }
     }
