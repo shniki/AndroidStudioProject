@@ -14,6 +14,7 @@ import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.main.FeedFragment;
 import com.example.androidstudioproject.activities.main.MainActivity;
 import com.example.androidstudioproject.activities.main.SettingsFragment;
+import com.example.androidstudioproject.entities.User;
 
 public class GuideFragment extends Fragment{
     Button btnGotIt;
@@ -46,6 +47,11 @@ public class GuideFragment extends Fragment{
             this.getFragmentManager().popBackStack();
             this.getFragmentManager().popBackStack();
             this.getFragmentManager().popBackStack();
+            User currUser = ((MainActivity) getActivity()).getUsersViewModel().getUserByEmail(
+                    ((MainActivity) getActivity()).getCurrEmail()
+            );
+            currUser.setLogIn();
+            ((MainActivity) getActivity()).getUsersViewModel().update(currUser);
             ((MainActivity) getActivity()).replaceFragments(FeedFragment.class);
         });
 

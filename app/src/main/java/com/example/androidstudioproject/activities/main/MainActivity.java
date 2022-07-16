@@ -1,6 +1,7 @@
 package com.example.androidstudioproject.activities.main;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -86,10 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
         currEmail = authenticationViewModel.getCurrentEmail();
         User currUser = usersViewModel.getUserByEmail(currEmail);
-        if(currUser != null && !currUser.getHasLoggedIn() && currentFragment==null){
+        if(currUser != null && !currUser.getHasLoggedIn()){
             this.replaceFragments(WelcomeFragment.class);
-            currUser.setLogIn();
-            usersViewModel.update(currUser);
         }
         else if(currentFragment==null)
             replaceFragments(FeedFragment.class);
@@ -201,18 +200,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pickMediaFromGallery(){
-        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        getIntent.setType("image/* video/*");
+        Intent pickPhoto = new Intent(Intent.ACTION_GET_CONTENT);
+        pickPhoto.setType("*/*");
+        String[] mimetypes = {"image/*", "video/*"};
+        pickPhoto.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
 
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/* video/*");
-
-        Intent chooserIntent = Intent.createChooser(getIntent, "Select media");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
-
-        startActivityForResult(chooserIntent, PICK_PHOTO);
+        startActivityForResult(pickPhoto, PICK_PHOTO);
     }
 
+
+    private void setVideoToActivity(Uri uri){
+        if(CreatePostFragment.class.getName().equals(currentFragment.getClass().getName())){
+            ((CreatePostFragment)currentFragment).setVideo(uri);
+        }
+    }
 
     private void setImageToActivity(Bitmap bitmap){
         if(EditDetailsFragment.class.getName().equals(currentFragment.getClass().getName()))
@@ -235,12 +236,20 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(requestCode == PICK_PHOTO){
                 try {
-                    final Uri imageUri = data.getData();
-                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                    final Bitmap image = BitmapFactory.decodeStream(imageStream);
+                    final Uri uri = data.getData();
 
-                    setImageToActivity(image);
-                    return;
+                    ContentResolver cr = getContentResolver();
+                    String mime = cr.getType(uri);
+                    if(mime.toLowerCase().contains("video")) {
+                        setVideoToActivity(uri);
+                        return;
+                    } else if(mime.toLowerCase().contains("image")) {
+                        final InputStream imageStream = getContentResolver().openInputStream(uri);
+                        final Bitmap image = BitmapFactory.decodeStream(imageStream);
+
+                        setImageToActivity(image);
+                        return;                    }
+
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

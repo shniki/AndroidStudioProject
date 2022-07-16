@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -69,11 +70,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         //TODO holder.location.setText(post.getLocation());
         if(post.getDataType()==2)
         {
+            MediaController mediaController = new MediaController(context);
             holder.video.setVideoURI(Uri.parse(post.getDataURL()));
             holder.video.setVisibility(View.VISIBLE);
+            holder.video.setMediaController(mediaController);
+            holder.video.start();
         }
         else {
-            //holder.video.setVisibility(View.GONE);
+            holder.video.setVisibility(View.GONE);
         }
 
         if(!user.getProfilePicture().equals(""))
@@ -90,9 +94,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             gotoPostFragment(post.getPostID());
         });
 
-//            holder.video.setOnClickListener(v->{
-//                gotoPostFragment(post.getPostID());
-//            });
+        holder.video.setOnClickListener(v->{
+            gotoPostFragment(post.getPostID());
+        });
 
         holder.description.setOnClickListener(v->{
             gotoPostFragment(post.getPostID());
@@ -186,7 +190,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             userProfile=itemView.findViewById((R.id.userProfilePost));
             image=itemView.findViewById((R.id.postImage));
 
-            //TODO video=itemView.findViewById((R.id.^^^));
+            video=itemView.findViewById((R.id.videoView));
 
         }
     }

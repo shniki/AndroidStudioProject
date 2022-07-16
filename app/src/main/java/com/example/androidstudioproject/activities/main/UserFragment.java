@@ -133,7 +133,18 @@ public class UserFragment extends Fragment {
             public void onChanged(@Nullable final List<UserConnections> connections) {
                 // Update the cached copy of the words in the adapter.
                 if(!loggedInUser.equals(userEmail)) {
-                    setButton();
+                    boolean isFollowing=false, isFollowed = false;
+
+                    for (UserConnections connection : connections){
+                        if(connection.getUserEmail().equals(userEmail) &&
+                                connection.getSecondUserEmail().equals(loggedInUser))
+                            isFollowed=true; //user -> me
+
+                        if(connection.getUserEmail().equals(loggedInUser) &&
+                                connection.getSecondUserEmail().equals(userEmail))
+                            isFollowing=true; //me -> user
+                    }
+                    setButton(isFollowing,isFollowed);
                 }
             }
         });
@@ -176,20 +187,20 @@ public class UserFragment extends Fragment {
         moreInfo.setText(info);
     }
 
-    private void setButton(){
+    private void setButton(boolean isFollowing, boolean isFollowed){
 
-        UserConnections isFollowing = connectionsViewModel.getConnectionIfExists(loggedInUser, userEmail);
-        UserConnections isFollowed = connectionsViewModel.getConnectionIfExists(userEmail, loggedInUser);
+//        UserConnections isFollowing = connectionsViewModel.getConnectionIfExists(loggedInUser, userEmail);
+//        UserConnections isFollowed = connectionsViewModel.getConnectionIfExists(userEmail, loggedInUser);
 
-        if (isFollowing != null) {
-            if (isFollowed != null) {
+        if (isFollowing) {
+            if (isFollowed) {
                 followBtn.setText(R.string.match);
             } else {
                 followBtn.setText(R.string.following);
             }
         }
         else {
-            if (isFollowed != null) {
+            if (isFollowed) {
                 followBtn.setText(R.string.follow_back);
             } else {
                 followBtn.setText(R.string.follow_txt);

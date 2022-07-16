@@ -65,7 +65,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location_post"></ImageView>
 
-    <TextView
+        <VideoView
+            android:id="@+id/videoView_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
         android:id="@+id/location_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

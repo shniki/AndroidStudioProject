@@ -13,6 +13,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import android.telephony.SmsManager;
 import android.text.TextUtils;
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -33,10 +35,14 @@ import com.bumptech.glide.Glide;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.entities.Post;
 import com.example.androidstudioproject.entities.User;
+import com.example.androidstudioproject.entities.UserConnections;
 import com.example.androidstudioproject.repositories.connection.ConnectionsViewModel;
 import com.example.androidstudioproject.repositories.post.PostsViewModel;
 import com.example.androidstudioproject.repositories.user.UsersViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.annotations.Nullable;
+
+import java.util.List;
 
 public class PostFragment extends Fragment {
     private static final int SMS_REQUEST_ID = 123;
@@ -44,6 +50,7 @@ public class PostFragment extends Fragment {
     UsersViewModel usersViewModel;
     ConnectionsViewModel connectionsViewModel;
     long postID;
+    boolean exists = true;
     String curremail;
     String posteremail;
     ImageView imgProfile;//userProfilePost_post
@@ -103,9 +110,13 @@ public class PostFragment extends Fragment {
 
         User user = usersViewModel.getUserByEmail(post.getUserEmail());
 
-        Glide.with(getContext()).load(user.getProfilePicture()).into(imgProfile);
         String text = user.getFirstName()+getString(R.string.spaceChar)+user.getLastName();
         txtUserName.setText(text);
+
+        if(!user.getProfilePicture().equals(""))
+            Glide.with(getContext()).load(user.getProfilePicture()).into(imgProfile);
+        else
+            imgProfile.setImageResource(R.drawable.ic_profile);
 
     }
 
@@ -120,16 +131,17 @@ public class PostFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         //get post + user
         Post post = postsViewModel.getPostById(postID);
+        //        if (post==null){
+//            exists = false;
+//            Snackbar.make(getView(), R.string.deleted_post, Snackbar.LENGTH_LONG).show();
+//            ((MainActivity) getActivity()).onBackPressed();
+//        }
         User user = usersViewModel.getUserByEmail(post.getUserEmail());
         posteremail = post.getUserEmail();
          curremail = ((MainActivity)getActivity()).getCurrEmail();
 
 
         imgProfile = view.findViewById(R.id.userProfilePost_post);//userProfilePost_post
-        if(!user.getProfilePicture().equals(""))
-            Glide.with(getContext()).load(user.getProfilePicture()).into(imgProfile);
-        else
-            imgProfile.setImageResource(R.drawable.ic_profile);
 
         txtUserName = view.findViewById(R.id.userName_post);//userName_post
         String text = user.getFirstName()+getString(R.string.spaceChar)+user.getLastName();
@@ -149,15 +161,18 @@ public class PostFragment extends Fragment {
             image.setVisibility(View.GONE);
         }
 
-        //video = view.findViewById(R.id.postImage_post);//postImage_post
-        if (post.getDataType()==2)//picture
+        video = view.findViewById(R.id.videoView_post);//postImage_post
+        if (post.getDataType()==2)//video
         {
+            MediaController mediaController = new MediaController(this.getContext());
             video.setVisibility(View.VISIBLE);
             video.setVideoURI(Uri.parse(post.getDataURL()));
+            video.setMediaController(mediaController);
+            video.start();
         }
         else
         {
-            //video.setVisibility(View.GONE);
+            video.setVisibility(View.GONE);
         }
 
         txtDesc = view.findViewById(R.id.description_post);//description_post
@@ -232,11 +247,12 @@ public class PostFragment extends Fragment {
             btnDelete.setVisibility(View.VISIBLE);
         });
         btnDelete.setOnClickListener(v->{
+            btnDelete.setClickable(false);
+            btnEdit.setClickable(false);
+
             postsViewModel.delete(post);
             //todo FIX DELETE
             Snackbar.make(getView(), R.string.post_deleted, Snackbar.LENGTH_LONG).show();
-            Log.d("delete", "from main");
-            ((MainActivity)this.getActivity()).onBackPressed();
         });
 
         View layout = view.findViewById(R.id.linearLayout2);
@@ -272,6 +288,59 @@ public class PostFragment extends Fragment {
 
         txtUserName.setOnClickListener(v->{
             gotoUserFragment(post.getUserEmail());
+        });
+
+        postsViewModel.getAllPosts().observe(this.getActivity(), new Observer<List<Post>>() {
+            @Override
+            public void onChanged(@Nullable final List<Post> posts) {
+                // Update the cached copy of the words in the adapter.
+                if(exists) {
+                    exists = false;
+                    for (Post p : posts) {
+                        if (p.getPostID() == postID) {
+                            //if theres a change in desc
+                            if (!p.getContent().equals(txtDesc.getText().toString()))
+                                txtDesc.setText(p.getContent());
+                            exists = true;
+                        }
+                    }
+
+                    if (!exists) {
+                        Snackbar.make(getView(), R.string.deleted_post, Snackbar.LENGTH_LONG).show();
+                        ((MainActivity) getActivity()).onBackPressed();
+
+                    }
+                }
+            }
+        });
+
+        connectionsViewModel.getAllConnections().observe(this.getActivity(), new Observer<List<UserConnections>>() {
+            @Override
+            public void onChanged(@Nullable final List<UserConnections> connections) {
+                // Update the cached copy of the words in the adapter.
+                if(!posteremail.equals(curremail)) {
+                    boolean isFollowing = false, isFollowed = false;
+
+                    for (UserConnections connection : connections) {
+                        if (connection.getUserEmail().equals(posteremail) &&
+                                connection.getSecondUserEmail().equals(curremail))
+                            isFollowed = true; //user -> me
+
+                        if (connection.getUserEmail().equals(curremail) &&
+                                connection.getSecondUserEmail().equals(posteremail))
+                            isFollowing = true; //me -> user
+                    }
+
+                    if (isFollowed&&isFollowing) {
+                        //make send message visible
+                        edtDescMsg.setVisibility(View.VISIBLE);
+                        btnSend.setVisibility(View.VISIBLE);
+                    } else {
+                        edtDescMsg.setVisibility(View.GONE);
+                        btnSend.setVisibility(View.GONE);
+                    }
+                }
+            }
         });
     }
 
