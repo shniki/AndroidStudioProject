@@ -58,14 +58,14 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        edtEmail = view.findViewById(R.id.fragLogin_userName_et); //get input line (edit text) by id
-        edtPasswd = view.findViewById(R.id.fragLogin_password_et); //get input line (edit text) by id
-        edtFullName = view.findViewById(R.id.fragLogin_fullName); //get input line (edit text) by id
-        edtPhoneNumber = view.findViewById(R.id.fragLogin_phoneNumber); //get input line (edit text) by id
-        edtAge = view.findViewById(R.id.fragLogin_age); //get input line (edit text) by id
+        edtEmail = view.findViewById(R.id.fragSignup_userName_et); //get input line (edit text) by id
+        edtPasswd = view.findViewById(R.id.fragSignup_password_et); //get input line (edit text) by id
+        edtFullName = view.findViewById(R.id.fragSignup_fullName); //get input line (edit text) by id
+        edtPhoneNumber = view.findViewById(R.id.fragSignup_phoneNumber); //get input line (edit text) by id
+        edtAge = view.findViewById(R.id.fragSignup_age); //get input line (edit text) by id
 
 
-        Spinner edtGender = view.findViewById(R.id.fragLogin_gender);
+        Spinner edtGender = view.findViewById(R.id.fragSignup_gender);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.gender_array, R.layout.gender_spinner_item);
@@ -74,8 +74,8 @@ public class SignUpFragment extends Fragment /*implements AdapterView.OnItemSele
         // Apply the adapter to the spinner
         edtGender.setAdapter(adapter);
 
-        //fragLogin_login_btn
-        TextView gotoLoginBtn = view.findViewById(R.id.fragLogin_login_btn);
+        //fragSignup_login_btn
+        TextView gotoLoginBtn = view.findViewById(R.id.fragSignup_login_btn);
         gotoLoginBtn.setOnClickListener(v -> {
 
             if (edtEmail == null || edtPasswd == null || edtFullName == null || edtPhoneNumber == null || edtAge == null) //validate input

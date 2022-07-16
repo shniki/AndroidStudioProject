@@ -156,7 +156,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/fragSignup_password_et" />
 
             <EditText
-                android:id="@+id/fragLogin_age"
+                android:id="@+id/fragSignup_age"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -189,7 +189,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragLogin_age" />
+                app:layout_constraintTop_toBottomOf="@+id/fragSignup_age" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
