@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.androidstudioproject.R;
 import com.example.androidstudioproject.activities.main.FeedFragment;
 import com.example.androidstudioproject.activities.main.MainActivity;
@@ -70,13 +71,20 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         holder.location.setText(post.getLocation());
         if(post.getDataType()==2)
         {
-            MediaController mediaController = new MediaController(context);
-            holder.video.setVideoURI(Uri.parse(post.getDataURL()));
-            holder.video.setVisibility(View.VISIBLE);
-            holder.video.setMediaController(mediaController);
-            holder.video.start();
+            holder.image.setVisibility(View.VISIBLE);
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.isMemoryCacheable();
+            Glide.with(context).setDefaultRequestOptions(requestOptions)
+                    .load(Uri.parse(post.getDataURL()))
+                    .into(holder.image);
+//            MediaController mediaController = new MediaController(context);
+//            holder.video.setVideoURI(Uri.parse(post.getDataURL()));
+//            holder.video.setVisibility(View.VISIBLE);
+//            holder.video.setMediaController(mediaController);
+//            holder.video.start();
         }
         else {
+            holder.image.setVisibility(View.GONE);
             holder.video.setVisibility(View.GONE);
         }
 
