@@ -26,9 +26,18 @@
         <entry key="..\:/Users/noyha/StudioProjects/AndroidStudioProject/app/src/main/res/menu/bottom_navigation_bar.xml" value="0.1796875" />
         <entry key="..\:/Users/noyha/StudioProjects/AndroidStudioProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-anydpi/ic_add_post.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_next_arrow.xml" value="0.112" />
         <entry key="app/src/main/res/drawable-anydpi/ic_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.112" />
+        <entry key="app/src/main/res/drawable-xhdpi/input_edit_account_bg.xml" value="0.112" />
         <entry key="app/src/main/res/drawable/color_img_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/color_img_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_account_box_24.xml" value="0.112" />
+        <entry key="app/src/main/res/drawable/ic_baseline_security_24.xml" value="0.112" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.112" />
+        <entry key="app/src/main/res/drawable/input_bg.xml" value="0.112" />
+        <entry key="app/src/main/res/drawable/language_img_background.xml" value="0.112" />
+        <entry key="app/src/main/res/drawable/language_img_foreground.xml" value="0.112" />
         <entry key="app/src/main/res/font/aldrich.xml" value="0.13796296296296295" />
         <entry key="app/src/main/res/layout-land/fragment_feed.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout-large/activity_login.xml" value="0.16458333333333333" />

@@ -123,7 +123,11 @@ public class CreatePostFragment extends Fragment {
 
             if(location.equals("")) {
                 Location l = gpShelper.getCurrentLocation(getContext());
-
+                if(l==null)
+                {
+                    Snackbar.make(view, R.string.no_premissions, Snackbar.LENGTH_LONG).show();
+                    return;
+                }
                 //location = latitude + " " + longitude
                 location=String.valueOf(l.getLatitude())+getString(R.string.spaceChar)+String.valueOf(l.getLongitude());
                 btnLocation.setText(R.string.location_added);
